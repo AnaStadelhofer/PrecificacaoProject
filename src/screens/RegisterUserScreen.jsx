@@ -1,18 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   View,
   StyleSheet,
   SafeAreaView,
   Text,
-  Alert,
   Dimensions,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+  Button,
 } from "react-native";
-import { useLayoutEffect } from "react";
 import { auth } from "../config/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { TextInput } from "react-native";
-import { TouchableOpacity } from "react-native";
-import LoginScreen from "./LoginScreen";
+import Feather from "react-native-vector-icons/Feather";
 
 const { width } = Dimensions.get("window");
 
@@ -22,17 +22,128 @@ export default function RegisterUserScreen({ navigation }) {
   const [nameUser, setNameUser] = useState("");
   const [mailUser, setMailUser] = useState("");
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [isButtonEnabled, setIsButtonEnabled] = useState(false);
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
+  const [nameError, setNameError] = useState("");
+
+  useEffect(() => {
+    setIsButtonEnabled(
+      nameUser !== "" &&
+        mailUser !== "" &&
+        password !== "" &&
+        confirmPassword !== "" &&
+        emailError == "" &&
+        passwordError == "" &&
+        confirmPasswordError == "" &&
+        nameError == ""
+    );
+  }, [nameUser, mailUser, password, confirmPassword]);
+
   const handleRegister = async () => {
     try {
-      createUserWithEmailAndPassword(auth, mailUser, password).then(
-        (userCredential) => {
-          console.log("Usuário registrado com sucesso!");
-        }
-      );
+      createUserWithEmailAndPassword(auth, mailUser, password);
+      navigation.navigate("MenuScreen");
     } catch (error) {
-      console.log(error);
+      Alert.alert("Error", "Parece que ocorreu um erro, tente mais tarde");
     }
   };
+
+  const validateEmail = (mailUser) => {
+    const emailRegex = /\S+@\S+\.\S+/;
+    setMailUser(mailUser);
+
+    if (mailUser == "") {
+      setEmailError("");
+
+    } else if (!emailRegex.test(mailUser)) {
+      setEmailError("Por favor, insira um email válido.");
+      
+    } else {
+      setEmailError("");
+    }
+  };
+
+  const validateName = (nameUser) => {
+    const nameRegex = /^[a-zA-z/s]*$/;
+    setNameUser(nameUser);
+
+    if (nameUser == "") {
+      setNameError("");
+
+    } else if (!nameRegex.test(nameUser)) {
+      setNameError("O nome deve conter apenas letras.");
+
+    } else {
+      setNameError("");
+    }
+  };
+
+  function isStrongPassword(password) {
+    const strongRegex = new RegExp(
+      "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
+    );
+    return strongRegex.test(password);
+  }
+
+  const validatePassword = (password) => {
+    setPassword(password);
+
+    if (password == "") {
+      setPasswordError("");
+
+    } else if (password.length < 6) {
+      setPasswordError("A senha deve ter pelo menos 6 caracteres.");
+      validatePasswordEqual();
+
+    } else if (!isStrongPassword(password)) {
+      setPasswordError("A senha precisa ser forte");
+      validatePasswordEqual();
+
+    } else {
+      setPasswordError("");
+      validatePasswordEqual();
+
+    }
+  };
+
+  const validatePasswordEqual = (confirmPassword) => {
+    setConfirmPassword(confirmPassword);
+
+    if (confirmPassword == "") {
+      setConfirmPasswordError("");
+
+    } else if (password !== confirmPassword) {
+      setConfirmPasswordError("As senhas não coincidem.");
+
+    } else {
+      setConfirmPasswordError("");
+    }
+  };
+
+  function renderPasswordVisibilityIcon() {
+    if (showPassword) {
+      return (
+        <Feather
+          name="eye-off"
+          color="grey"
+          size={20}
+          onPress={() => setShowPassword(false)}
+        />
+      );
+    } else {
+      return (
+        <Feather
+          name="eye"
+          color="grey"
+          size={20}
+          onPress={() => setShowPassword(true)}
+        />
+      );
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -42,41 +153,58 @@ export default function RegisterUserScreen({ navigation }) {
           secureTextEntry={false}
           textContentType="text"
           value={nameUser}
-          onChangeText={setNameUser}
-          style={styles.input}
+          onChangeText={validateName}
+          style={nameError ? styles.inputError : styles.input}
         />
+        {nameError ? <Text style={styles.error}>{nameError}</Text> : null}
+
         <TextInput
           placeholder="Email *"
-          secureTextEntry={false}
           textContentType="emailAddress"
           value={mailUser}
-          onChangeText={setMailUser}
-          style={styles.input}
+          onChangeText={validateEmail}
+          style={emailError ? styles.inputError : styles.input}
         />
+        {emailError ? <Text style={styles.error}>{emailError}</Text> : null}
+
         <TextInput
           placeholder="Senha *"
-          secureTextEntry={true}
+          secureTextEntry={!showPassword}
           textContentType="password"
           value={password}
-          onChangeText={setPassword}
-          style={styles.input}
+          onChangeText={validatePassword}
+          style={passwordError ? styles.inputError : styles.input}
         />
+        <View style={{ flexDirection: "row" }}>
+          <View style={{ flex: 1 }}>
+            {passwordError ? (
+              <Text style={styles.error}>{passwordError}</Text>
+            ) : null}
+          </View>
+          {/* {renderPasswordVisibilityIcon()} */}
+        </View>
+
         <TextInput
           placeholder="Confirmar Senha *"
-          secureTextEntry={true}
+          secureTextEntry={!showPassword}
           textContentType="password"
           value={confirmPassword}
-          onChangeText={setConfirmPassword}
-          style={styles.input}
+          onChangeText={validatePasswordEqual}
+          style={confirmPasswordError ? styles.inputError : styles.input}
         />
-
-        <TouchableOpacity style={styles.button} onPress={handleRegister}>
-          <Text style={styles.buttonText}>Confirmar</Text>
-        </TouchableOpacity>
+        {confirmPasswordError ? (
+          <Text style={styles.error}>{confirmPasswordError}</Text>
+        ) : null}
 
         <TouchableOpacity
-          onPress={() => navigation.navigate("LoginScreen")}
+          style={isButtonEnabled ? styles.buttonEnabled : styles.buttonDisabled}
+          disabled={!isButtonEnabled}
+          onPress={handleRegister}
         >
+          <Text style={styles.buttonText}>Cadastrar</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}>
           <Text style={styles.link}>Já possuo conta!</Text>
         </TouchableOpacity>
       </SafeAreaView>
@@ -91,14 +219,26 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#fff",
   },
-  button: {
+  error: {
+    color: "red",
+  },
+  buttonEnabled: {
     justifyContent: "center",
     alignItems: "center",
     width: width * 0.75,
     height: 50,
     backgroundColor: "#2196f3",
     borderRadius: 5,
-    marginTop: 10,
+    marginTop: 15,
+  },
+  buttonDisabled: {
+    justifyContent: "center",
+    alignItems: "center",
+    width: width * 0.75,
+    height: 50,
+    borderRadius: 5,
+    marginTop: 15,
+    backgroundColor: "gray",
   },
   buttonText: {
     color: "#fff",
@@ -110,7 +250,16 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     paddingLeft: 10,
-    marginBottom: 30,
+    marginTop: 30,
+    width: width * 0.75,
+  },
+  inputError: {
+    height: 60,
+    borderColor: "red",
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingLeft: 10,
+    marginTop: 30,
     width: width * 0.75,
   },
   link: {
