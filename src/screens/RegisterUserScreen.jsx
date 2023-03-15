@@ -44,11 +44,39 @@ export default function RegisterUserScreen({ navigation }) {
 
   const handleRegister = async () => {
     try {
-      createUserWithEmailAndPassword(auth, mailUser, password);
-      navigation.navigate("MenuScreen");
-    } catch (error) {
-      Alert.alert("Error", "Parece que ocorreu um erro, tente mais tarde");
-    }
+      createUserWithEmailAndPassword(auth, mailUser, password)
+        .then(() => {
+          //navigation.navigate("MenuScreen");
+        })
+        .catch((error) => {
+          switch (error.code) {
+            case "auth/email-already-in-use":
+              console.log("Esse endereço de e-mail já está sendo usado.");
+              Alert.alert("Erro", "Esse endereço de e-mail já está sendo usado.");
+              break;
+            case "auth/invalid-email":
+              console.log("Esse endereço de e-mail é inválido.");
+              Alert.alert("Erro", "Esse endereço de e-mail é inválido.");
+              break;
+            case "auth/weak-password":
+              console.log("Essa senha é muito fraca.");
+              Alert.alert("Erro", "Essa senha é muito fraca.");
+              break;
+            case "auth/user-not-found":
+              console.log("Não foi possível encontrar um usuário com esse e-mail e senha.");
+              Alert.alert("Erro", "Não foi possível encontrar um usuário com esse e-mail e senha.");
+              break;
+            case "auth/wrong-password":
+              console.log("A senha inserida está incorreta.");
+              Alert.alert("Erro", "A senha inserida está incorreta.");
+              break;
+            default:
+              console.log("Ocorreu um erro desconhecido:", error);
+              Alert.alert("Erro", "Parece que ocorreu um erro, tente mais tarde.");
+              break;
+          }
+        });
+    } catch (error) {}
   };
 
   const validateEmail = (mailUser) => {
@@ -57,10 +85,8 @@ export default function RegisterUserScreen({ navigation }) {
 
     if (mailUser == "") {
       setEmailError("");
-
     } else if (!emailRegex.test(mailUser)) {
       setEmailError("Por favor, insira um email válido.");
-      
     } else {
       setEmailError("");
     }
@@ -72,10 +98,8 @@ export default function RegisterUserScreen({ navigation }) {
 
     if (nameUser == "") {
       setNameError("");
-
     } else if (!nameRegex.test(nameUser)) {
       setNameError("O nome deve conter apenas letras.");
-
     } else {
       setNameError("");
     }
@@ -93,19 +117,15 @@ export default function RegisterUserScreen({ navigation }) {
 
     if (password == "") {
       setPasswordError("");
-
     } else if (password.length < 6) {
       setPasswordError("A senha deve ter pelo menos 6 caracteres.");
       validatePasswordEqual();
-
     } else if (!isStrongPassword(password)) {
       setPasswordError("A senha precisa ser forte");
       validatePasswordEqual();
-
     } else {
       setPasswordError("");
       validatePasswordEqual();
-
     }
   };
 
@@ -114,10 +134,8 @@ export default function RegisterUserScreen({ navigation }) {
 
     if (confirmPassword == "") {
       setConfirmPasswordError("");
-
     } else if (password !== confirmPassword) {
       setConfirmPasswordError("As senhas não coincidem.");
-
     } else {
       setConfirmPasswordError("");
     }
