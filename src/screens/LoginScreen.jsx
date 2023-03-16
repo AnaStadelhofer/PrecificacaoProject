@@ -4,6 +4,7 @@ import { useLayoutEffect } from "react";
 import { auth } from "../config/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import Icon from "react-native-vector-icons/FontAwesome";
+import Logo from "../components/Logo";
 
 const { width } = Dimensions.get("window");
 
@@ -28,6 +29,7 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <Logo/>
       <SafeAreaView>
         <TextInput
           placeholder="Email"
