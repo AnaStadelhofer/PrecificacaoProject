@@ -1,15 +1,6 @@
 import { useEffect, useState } from "react";
-import {
-  View,
-  StyleSheet,
-  SafeAreaView,
-  Text,
-  Dimensions,
-  TextInput,
-  TouchableOpacity,
-  Alert,
-  Button,
-} from "react-native";
+import { View, SafeAreaView, TouchableOpacity, Alert, Dimensions, StyleSheet } from "react-native";
+import { Text, TextInput, Button } from "react-native-paper";
 import { auth } from "../config/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import Feather from "react-native-vector-icons/Feather";
