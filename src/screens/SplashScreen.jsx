@@ -1,4 +1,4 @@
-import { Image, View, Text } from "react-native";
+import { View, Text } from "react-native";
 import Loading from "../components/Loading";
 import { StyleSheet } from "react-native";
 
@@ -7,7 +7,7 @@ export default function SplashScreen({ navigation }) {
     setTimeout(
         () => {
             navigation.navigate("LoginScreen");
-        }, 3000
+        }, 2000
     )
 
     return (
