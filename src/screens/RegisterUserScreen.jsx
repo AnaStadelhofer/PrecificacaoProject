@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { View, SafeAreaView, TouchableOpacity, Alert, Dimensions, StyleSheet } from "react-native";
-import { Text, TextInput, Button } from "react-native-paper";
+import { Text, TextInput } from "react-native-paper";
 import { auth } from "../config/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import Feather from "react-native-vector-icons/Feather";
-
-const { width } = Dimensions.get("window");
+import { styles } from '../utils/styles';
 
 export default function RegisterUserScreen({ navigation }) {
   const [password, setPassword] = useState("");
@@ -221,60 +220,3 @@ export default function RegisterUserScreen({ navigation }) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#fff",
-  },
-  error: {
-    color: "red",
-  },
-  buttonEnabled: {
-    justifyContent: "center",
-    alignItems: "center",
-    width: width * 0.75,
-    height: 50,
-    backgroundColor: "#2196f3",
-    borderRadius: 5,
-    marginTop: 15,
-  },
-  buttonDisabled: {
-    justifyContent: "center",
-    alignItems: "center",
-    width: width * 0.75,
-    height: 50,
-    borderRadius: 5,
-    marginTop: 15,
-    backgroundColor: "gray",
-  },
-  buttonText: {
-    color: "#fff",
-    fontSize: 18,
-  },
-  input: {
-    height: 60,
-    borderColor: "#ccc",
-    borderWidth: 1,
-    borderRadius: 5,
-    paddingLeft: 10,
-    marginTop: 30,
-    width: width * 0.75,
-  },
-  inputError: {
-    height: 60,
-    borderColor: "red",
-    borderWidth: 1,
-    borderRadius: 5,
-    paddingLeft: 10,
-    marginTop: 30,
-    width: width * 0.75,
-  },
-  link: {
-    paddingHorizontal: 10,
-    fontSize: 16,
-    color: "#2196f3",
-    textAlign: "center",
-  },
-});
