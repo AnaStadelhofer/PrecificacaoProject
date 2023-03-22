@@ -18,6 +18,11 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     color: "#2196f3",
     textAlign: "center",
+    paddingTop: 10,
+    fontSize: 20
+  },
+  textLinks: {
+    paddingTop: 10
   },
   // Buttons
   button: {

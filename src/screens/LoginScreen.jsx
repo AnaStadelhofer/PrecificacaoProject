@@ -8,6 +8,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 
 import Icon from "react-native-vector-icons/FontAwesome";
 import Logo from "../components/Logo";
+import Divider from "../components/Divider";
 
 export default function LoginScreen({ navigation }) {
   const [mailUser, setMailUser] = useState("");
@@ -53,23 +54,25 @@ export default function LoginScreen({ navigation }) {
         <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
           <Icon name={showPassword ? "eye-slash" : "eye"} />
         </TouchableOpacity>
-        
+
         <TouchableOpacity
           style={styles.button}
           onPress={() => login(mailUser, password)}
         >
           <Text style={styles.buttonText}>Confirmar</Text>
         </TouchableOpacity>
+        <Divider />
+        <View style={styles.textLinks}>
+          <TouchableOpacity onPress={() => navigation.navigate("MenuScreen")}>
+            <Text style={styles.link}>Esqueci minha senha!</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => navigation.navigate("MenuScreen")}>
-          <Text style={styles.link}>Esqueci minha senha!</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={() => navigation.navigate("RegisterUserScreen")}
-        >
-          <Text style={styles.link}>Não possuo conta!</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("RegisterUserScreen")}
+          >
+            <Text style={styles.link}>Não possuo conta!</Text>
+          </TouchableOpacity>
+        </View>
       </SafeAreaView>
     </View>
   );
