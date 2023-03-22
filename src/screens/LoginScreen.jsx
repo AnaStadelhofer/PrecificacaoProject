@@ -61,6 +61,7 @@ export default function LoginScreen({ navigation }) {
           <Text style={styles.buttonText}>Confirmar</Text>
         </TouchableOpacity>
 
+        <View style={styles.textLinks}>
         <TouchableOpacity onPress={() => navigation.navigate("MenuScreen")}>
           <Text style={styles.link}>Esqueci minha senha!</Text>
         </TouchableOpacity>
@@ -70,6 +71,7 @@ export default function LoginScreen({ navigation }) {
         >
           <Text style={styles.link}>Não possuo conta!</Text>
         </TouchableOpacity>
+        </View>
       </SafeAreaView>
     </View>
   );
