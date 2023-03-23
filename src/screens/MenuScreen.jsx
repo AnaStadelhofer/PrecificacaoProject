@@ -1,17 +1,16 @@
-import { View, StyleSheet, SafeAreaView } from 'react-native';
+import { View, SafeAreaView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useLayoutEffect } from 'react';
 import { Text, TouchableOpacity, Dimensions} from "react-native"
+import { styles } from '../utils/styles';
 
 // IMPORT THE SCREENS
 import LoginScreen from './LoginScreen';
 import RegisterUserScreen from './RegisterUserScreen';
-
-import Logo from '../components/Logo';
 import SplashScreen from './SplashScreen';
 
-const { width } = Dimensions.get('window');
+// IMPORT COMPONENTS
+import Logo from '../components/Logo';
 
 const Stack = createNativeStackNavigator();
 
@@ -43,7 +42,7 @@ function OptionsMenu({ navigation }) {
 export default function MenuScreen() {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="SplashScreen">
+            <Stack.Navigator initialRouteName="MenuScreen">
                 <Stack.Screen name="MenuScreen" component={OptionsMenu} options={{ title: 'Menu', headerShown: false}}/>
                 <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ title: 'Menu', headerShown: false}}/>
                 {/* <Stack.Screen name="RevenueScreen" component={RevenueScreen} options={{ title: 'Receitas' }}/> 
@@ -58,24 +57,3 @@ export default function MenuScreen() {
     )
 }
 
-const styles = StyleSheet.create({
-    button: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: width * 0.5,
-        height: 50,
-        backgroundColor: '#2196f3',
-        borderRadius: 5,
-        marginTop: 10
-    },
-    buttonText: {
-        color: '#fff',
-        fontSize: 18,
-    },
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#fff',
-    }
-})
