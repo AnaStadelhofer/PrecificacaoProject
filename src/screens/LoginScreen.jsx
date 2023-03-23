@@ -8,12 +8,15 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 
 import Icon from "react-native-vector-icons/FontAwesome";
 import Logo from "../components/Logo";
+
+import { Alert } from "react-native";
 import Divider from "../components/Divider";
 
 export default function LoginScreen({ navigation }) {
   const [mailUser, setMailUser] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const login = async (email, password) => {
     try {
@@ -25,7 +28,16 @@ export default function LoginScreen({ navigation }) {
       const user = userCredential.user;
       console.log("User logged in: ", user);
     } catch (error) {
-      console.log("Error logging in: ", error);
+      if (error.code === "auth/user-not-found") {
+        setErrorMessage("Este usuário não existe. Por favor, verifique o e-mail.");
+      } else if (error.code === "auth/wrong-password") {
+        setErrorMessage("E-mail ou Senha incorreta. Por favor, tente novamente.");
+      } else if (error.code === "auth/invalid-email") {
+        setErrorMessage("Endereço de e-mail inválido. Por favor, verifique e tente novamente.");
+      } else {
+        setErrorMessage("Ocorreu um erro ao fazer login. Por favor, tente novamente.");
+      }
+      console.log("Error logging in: ", error);   
     }
   };
 
@@ -33,24 +45,30 @@ export default function LoginScreen({ navigation }) {
     <View style={styles.container}>
       <Logo />
       <SafeAreaView>
-        <View>
-          <TextInput
-            placeholder="Email"
-            secureTextEntry={false}
-            textContentType="emailAddress"
-            value={mailUser}
-            onChangeText={setMailUser}
-            style={styles.input}
-          />
-          <TextInput
-            placeholder="Password"
-            secureTextEntry={showPassword}
-            textContentType="password"
-            value={password}
-            onChangeText={setPassword}
-            style={styles.input}
-          ></TextInput>
+      <View>
+        {errorMessage && (
+          <Text style={styles.errorMessage}>{errorMessage}</Text>
+        )}
+        <TextInput
+          placeholder="Email"
+          secureTextEntry={false}
+          textContentType="emailAddress"
+          value={mailUser}
+          onChangeText={setMailUser}
+          style={styles.input}
+        />
+        <TextInput
+          placeholder="Password"
+          secureTextEntry={showPassword}
+          textContentType="password"
+          value={password}
+          onChangeText={setPassword}
+          style={styles.input}
+        >
+        </TextInput>
+
         </View>
+
         <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
           <Icon name={showPassword ? "eye-slash" : "eye"} />
         </TouchableOpacity>
