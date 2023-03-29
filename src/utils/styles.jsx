@@ -24,6 +24,11 @@ export const styles = StyleSheet.create({
   textLinks: {
     paddingTop: 10
   },
+  textInittial: {
+    fontSize: 20,
+    textAlign: "center",
+    paddingBottom: 15
+  },
   // Buttons
   button: {
     justifyContent: "center",
