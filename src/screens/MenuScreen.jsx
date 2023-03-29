@@ -20,6 +20,7 @@ function OptionsMenu({ navigation }) {
         <View style={styles.container}>
             <Logo/>
             <SafeAreaView>
+                <Text style={styles.textInittial}> Seja bem-vindo ao nosso aplicativo! </Text>
                 {/* <ButtonCentralized title="Receita" onPress={() => navigation.navigate('RevenueScreen')}/>
                 <ButtonCentralized title="Relatório" onPress={() => navigation.navigate('ReportScreen')}/>
                 <ButtonCentralized title="Clientes" onPress={() => navigation.navigate('ClientScreen')}/> */}
@@ -43,14 +44,14 @@ export default function MenuScreen() {
     return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName="MenuScreen">
-                <Stack.Screen name="MenuScreen" component={OptionsMenu} options={{ title: 'Menu', headerShown: false}}/>
+                <Stack.Screen name="MenuScreen" component={OptionsMenu} options={{ title: 'Menu'}}/>
                 <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ title: 'Menu', headerShown: false}}/>
                 {/* <Stack.Screen name="RevenueScreen" component={RevenueScreen} options={{ title: 'Receitas' }}/> 
                 <Stack.Screen name="ReportScreen" component={ReportScreen} options={{ title: 'Relatório' }}/>
                 <Stack.Screen name="ClientScreen" component={ClientScreen} options={{ title: 'Clientes' }}/> */}
-                <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ title: 'Login', headerShown: false}} />
+                <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ title: 'Login'}} />
                 {/* <Stack.Screen name="CartScreen" component={CartScreen} options={{ title: 'Carrinho' }}/> */}
-                <Stack.Screen name="RegisterUserScreen" component={RegisterUserScreen} options={{ title: 'Cadastrar', headerShown: false}} />
+                <Stack.Screen name="RegisterUserScreen" component={RegisterUserScreen} options={{ title: 'Cadastrar'}} />
                 {/* <Stack.Screen name="RecoverPasswordScreen" component={RecoverPasswordScreen} options={{ title: 'Recuperar senha' }}/> */}
             </Stack.Navigator>
         </NavigationContainer>

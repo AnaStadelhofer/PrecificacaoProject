@@ -5,6 +5,7 @@ import { auth } from "../config/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import Feather from "react-native-vector-icons/Feather";
 import { styles } from '../utils/styles';
+import ButtonCentralized from "../components/ButtonCentralized";
 
 export default function RegisterUserScreen({ navigation }) {
   const [password, setPassword] = useState("");
@@ -204,13 +205,7 @@ export default function RegisterUserScreen({ navigation }) {
           <Text style={styles.error}>{confirmPasswordError}</Text>
         ) : null}
 
-        <TouchableOpacity
-          style={isButtonEnabled ? styles.buttonEnabled : styles.buttonDisabled}
-          disabled={!isButtonEnabled}
-          onPress={handleRegister}
-        >
-          <Text style={styles.buttonText}>Cadastrar</Text>
-        </TouchableOpacity>
+          <ButtonCentralized handle={handleRegister} disable={isButtonEnabled} />
 
         <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}>
           <Text style={styles.link}>Já possuo conta!</Text>

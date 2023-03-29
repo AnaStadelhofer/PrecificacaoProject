@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import {View, Text } from "react-native";
 import Loading from "../components/Loading";
 import { StyleSheet } from "react-native";
 
