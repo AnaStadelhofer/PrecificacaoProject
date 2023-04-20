@@ -8,6 +8,7 @@ import { styles } from '../utils/styles';
 import LoginScreen from './LoginScreen';
 import RegisterUserScreen from './RegisterUserScreen';
 import SplashScreen from './SplashScreen';
+import CartScreen from './CartScreen';
 
 // IMPORT COMPONENTS
 import Logo from '../components/Logo';
@@ -33,6 +34,9 @@ function OptionsMenu({ navigation }) {
                 <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('SplashScreen')}>
                     <Text style={styles.buttonText}>SplashScreen</Text>
                 </TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('CartScreen')}>
+                    <Text style={styles.buttonText}>CartList</Text>
+                </TouchableOpacity>
                 {/* <ButtonCentralized title="Carrinho" onPress={() => navigation.navigate('CartScreen')}/> */}
                 {/* <ButtonCentralized title="Recuperar" onPress={() => navigation.navigate('RecoverPasswordScreen')}/> */}
             </SafeAreaView>
@@ -44,13 +48,13 @@ export default function MenuScreen() {
     return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName="MenuScreen">
-                <Stack.Screen name="MenuScreen" component={OptionsMenu} options={{ title: 'Menu'}}/>
+                <Stack.Screen name="MenuScreen" component={OptionsMenu} options={{ title: 'Menu', headerShown: false}}/>
                 <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ title: 'Menu', headerShown: false}}/>
                 {/* <Stack.Screen name="RevenueScreen" component={RevenueScreen} options={{ title: 'Receitas' }}/> 
                 <Stack.Screen name="ReportScreen" component={ReportScreen} options={{ title: 'Relatório' }}/>
                 <Stack.Screen name="ClientScreen" component={ClientScreen} options={{ title: 'Clientes' }}/> */}
                 <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ title: 'Login'}} />
-                {/* <Stack.Screen name="CartScreen" component={CartScreen} options={{ title: 'Carrinho' }}/> */}
+                <Stack.Screen name="CartScreen" component={CartScreen} options={{ title: 'Carrinho' }}/>
                 <Stack.Screen name="RegisterUserScreen" component={RegisterUserScreen} options={{ title: 'Cadastrar'}} />
                 {/* <Stack.Screen name="RecoverPasswordScreen" component={RecoverPasswordScreen} options={{ title: 'Recuperar senha' }}/> */}
             </Stack.Navigator>

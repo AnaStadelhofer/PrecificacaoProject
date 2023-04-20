@@ -1,10 +1,16 @@
 import { useEffect, useState } from "react";
-import { View, SafeAreaView, TouchableOpacity, Alert, Dimensions, StyleSheet } from "react-native";
+import {
+  View,
+  SafeAreaView,
+  TouchableOpacity,
+  Alert,
+  Dimensions,
+  StyleSheet,
+} from "react-native";
 import { Text, TextInput } from "react-native-paper";
 import { auth } from "../config/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import Feather from "react-native-vector-icons/Feather";
-import { styles } from '../utils/styles';
+import { styles } from "../utils/styles";
 import ButtonCentralized from "../components/ButtonCentralized";
 
 export default function RegisterUserScreen({ navigation }) {
@@ -37,13 +43,17 @@ export default function RegisterUserScreen({ navigation }) {
     try {
       createUserWithEmailAndPassword(auth, mailUser, password)
         .then(() => {
-          //navigation.navigate("MenuScreen");
+          // updateProfile({ displayName: nameUser });
+          navigation.navigate("MenuScreen");
         })
         .catch((error) => {
           switch (error.code) {
             case "auth/email-already-in-use":
               console.log("Esse endereço de e-mail já está sendo usado.");
-              Alert.alert("Erro", "Esse endereço de e-mail já está sendo usado.");
+              Alert.alert(
+                "Erro",
+                "Esse endereço de e-mail já está sendo usado."
+              );
               break;
             case "auth/invalid-email":
               console.log("Esse endereço de e-mail é inválido.");
@@ -54,8 +64,13 @@ export default function RegisterUserScreen({ navigation }) {
               Alert.alert("Erro", "Essa senha é muito fraca.");
               break;
             case "auth/user-not-found":
-              console.log("Não foi possível encontrar um usuário com esse e-mail e senha.");
-              Alert.alert("Erro", "Não foi possível encontrar um usuário com esse e-mail e senha.");
+              console.log(
+                "Não foi possível encontrar um usuário com esse e-mail e senha."
+              );
+              Alert.alert(
+                "Erro",
+                "Não foi possível encontrar um usuário com esse e-mail e senha."
+              );
               break;
             case "auth/wrong-password":
               console.log("A senha inserida está incorreta.");
@@ -63,7 +78,10 @@ export default function RegisterUserScreen({ navigation }) {
               break;
             default:
               console.log("Ocorreu um erro desconhecido:", error);
-              Alert.alert("Erro", "Parece que ocorreu um erro, tente mais tarde.");
+              Alert.alert(
+                "Erro",
+                "Parece que ocorreu um erro, tente mais tarde."
+              );
               break;
           }
         });
@@ -132,28 +150,6 @@ export default function RegisterUserScreen({ navigation }) {
     }
   };
 
-  function renderPasswordVisibilityIcon() {
-    if (showPassword) {
-      return (
-        <Feather
-          name="eye-off"
-          color="grey"
-          size={20}
-          onPress={() => setShowPassword(false)}
-        />
-      );
-    } else {
-      return (
-        <Feather
-          name="eye"
-          color="grey"
-          size={20}
-          onPress={() => setShowPassword(true)}
-        />
-      );
-    }
-  }
-
   return (
     <View style={styles.container}>
       <SafeAreaView>
@@ -183,6 +179,14 @@ export default function RegisterUserScreen({ navigation }) {
           value={password}
           onChangeText={validatePassword}
           style={passwordError ? styles.inputError : styles.input}
+          right={
+            <TextInput.Icon
+              icon={showPassword ? "eye" : "eye-off"}
+              size={20}
+              style={{ marginRight: 10 }}
+              onPress={() => setShowPassword(!showPassword)}
+            />
+          }
         />
         <View style={{ flexDirection: "row" }}>
           <View style={{ flex: 1 }}>
@@ -190,7 +194,6 @@ export default function RegisterUserScreen({ navigation }) {
               <Text style={styles.error}>{passwordError}</Text>
             ) : null}
           </View>
-          {/* {renderPasswordVisibilityIcon()} */}
         </View>
 
         <TextInput
@@ -200,12 +203,20 @@ export default function RegisterUserScreen({ navigation }) {
           value={confirmPassword}
           onChangeText={validatePasswordEqual}
           style={confirmPasswordError ? styles.inputError : styles.input}
+          right={
+            <TextInput.Icon
+              icon={showPassword ? "eye" : "eye-off"}
+              size={20}
+              style={{ marginRight: 10 }}
+              onPress={() => setShowPassword(!showPassword)}
+            />
+          }
         />
         {confirmPasswordError ? (
           <Text style={styles.error}>{confirmPasswordError}</Text>
         ) : null}
 
-          <ButtonCentralized handle={handleRegister} disable={isButtonEnabled} />
+        <ButtonCentralized handle={handleRegister} disable={isButtonEnabled} />
 
         <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}>
           <Text style={styles.link}>Já possuo conta!</Text>
@@ -214,4 +225,3 @@ export default function RegisterUserScreen({ navigation }) {
     </View>
   );
 }
-

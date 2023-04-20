@@ -29,13 +29,17 @@ export default function LoginScreen({ navigation }) {
       console.log("User logged in: ", user);
     } catch (error) {
       if (error.code === "auth/user-not-found") {
-        setErrorMessage("Este usuário não existe. Por favor, verifique o e-mail.");
+        // setErrorMessage("Este usuário não existe. Por favor, verifique o e-mail.");
+        Alert.alert("Erro", "Este usuário não existe. Por favor, verifique o e-mail.");
       } else if (error.code === "auth/wrong-password") {
-        setErrorMessage("E-mail ou Senha incorreta. Por favor, tente novamente.");
+        Alert.alert("Erro", "E-mail ou Senha incorreta. Por favor, tente novamente.");
+        // setErrorMessage("E-mail ou Senha incorreta. Por favor, tente novamente.");
       } else if (error.code === "auth/invalid-email") {
-        setErrorMessage("Endereço de e-mail inválido. Por favor, verifique e tente novamente.");
+        Alert.alert("Erro", "Endereço de e-mail inválido. Por favor, verifique e tente novamente.");
+        // setErrorMessage("Endereço de e-mail inválido. Por favor, verifique e tente novamente.");
       } else {
-        setErrorMessage("Ocorreu um erro ao fazer login. Por favor, tente novamente.");
+        Alert.alert("Erro", "Ocorreu um erro ao fazer login. Por favor, tente novamente.");
+        // setErrorMessage("Ocorreu um erro ao fazer login. Por favor, tente novamente.");
       }
       console.log("Error logging in: ", error);   
     }
@@ -64,14 +68,18 @@ export default function LoginScreen({ navigation }) {
           value={password}
           onChangeText={setPassword}
           style={styles.input}
+          right={
+            <TextInput.Icon
+              icon={showPassword ? "eye" : "eye-off"}
+              size={20}
+              style={{ marginRight: 10 }}
+              onPress={() => setShowPassword(!showPassword)}
+            />
+          }
         >
         </TextInput>
 
         </View>
-
-        <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-          <Icon name={showPassword ? "eye-slash" : "eye"} />
-        </TouchableOpacity>
 
         <TouchableOpacity
           style={styles.button}

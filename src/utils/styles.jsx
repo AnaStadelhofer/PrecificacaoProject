@@ -80,4 +80,18 @@ export const styles = StyleSheet.create({
     marginTop: 30,
     minWidth: elementWidth,
   },
+  textInputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: 'flex-end',
+  },
+  inputAddItem: {
+    height: 60,
+    borderColor: "#ccc",
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingLeft: 10,
+    marginBottom: 20,
+    minWidth: elementWidth,
+  },
 });
