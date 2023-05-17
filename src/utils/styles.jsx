@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native-web";
+import { StyleSheet } from "react-native";
 
 const elementWidth = 300 * 0.9;
 
@@ -11,6 +11,7 @@ export const styles = StyleSheet.create({
   },
   error: {
     color: "red",
+    marginBottom: 10,
   },
   // Texts
   link: {
@@ -19,15 +20,15 @@ export const styles = StyleSheet.create({
     color: "#2196f3",
     textAlign: "center",
     paddingTop: 10,
-    fontSize: 20
+    fontSize: 20,
   },
   textLinks: {
-    paddingTop: 10
+    paddingTop: 10,
   },
   textInittial: {
     fontSize: 20,
     textAlign: "center",
-    paddingBottom: 15
+    paddingBottom: 15,
   },
   // Buttons
   button: {
@@ -70,6 +71,8 @@ export const styles = StyleSheet.create({
     paddingLeft: 10,
     marginBottom: 30,
     minWidth: elementWidth,
+    backgroundColor: "white",
+    borderColor: "gray",
   },
   inputError: {
     height: 60,
@@ -77,7 +80,37 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     paddingLeft: 10,
-    marginTop: 30,
     minWidth: elementWidth,
+    backgroundColor: "white",
+  },
+  textInputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-end",
+  },
+  inputAddItem: {
+    height: 60,
+    borderColor: "#ccc",
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingLeft: 10,
+    marginBottom: 20,
+    minWidth: elementWidth,
+    backgroundColor: "white",
+  },
+  // Item carrinho
+  listCart: {
+    backgroundColor: "white",
+    minWidth: elementWidth + 50,
+    borderRadius: 10,
+    borderColor: "gray",
+    marginTop: 15,
+    backgroundColor: "gray",
+  },
+  cart: {
+    marginTop: 5550,
+    borderRadius: 10,
+    borderColor: "gray",
+    marginTop: 15,
   },
 });
