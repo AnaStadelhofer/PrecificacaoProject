@@ -1,5 +1,5 @@
-import { ScrollView, View } from "react-native-web";
-import { Text, TextInput } from "react-native-paper";
+import { View } from "react-native";
+import { TextInput } from "react-native-paper";
 import { collection, getFirestore, addDoc } from "firebase/firestore";
 import { app } from "../config/firebase";
 import { useEffect, useState } from "react";

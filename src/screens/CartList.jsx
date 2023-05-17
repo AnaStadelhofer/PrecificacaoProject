@@ -1,4 +1,7 @@
-import { ScrollView, View, ActivityIndicator, FlatList } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, ActivityIndicator, FlatList, ScrollView } from "react-native";
+import { TouchableOpacity } from "react-native";
+import { Alert } from "react-native";
 import { List } from "react-native-paper";
 import {
   collection,
@@ -8,12 +11,10 @@ import {
   doc,
   query,
 } from "firebase/firestore";
-import { app } from "../config/firebase";
-import { useEffect, useState } from "react";
+import { app, db } from "../config/firebase";
 import { styles } from "../utils/styles";
-import { TouchableOpacity } from "react-native-web";
 
-const itemRef = collection(getFirestore(app), "Cart");
+const itemRef = collection(db, "Cart");
 
 export default function CartList() {
   const [cart, setCart] = useState([]);
@@ -23,12 +24,10 @@ export default function CartList() {
     const queryInstance = query(itemRef);
     const cartQuery = onSnapshot(queryInstance, (snapshot) => {
       console.log(snapshot);
-      const listCart = snapshot.docs.map((doc) => {
-        return {
-          id: doc.id,
-          ...doc.data(),
-        };
-      });
+      const listCart = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
       setLoading(false);
       setCart(listCart);
     });
@@ -43,18 +42,47 @@ export default function CartList() {
       .catch((error) => console.log(error));
   }
 
+  function handleEdit(id) {
+    const selectedItem = cart.find(item => item.id === id);
+    console.log("batata" + id)
+    Alert.alert(
+      'Editar nome do produto',
+      'Digite o novo nome:',
+      (newName) => {
+        if (newName) {
+          // Realize a ação de atualização do nome do produto
+          console.log(`Novo nome: ${newName}`);
+          // Aqui você pode utilizar o Firebase Firestore para atualizar o nome do produto
+        }
+      },
+      'plain-text',
+      id.nameProduct
+    );
+  }
+
   const renderItem = ({ item }) => (
-    <View>
+    <View style={styles.cart}>
       <List.Item
         title={item.nameProduct}
         data={cart}
         // description={item.nameProduct}
         left={(props) => <List.Icon {...props} icon="check" />}
         onPress={() => console.log("Pressionado")}
-        right={(props) => (
-          <TouchableOpacity onPress={() => handleDelete(item.id)}>
-            <List.Icon {...props} icon="delete" size={28} />
-          </TouchableOpacity>
+        right={() => (
+          <View style={{ flexDirection: "row" }}>
+            <TouchableOpacity
+              style={{ paddingLeft: 10 }}
+              onPress={() => handleEdit(item.id)}
+            >
+              <List.Icon icon="pen" size={28} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{ paddingLeft: 10 }}
+              onPress={() => handleDelete(item.id)}
+            >
+              <List.Icon icon="delete" size={28} />
+            </TouchableOpacity>
+          </View>
         )}
       />
     </View>
@@ -62,7 +90,7 @@ export default function CartList() {
 
   return (
     <View style={styles.container}>
-      <ScrollView>
+      <ScrollView horizontal={true}>
         {loading ? (
           <ActivityIndicator size="large" />
         ) : (
@@ -70,6 +98,7 @@ export default function CartList() {
             data={cart}
             renderItem={renderItem}
             keyExtractor={(item) => item.id}
+            contentContainerStyle={{ flexGrow: 1 }}
           />
         )}
       </ScrollView>

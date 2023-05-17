@@ -9,6 +9,7 @@ import LoginScreen from './LoginScreen';
 import RegisterUserScreen from './RegisterUserScreen';
 import SplashScreen from './SplashScreen';
 import CartScreen from './CartScreen';
+import ProfileScreen from './ProfileScreen';
 
 // IMPORT COMPONENTS
 import Logo from '../components/Logo';
@@ -35,7 +36,10 @@ function OptionsMenu({ navigation }) {
                     <Text style={styles.buttonText}>SplashScreen</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('CartScreen')}>
-                    <Text style={styles.buttonText}>CartList</Text>
+                    <Text style={styles.buttonText}>Carrinho</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('ProfileScreen')}>
+                    <Text style={styles.buttonText}>Perfil</Text>
                 </TouchableOpacity>
                 {/* <ButtonCentralized title="Carrinho" onPress={() => navigation.navigate('CartScreen')}/> */}
                 {/* <ButtonCentralized title="Recuperar" onPress={() => navigation.navigate('RecoverPasswordScreen')}/> */}
@@ -56,6 +60,7 @@ export default function MenuScreen() {
                 <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ title: 'Login'}} />
                 <Stack.Screen name="CartScreen" component={CartScreen} options={{ title: 'Carrinho' }}/>
                 <Stack.Screen name="RegisterUserScreen" component={RegisterUserScreen} options={{ title: 'Cadastrar'}} />
+                <Stack.Screen name="ProfileScreen" component={ProfileScreen} options={{ title: 'Perfil'}} />
                 {/* <Stack.Screen name="RecoverPasswordScreen" component={RecoverPasswordScreen} options={{ title: 'Recuperar senha' }}/> */}
             </Stack.Navigator>
         </NavigationContainer>

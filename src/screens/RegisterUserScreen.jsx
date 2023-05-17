@@ -1,14 +1,10 @@
 import { useEffect, useState } from "react";
-import {
-  View,
-  SafeAreaView,
-  TouchableOpacity,
-  Alert,
-  Dimensions,
-  StyleSheet,
-} from "react-native";
+import { View, SafeAreaView, TouchableOpacity, Alert } from "react-native";
+import { addDoc, collection, getFirestore } from "firebase/firestore";
+// import { app } from "../config/firebase";
+
 import { Text, TextInput } from "react-native-paper";
-import { auth } from "../config/firebase";
+import { auth, db } from "../config/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { styles } from "../utils/styles";
 import ButtonCentralized from "../components/ButtonCentralized";
@@ -20,6 +16,8 @@ export default function RegisterUserScreen({ navigation }) {
   const [mailUser, setMailUser] = useState("");
 
   const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
+
   const [isButtonEnabled, setIsButtonEnabled] = useState(false);
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -42,9 +40,27 @@ export default function RegisterUserScreen({ navigation }) {
   const handleRegister = async () => {
     try {
       createUserWithEmailAndPassword(auth, mailUser, password)
-        .then(() => {
+        .then((userCredential) => {
           // updateProfile({ displayName: nameUser });
-          navigation.navigate("MenuScreen");
+          console.log(userCredential, "Usuário registrado com sucesso");
+          const userUID = userCredential.user.uid;
+
+          const dadosParaInserir = {
+            nomeDaPessoa: nameUser,
+            userUID: userUID,
+          };
+          const collectionRef = collection(db, "Users");
+
+          const docRef = addDoc(collectionRef, dadosParaInserir)
+            .then((docRef) => {
+              console.log("Documento inserido com sucesso: ", docRef.id);
+              // navigation.navigate("LoginScreen");
+            })
+            .catch((error) => {
+              console.log("Erro ao inserir o documento: ", error);
+            });
+
+          // navigation.navigate("MenuScreen");
         })
         .catch((error) => {
           switch (error.code) {
@@ -77,7 +93,7 @@ export default function RegisterUserScreen({ navigation }) {
               Alert.alert("Erro", "A senha inserida está incorreta.");
               break;
             default:
-              console.log("Ocorreu um erro desconhecido:", error);
+              // console.log("Ocorreu um erro desconhecido:", error);
               Alert.alert(
                 "Erro",
                 "Parece que ocorreu um erro, tente mais tarde."
@@ -198,17 +214,17 @@ export default function RegisterUserScreen({ navigation }) {
 
         <TextInput
           placeholder="Confirmar Senha *"
-          secureTextEntry={!showPassword}
+          secureTextEntry={!showPasswordConfirm}
           textContentType="password"
           value={confirmPassword}
           onChangeText={validatePasswordEqual}
           style={confirmPasswordError ? styles.inputError : styles.input}
           right={
             <TextInput.Icon
-              icon={showPassword ? "eye" : "eye-off"}
+              icon={showPasswordConfirm ? "eye" : "eye-off"}
               size={20}
               style={{ marginRight: 10 }}
-              onPress={() => setShowPassword(!showPassword)}
+              onPress={() => setShowPasswordConfirm(!showPasswordConfirm)}
             />
           }
         />
