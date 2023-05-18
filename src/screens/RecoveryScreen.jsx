@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, TouchableOpacity, SafeAreaView } from "react-native";
-import { TextInput, Text, Dialog } from "react-native-paper";
+import { TextInput, Text, Dialog, Button } from "react-native-paper";
 import { styles } from "../utils/styles";
 import { auth } from "../config/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -11,7 +11,7 @@ import Divider from "../components/Divider";
 
 export default function RecoveryScreen({ navigation }) {
   const [mailUser, setMailUser] = useState("");
-  const [DialogVisible, setDialogVisible] = useState(false);
+  const [dialogVisible, setDialogVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleRecovery = async (email) => {
