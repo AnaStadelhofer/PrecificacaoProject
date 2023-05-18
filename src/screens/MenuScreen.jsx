@@ -10,6 +10,7 @@ import RegisterUserScreen from './RegisterUserScreen';
 import SplashScreen from './SplashScreen';
 import CartScreen from './CartScreen';
 import ProfileScreen from './ProfileScreen';
+import RecoveryScreen from './RecoveryScreen';
 
 // IMPORT COMPONENTS
 import Logo from '../components/Logo';
@@ -41,6 +42,9 @@ function OptionsMenu({ navigation }) {
                 <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('ProfileScreen')}>
                     <Text style={styles.buttonText}>Perfil</Text>
                 </TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('RecoveryScreen')}>
+                    <Text style={styles.buttonText}>RecoveryScreen</Text>
+                </TouchableOpacity>
                 {/* <ButtonCentralized title="Carrinho" onPress={() => navigation.navigate('CartScreen')}/> */}
                 {/* <ButtonCentralized title="Recuperar" onPress={() => navigation.navigate('RecoverPasswordScreen')}/> */}
             </SafeAreaView>
@@ -61,6 +65,7 @@ export default function MenuScreen() {
                 <Stack.Screen name="CartScreen" component={CartScreen} options={{ title: 'Carrinho' }}/>
                 <Stack.Screen name="RegisterUserScreen" component={RegisterUserScreen} options={{ title: 'Cadastrar'}} />
                 <Stack.Screen name="ProfileScreen" component={ProfileScreen} options={{ title: 'Perfil'}} />
+                <Stack.Screen name="RecoveryScreen" component={RecoveryScreen} options={{ title: 'DSADASD'}} />
                 {/* <Stack.Screen name="RecoverPasswordScreen" component={RecoverPasswordScreen} options={{ title: 'Recuperar senha' }}/> */}
             </Stack.Navigator>
         </NavigationContainer>
