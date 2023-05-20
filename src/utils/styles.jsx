@@ -40,6 +40,17 @@ export const styles = StyleSheet.create({
     borderRadius: 5,
     marginTop: 10,
   },
+  recipebutton: {
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+    backgroundColor: '#90C444',
+    borderRadius: 50,
+    width: 50,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   buttonText: {
     color: "#fff",
     fontSize: 18,
@@ -112,5 +123,22 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor: "gray",
     marginTop: 15,
+  },
+  //Receita
+  item: {
+    backgroundColor: 'blue',
+    padding: 10,
+    borderRadius: 8,
+    marginBottom: 20,
+  },
+  itemText: {
+    color: 'white',
+    fontSize: 16,
+  },
+  expandedItem: {
+    backgroundColor: 'lightblue',
+    width: '80%',
+    borderRadius: 8,
+    overflow: 'hidden',
   },
 });
