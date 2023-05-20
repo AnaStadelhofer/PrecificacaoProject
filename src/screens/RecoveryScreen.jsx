@@ -16,8 +16,8 @@ export default function RecoveryScreen({ navigation }) {
 
   const handleRecovery = async (email) => {
     if (mailUser.trim() === "") {
-        setErrorMessage("Por favor, insira o e-mail.");
-        return;
+      setErrorMessage("Por favor, insira o e-mail.");
+      return;
     }
     try {
       await auth.sendPasswordResetEmail(email);
@@ -53,7 +53,9 @@ export default function RecoveryScreen({ navigation }) {
             <Text style={styles.errorMessage}>{errorMessage}</Text>
           )}
           <TextInput
-            placeholder="Email"
+            borderRadius={10}
+            placeholder="Email de recuperação"
+            placeholderTextColor={"#CDCDCD"}
             secureTextEntry={false}
             textContentType="emailAddress"
             value={mailUser}
@@ -61,11 +63,20 @@ export default function RecoveryScreen({ navigation }) {
             style={styles.input}
           />
           <TouchableOpacity
+            width="296px"
+            height="39px"
+            borderRadius={10}
             style={styles.button}
-            onPress={() => Recovery(mailUser)}
+            onPress={() => handleRecovery(mailUser)}
             disable={!mailUser}
           >
             <Text style={styles.buttonText}>Recuperar Senha</Text>
+          </TouchableOpacity>
+          <Divider />
+          <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}>
+            <Text style={[styles.link, { color: "#CDCDCD" }]} color="#CDCDCD">
+              Voltar para Login
+            </Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>
