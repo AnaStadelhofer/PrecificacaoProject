@@ -3,6 +3,7 @@ import { View, ActivityIndicator, FlatList, ScrollView } from "react-native";
 import { TouchableOpacity } from "react-native";
 import { Alert } from "react-native";
 import { List } from "react-native-paper";
+import { Text } from "react-native-paper";
 import {
   collection,
   getFirestore,
@@ -13,12 +14,15 @@ import {
 } from "firebase/firestore";
 import { app, db } from "../config/firebase";
 import { styles } from "../utils/styles";
+// import { Dialog } from '@rneui/themed';
+import Dialog from "react-native-paper";
 
 const itemRef = collection(db, "Cart");
 
 export default function CartList() {
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [cartEmpty, setCartEmpty] = useState(false);
 
   useEffect(() => {
     const queryInstance = query(itemRef);
@@ -29,7 +33,14 @@ export default function CartList() {
         ...doc.data(),
       }));
       setLoading(false);
-      setCart(listCart);
+      if (listCart.length === 0) {
+        setCartEmpty(true);
+        console.log(cartEmpty);
+      } else {
+        setCart(listCart);
+        setCartEmpty(false);
+
+      }
     });
     return () => cartQuery();
   }, []);
@@ -43,21 +54,8 @@ export default function CartList() {
   }
 
   function handleEdit(id) {
-    const selectedItem = cart.find(item => item.id === id);
-    console.log("batata" + id)
-    Alert.alert(
-      'Editar nome do produto',
-      'Digite o novo nome:',
-      (newName) => {
-        if (newName) {
-          // Realize a ação de atualização do nome do produto
-          console.log(`Novo nome: ${newName}`);
-          // Aqui você pode utilizar o Firebase Firestore para atualizar o nome do produto
-        }
-      },
-      'plain-text',
-      id.nameProduct
-    );
+    const selectedItem = cart.find((item) => item.id === id);
+    console.log("batata");
   }
 
   const renderItem = ({ item }) => (
@@ -91,8 +89,9 @@ export default function CartList() {
   return (
     <View style={styles.container}>
       <ScrollView horizontal={true}>
-        {loading ? (
-          <ActivityIndicator size="large" />
+        {loading || cartEmpty ? (
+          // <ActivityIndicator size="large" />
+          <Text>não ta vazio bro</Text>
         ) : (
           <FlatList
             data={cart}

@@ -5,6 +5,7 @@ import { app } from "../config/firebase";
 import { useEffect, useState } from "react";
 import { styles } from "../utils/styles";
 import CartList from "./CartList";
+import CartSearch from "./CartSearch";
 
 const itemRef = collection(getFirestore(app), "Cart");
 
@@ -35,6 +36,7 @@ export default function CartScreen() {
 
   return (
     <View style={styles.container}>
+      {/* <CartSearch/> */}
       <CartList />
       <View style={styles.textInputContainer}>
         <TextInput
