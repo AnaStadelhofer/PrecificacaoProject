@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { View, SafeAreaView, TouchableOpacity, Alert } from "react-native";
-import { addDoc, collection, getFirestore } from "firebase/firestore";
-// import { app } from "../config/firebase";
+import { addDoc, collection } from "firebase/firestore";
 
-import { Text, TextInput } from "react-native-paper";
+import { Checkbox, Text, TextInput } from "react-native-paper";
 import { auth, db } from "../config/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { styles } from "../utils/styles";
 import ButtonCentralized from "../components/ButtonCentralized";
+import Divider from "../components/Divider";
 
 export default function RegisterUserScreen({ navigation }) {
   const [password, setPassword] = useState("");
@@ -24,6 +24,8 @@ export default function RegisterUserScreen({ navigation }) {
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [nameError, setNameError] = useState("");
 
+  const [isSelected, setIsSelected] = useState(false);
+
   useEffect(() => {
     setIsButtonEnabled(
       nameUser !== "" &&
@@ -33,15 +35,15 @@ export default function RegisterUserScreen({ navigation }) {
         emailError == "" &&
         passwordError == "" &&
         confirmPasswordError == "" &&
-        nameError == ""
+        nameError == "" &&
+        isSelected == true
     );
-  }, [nameUser, mailUser, password, confirmPassword]);
+  }, [nameUser, mailUser, password, confirmPassword, isSelected]);
 
   const handleRegister = async () => {
     try {
       createUserWithEmailAndPassword(auth, mailUser, password)
         .then((userCredential) => {
-          // updateProfile({ displayName: nameUser });
           console.log(userCredential, "Usuário registrado com sucesso");
           const userUID = userCredential.user.uid;
 
@@ -54,13 +56,11 @@ export default function RegisterUserScreen({ navigation }) {
           const docRef = addDoc(collectionRef, dadosParaInserir)
             .then((docRef) => {
               console.log("Documento inserido com sucesso: ", docRef.id);
-              // navigation.navigate("LoginScreen");
+              navigation.navigate("LoginScreen");
             })
             .catch((error) => {
               console.log("Erro ao inserir o documento: ", error);
             });
-
-          // navigation.navigate("MenuScreen");
         })
         .catch((error) => {
           switch (error.code) {
@@ -111,7 +111,7 @@ export default function RegisterUserScreen({ navigation }) {
     if (mailUser == "") {
       setEmailError("");
     } else if (!emailRegex.test(mailUser)) {
-      setEmailError("Por favor, insira um email válido.");
+      setEmailError("E-mail informado é inválido.");
     } else {
       setEmailError("");
     }
@@ -125,6 +125,8 @@ export default function RegisterUserScreen({ navigation }) {
       setNameError("");
     } else if (!nameRegex.test(nameUser)) {
       setNameError("O nome deve conter apenas letras.");
+    } else if (nameUser.length < 3) {
+      setNameError("O nome deve ter no minimo 3 caracteres.");
     } else {
       setNameError("");
     }
@@ -146,7 +148,7 @@ export default function RegisterUserScreen({ navigation }) {
       setPasswordError("A senha deve ter pelo menos 6 caracteres.");
       validatePasswordEqual();
     } else if (!isStrongPassword(password)) {
-      setPasswordError("A senha precisa ser forte");
+      setPasswordError("A senha pestá fraca.");
       validatePasswordEqual();
     } else {
       setPasswordError("");
@@ -166,30 +168,35 @@ export default function RegisterUserScreen({ navigation }) {
     }
   };
 
+  const toggleCheckbox = () => {
+    setIsSelected(!isSelected);
+    console.log(isSelected)
+  };
+
   return (
     <View style={styles.container}>
       <SafeAreaView>
         <TextInput
-          placeholder="Nome *"
+          placeholder="Nome"
           secureTextEntry={false}
           textContentType="text"
           value={nameUser}
           onChangeText={validateName}
           style={nameError ? styles.inputError : styles.input}
         />
-        {nameError ? <Text style={styles.error}>{nameError}</Text> : null}
+        {nameError && <Text style={styles.error}>{nameError}</Text>}
 
         <TextInput
-          placeholder="Email *"
+          placeholder="Email"
           textContentType="emailAddress"
           value={mailUser}
           onChangeText={validateEmail}
           style={emailError ? styles.inputError : styles.input}
         />
-        {emailError ? <Text style={styles.error}>{emailError}</Text> : null}
+        {emailError && <Text style={styles.error}>{emailError}</Text>}
 
         <TextInput
-          placeholder="Senha *"
+          placeholder="Senha"
           secureTextEntry={!showPassword}
           textContentType="password"
           value={password}
@@ -204,16 +211,10 @@ export default function RegisterUserScreen({ navigation }) {
             />
           }
         />
-        <View style={{ flexDirection: "row" }}>
-          <View style={{ flex: 1 }}>
-            {passwordError ? (
-              <Text style={styles.error}>{passwordError}</Text>
-            ) : null}
-          </View>
-        </View>
+        {passwordError && <Text style={styles.error}>{passwordError}</Text>}
 
         <TextInput
-          placeholder="Confirmar Senha *"
+          placeholder="Confirmar Senha"
           secureTextEntry={!showPasswordConfirm}
           textContentType="password"
           value={confirmPassword}
@@ -228,14 +229,28 @@ export default function RegisterUserScreen({ navigation }) {
             />
           }
         />
-        {confirmPasswordError ? (
+        {confirmPasswordError && (
           <Text style={styles.error}>{confirmPasswordError}</Text>
-        ) : null}
+        )}
+
+        <View style={styles.checkboxContainer}>
+          <TouchableOpacity
+            onPress={toggleCheckbox}
+          >
+            <View
+              style={isSelected ? styles.checkboxSelected : styles.checkbox}
+            ></View>
+            
+          </TouchableOpacity>
+          <Text style={styles.textTerms}>Concordo com os termos de privacidade</Text>
+        </View>
 
         <ButtonCentralized handle={handleRegister} disable={isButtonEnabled} />
 
+        <Divider />
+
         <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}>
-          <Text style={styles.link}>Já possuo conta!</Text>
+          <Text style={styles.link}>Já possuo conta.</Text>
         </TouchableOpacity>
       </SafeAreaView>
     </View>

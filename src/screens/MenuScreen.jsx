@@ -74,6 +74,8 @@ export default function MenuScreen() {
 
                 <Stack.Screen name="FPasswordScreen" component={FPasswordScreen} options={{ title: 'FSenha'}} />
                 <Stack.Screen name="Recipes" component={Recipes} options={{ title: 'Receitas'}} />
+                <Stack.Screen name="RecoveryScreen" component={RecoveryScreen} options={{ title: 'RecoveryScreen'}} />
+
                 {/* <Stack.Screen name="RecoverPasswordScreen" component={RecoverPasswordScreen} options={{ title: 'Recuperar senha' }}/> */}
             </Stack.Navigator>
         </NavigationContainer>

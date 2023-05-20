@@ -23,13 +23,8 @@ export default function FPasswordScreen({ navigation }) {
     <View style={styles.container}>
       <Logo />
       <SafeAreaView>
-      <Text
-      style={styles.textInittial}
-      >Insira sua nova senha para realizar o login</Text>
-      <View>
-
       
-
+      <View>
         <TextInput
           placeholder="Senha"
           secureTextEntry={showNewPassword}

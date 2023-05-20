@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-const elementWidth = 300 * 0.9;
+const elementWidth = 300 * 1.1;
 
 export const styles = StyleSheet.create({
   container: {
@@ -14,13 +14,37 @@ export const styles = StyleSheet.create({
     marginBottom: 10,
   },
   // Texts
+  checkboxContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 15
+  },
+  checkbox: {
+    width: 20,
+    height: 20,
+    borderWidth: 1,
+    borderColor: 'gray',
+    marginRight: 5,
+  },
+  checkboxSelected: {
+    width: 20,
+    height: 20,
+    backgroundColor: '#6BA0D2',
+    marginRight: 5,
+  },
+  textTerms: {
+    fontSize: 20,
+    marginLeft: 5,
+  },
   link: {
     paddingHorizontal: 10,
     fontSize: 16,
-    color: "#2196f3",
+    color: "#8A8A8A",
     textAlign: "center",
     paddingTop: 10,
     fontSize: 20,
+    textDecorationLine: 'underline',
+    marginTop: 10
   },
   textLinks: {
     paddingTop: 10,
@@ -36,9 +60,9 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     minWidth: elementWidth,
     height: 50,
-    backgroundColor: "#2196f3",
-    borderRadius: 5,
-    marginTop: 10,
+    backgroundColor: "#6BA0D2",
+    borderRadius: 10,
+    marginTop: 15,
   },
   recipebutton: {
     position: 'absolute',
@@ -60,8 +84,8 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     minWidth: elementWidth,
     height: 50,
-    backgroundColor: "#2196f3",
-    borderRadius: 5,
+    backgroundColor: "#6BA0D2",
+    borderRadius: 10,
     marginTop: 15,
   },
   buttonDisabled: {
@@ -69,7 +93,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     minWidth: elementWidth,
     height: 50,
-    borderRadius: 5,
+    borderRadius: 10,
     marginTop: 15,
     backgroundColor: "gray",
   },
@@ -78,21 +102,27 @@ export const styles = StyleSheet.create({
     height: 60,
     borderColor: "#ccc",
     borderWidth: 1,
-    borderRadius: 5,
-    paddingLeft: 10,
-    marginBottom: 30,
+    paddingLeft: 5,
+    marginBottom: 22,
     minWidth: elementWidth,
     backgroundColor: "white",
     borderColor: "gray",
+    borderBottomLeftRadius: 10, 
+    borderBottomRightRadius: 10,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10, 
   },
   inputError: {
     height: 60,
     borderColor: "red",
     borderWidth: 1,
-    borderRadius: 5,
-    paddingLeft: 10,
+    paddingLeft: 5,
     minWidth: elementWidth,
     backgroundColor: "white",
+    borderBottomLeftRadius: 10, 
+    borderBottomRightRadius: 10,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10, 
   },
   textInputContainer: {
     flexDirection: "row",
