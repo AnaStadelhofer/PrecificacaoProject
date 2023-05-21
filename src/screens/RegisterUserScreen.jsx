@@ -48,7 +48,8 @@ export default function RegisterUserScreen({ navigation }) {
           const userUID = userCredential.user.uid;
 
           const dadosParaInserir = {
-            nomeDaPessoa: nameUser,
+            name: nameUser,
+            terms: true,
             userUID: userUID,
           };
           const collectionRef = collection(db, "Users");
