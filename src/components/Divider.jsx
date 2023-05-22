@@ -6,7 +6,7 @@ const Divider = () => {
       style={{
         borderBottomColor: 'grey',
         borderBottomWidth: 1,
-        paddingTop: 30
+        paddingTop: 30,
       }}
     />
   );

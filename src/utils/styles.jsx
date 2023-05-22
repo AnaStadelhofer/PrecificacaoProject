@@ -9,28 +9,42 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#fff",
   },
+  containerInner: {
+    flex: 1,
+    width: "100%",
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   error: {
     color: "red",
     marginBottom: 10,
   },
   // Texts
   checkboxContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 15
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 15,
   },
   checkbox: {
-    width: 20,
-    height: 20,
+    width: 25,
+    height: 25,
     borderWidth: 1,
-    borderColor: 'gray',
+    borderColor: "gray",
     marginRight: 5,
+    borderRadius: 5,
+    marginLeft: 5,
+    marginTop: 5
   },
   checkboxSelected: {
-    width: 20,
-    height: 20,
-    backgroundColor: '#6BA0D2',
+    width: 25,
+    height: 25,
+    backgroundColor: "#6BA0D2",
     marginRight: 5,
+  },
+  icons: {
+    marginTop: 5
   },
   textTerms: {
     fontSize: 20,
@@ -43,8 +57,8 @@ export const styles = StyleSheet.create({
     textAlign: "center",
     paddingTop: 10,
     fontSize: 20,
-    textDecorationLine: 'underline',
-    marginTop: 10
+    textDecorationLine: "underline",
+    marginTop: 10,
   },
   textLinks: {
     paddingTop: 10,
@@ -55,6 +69,22 @@ export const styles = StyleSheet.create({
     paddingBottom: 15,
   },
   // Buttons
+  buttonProfileContainer: {
+    flex: 1, // Ocupa a largura disponível igualmente
+    marginHorizontal: 10, // Espaçamento horizontal entre os botões
+  },
+  buttonContainer: {
+    flexDirection: 'row', // Alinha os botões horizontalmente
+    justifyContent: 'space-between', // Espaçamento igual entre os botões
+  },
+  buttonProfile: {
+    backgroundColor: '#6BA0D2',
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    borderRadius: 10,
+    textAlign: 'center',
+    minWidth: '25%'
+  },
   button: {
     justifyContent: "center",
     alignItems: "center",
@@ -65,15 +95,15 @@ export const styles = StyleSheet.create({
     marginTop: 15,
   },
   recipebutton: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 20,
     right: 20,
-    backgroundColor: '#90C444',
+    backgroundColor: "#90C444",
     borderRadius: 50,
     width: 50,
     height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   buttonText: {
     color: "#fff",
@@ -106,11 +136,11 @@ export const styles = StyleSheet.create({
     marginBottom: 22,
     minWidth: elementWidth,
     backgroundColor: "white",
-    borderColor: "gray",
-    borderBottomLeftRadius: 10, 
+    borderColor: '#777777',
+    borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
     borderTopLeftRadius: 10,
-    borderTopRightRadius: 10, 
+    borderTopRightRadius: 10,
   },
   inputError: {
     height: 60,
@@ -119,10 +149,10 @@ export const styles = StyleSheet.create({
     paddingLeft: 5,
     minWidth: elementWidth,
     backgroundColor: "white",
-    borderBottomLeftRadius: 10, 
+    borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
     borderTopLeftRadius: 10,
-    borderTopRightRadius: 10, 
+    borderTopRightRadius: 10,
   },
   textInputContainer: {
     flexDirection: "row",
@@ -130,7 +160,7 @@ export const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   inputAddItem: {
-    height: 60,
+    height: 55,
     borderColor: "#ccc",
     borderWidth: 1,
     borderRadius: 5,
@@ -138,37 +168,63 @@ export const styles = StyleSheet.create({
     marginBottom: 20,
     minWidth: elementWidth,
     backgroundColor: "white",
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    borderColor: '#777777'
   },
   // Item carrinho
   listCart: {
     backgroundColor: "white",
-    minWidth: elementWidth + 50,
     borderRadius: 10,
     borderColor: "gray",
     marginTop: 15,
     backgroundColor: "gray",
   },
   cart: {
-    marginTop: 5550,
     borderRadius: 10,
     borderColor: "gray",
     marginTop: 15,
+    justifyContent: "space-between",
+    backgroundColor: '#E8E8E8',
+    
+    shadowColor: 'black',
+    shadowOffset: { width: 10, height: 10 },
+    shadowOpacity: 0.8,
+    shadowRadius: 4,
+    elevation: 10,
+    minWidth: elementWidth,
+  },
+  cartEnable:  {
+    borderRadius: 10,
+    borderColor: "gray",
+    marginTop: 15,
+    justifyContent: "space-between",
+    backgroundColor: 'gray',
+
+    shadowColor: 'black',
+    shadowOffset: { width: 10, height: 10 },
+    shadowOpacity: 0.8,
+    shadowRadius: 4,
+    elevation: 10,
+    minWidth: elementWidth,
   },
   //Receita
   item: {
-    backgroundColor: 'blue',
+    backgroundColor: "blue",
     padding: 10,
     borderRadius: 8,
     marginBottom: 20,
   },
   itemText: {
-    color: 'white',
+    color: "white",
     fontSize: 16,
   },
   expandedItem: {
-    backgroundColor: 'lightblue',
-    width: '80%',
+    backgroundColor: "lightblue",
+    width: "80%",
     borderRadius: 8,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
 });

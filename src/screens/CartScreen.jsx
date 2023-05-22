@@ -36,7 +36,6 @@ export default function CartScreen() {
 
   return (
     <View style={styles.container}>
-      {/* <CartSearch/> */}
       <CartList />
       <View style={styles.textInputContainer}>
         <TextInput
