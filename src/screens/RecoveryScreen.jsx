@@ -62,7 +62,7 @@ export default function RecoveryScreen({ navigation }) {
           />
           <TouchableOpacity
             style={styles.button}
-            onPress={() => Recovery(mailUser)}
+            onPress={() => handleRecovery(mailUser)}
             disable={!mailUser}
           >
             <Text style={styles.buttonText}>Recuperar Senha</Text>
