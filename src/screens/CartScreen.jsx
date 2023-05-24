@@ -6,14 +6,23 @@ import { useEffect, useState } from "react";
 import { styles } from "../utils/styles";
 import CartList from "./CartList";
 import CartSearch from "./CartSearch";
+import { auth } from "../config/firebase";
 
 const itemRef = collection(getFirestore(app), "Cart");
 
-export default function CartScreen() {
+export default function CartScreen({ navigation }) {
+
+  useEffect(() => {
+    if (auth.currentUser.uid == undefined) {
+      navigation.navigate("LoginScreen");
+    }
+  }, [auth.currentUser.userID]);
+
   const [nameItem, setNameItem] = useState("");
   const [checkedItem, setCheckedItem] = useState(false);
 
   const saveItemCart = (cart) => {
+
     addDoc(itemRef, cart)
       .then((docRef) => {
         console.log("Item criado: ", docRef.id);
@@ -27,8 +36,14 @@ export default function CartScreen() {
   };
 
   function handleAddItem() {
-    console.log(nameItem);
-    const cart = { nameProduct: nameItem.trim(), checkProduct: false };
+
+    const idDoUsuario = auth.currentUser.uid;
+
+    const cart = {
+      nameProduct: nameItem.trim(),
+      checkProduct: false,
+      userID: idDoUsuario,
+    };
     saveItemCart(cart);
     setNameItem("");
     setCheckedItem(true);
@@ -36,7 +51,6 @@ export default function CartScreen() {
 
   return (
     <View style={styles.container}>
-      {/* <CartSearch/> */}
       <CartList />
       <View style={styles.textInputContainer}>
         <TextInput

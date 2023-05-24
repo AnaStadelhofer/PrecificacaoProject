@@ -5,6 +5,7 @@ import { styles } from "../utils/styles";
 import { auth } from "../config/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import Logo from "../components/Logo";
+import CartScreen from "./CartScreen";
 
 import { Alert } from "react-native";
 import Divider from "../components/Divider";
@@ -26,6 +27,7 @@ export default function LoginScreen({ navigation }) {
       );
       const user = userCredential.user;
       console.log("User logged in: ", user);
+      navigation.navigate("CartScreen")
     } catch (error) {
       if (error.code === "auth/user-not-found") {
         // setErrorMessage("Este usuário não existe. Por favor, verifique o e-mail.");
@@ -83,6 +85,7 @@ export default function LoginScreen({ navigation }) {
             textContentType="emailAddress"
             value={mailUser}
             onChangeText={validateEmail}
+            keyboardType="email-address"
             style={emailError ? styles.inputError : styles.input}
           />
           {emailError && <Text style={styles.error}>{emailError}</Text>}
@@ -94,6 +97,7 @@ export default function LoginScreen({ navigation }) {
             value={password}
             onChangeText={setPassword}
             style={styles.input}
+            keyboardType="default"
             right={
               <TextInput.Icon
                 icon={showPassword ? "eye" : "eye-off"}
