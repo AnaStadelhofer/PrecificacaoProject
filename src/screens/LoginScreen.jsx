@@ -89,7 +89,7 @@ export default function LoginScreen({ navigation }) {
         </TouchableOpacity>
         <Divider />
         <View style={styles.textLinks}>
-          <TouchableOpacity onPress={() => navigation.navigate("RecoveryScreen")}>
+          <TouchableOpacity onPress={() => navigation.navigate("FPasswordScreen")}>
             <Text style={styles.link}>Esqueci minha senha!</Text>
           </TouchableOpacity>
 
