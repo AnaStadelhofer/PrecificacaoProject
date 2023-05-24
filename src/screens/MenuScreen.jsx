@@ -13,6 +13,7 @@ import ProfileScreen from './ProfileScreen';
 import RecoveryScreen from './RecoveryScreen';
 import FPasswordScreen from './FPasswordScreen';
 import Recipes from './Recipes';
+import RecipeAdd from './RecipeAdd';
 
 
 // IMPORT COMPONENTS
@@ -51,6 +52,9 @@ function OptionsMenu({ navigation }) {
                 <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('RecoveryScreen')}>
                     <Text style={styles.buttonText}>RecoveryScreen</Text>
                 </TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('RecipeAdd')}>
+                    <Text style={styles.buttonText}>Criar receita</Text>
+                </TouchableOpacity>
                 {/* <ButtonCentralized title="Carrinho" onPress={() => navigation.navigate('CartScreen')}/> */}
                 {/* <ButtonCentralized title="Recuperar" onPress={() => navigation.navigate('RecoverPasswordScreen')}/> */}
             </SafeAreaView>
@@ -71,6 +75,8 @@ export default function MenuScreen() {
                 <Stack.Screen name="CartScreen" component={CartScreen} options={{ title: 'Carrinho' }}/>
                 <Stack.Screen name="RegisterUserScreen" component={RegisterUserScreen} options={{ title: 'Cadastrar'}} />
                 <Stack.Screen name="ProfileScreen" component={ProfileScreen} options={{ title: 'Perfil'}} />
+                <Stack.Screen name="RecipeAdd" component={RecipeAdd} options={{ title: 'Criar receita'}} />
+
 
                 <Stack.Screen name="FPasswordScreen" component={FPasswordScreen} options={{ title: 'FSenha'}} />
                 <Stack.Screen name="Recipes" component={Recipes} options={{ title: 'Receitas'}} />

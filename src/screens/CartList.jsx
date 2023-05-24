@@ -15,10 +15,12 @@ import {
 } from "firebase/firestore";
 import { db } from "../config/firebase";
 import { styles } from "../utils/styles";
-// import { Dialog } from '@rneui/themed';
 import { updateDoc } from "firebase/firestore";
 import Dialog from "react-native-paper";
 import Button from "react-native-paper";
+import { auth
+ } from "../config/firebase";
+import { where } from "firebase/firestore";
 
 const itemRef = collection(db, "Cart");
 
@@ -30,7 +32,7 @@ export default function CartList() {
   const [dialogVisible, setDialogVisible] = useState(false);
 
   useEffect(() => {
-    const queryInstance = query(itemRef);
+    const queryInstance = query(itemRef, where("userID", '==', auth.currentUser.uid));
     const cartQuery = onSnapshot(queryInstance, (snapshot) => {
       console.log(snapshot);
       const listCart = snapshot.docs.map((doc) => ({
@@ -40,7 +42,6 @@ export default function CartList() {
       setLoading(false);
       if (listCart.length === 0) {
         setCartEmpty(true);
-        console.log(cartEmpty);
       } else {
         setCart(listCart);
         setCartEmpty(false);
@@ -104,11 +105,7 @@ export default function CartList() {
     console.log(showModalEdit)
     return(
       <View>
-        <Dialog visible={dialogVisible}>
-          <Text>Descrição do Diálogo</Text>
-          {/* <Button label="Cancelar" onPress={hideModalEdit} />
-          <Button label="OK" onPress={showModalEdit} /> */}
-        </Dialog>
+       
       </View>
     )
   }
@@ -160,7 +157,7 @@ export default function CartList() {
       <ScrollView horizontal={true}>
         {loading || cartEmpty ? (
           // <ActivityIndicator size="large" />
-          <Text>não ta vazio bro</Text>
+          <Text style={styles.emptyCart}>Ops! Parece que você não adicionou nenhum item na lista de compras!</Text>
         ) : (
           <FlatList
             data={cart}

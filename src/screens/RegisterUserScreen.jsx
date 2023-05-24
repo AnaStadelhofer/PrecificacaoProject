@@ -184,6 +184,7 @@ export default function RegisterUserScreen({ navigation }) {
           value={nameUser}
           onChangeText={validateName}
           style={nameError ? styles.inputError : styles.input}
+          keyBoardType="default"
         />
         {nameError && <Text style={styles.error}>{nameError}</Text>}
 
@@ -193,6 +194,7 @@ export default function RegisterUserScreen({ navigation }) {
           value={mailUser}
           onChangeText={validateEmail}
           style={emailError ? styles.inputError : styles.input}
+          keyBoardType="email-address"
         />
         {emailError && <Text style={styles.error}>{emailError}</Text>}
 
@@ -203,6 +205,7 @@ export default function RegisterUserScreen({ navigation }) {
           value={password}
           onChangeText={validatePassword}
           style={passwordError ? styles.inputError : styles.input}
+          keyBoardType="default"
           right={
             <TextInput.Icon
               icon={showPassword ? "eye" : "eye-off"}
@@ -221,6 +224,7 @@ export default function RegisterUserScreen({ navigation }) {
           value={confirmPassword}
           onChangeText={validatePasswordEqual}
           style={confirmPasswordError ? styles.inputError : styles.input}
+          keyBoardType="default"
           right={
             <TextInput.Icon
               icon={showPasswordConfirm ? "eye" : "eye-off"}
@@ -246,7 +250,7 @@ export default function RegisterUserScreen({ navigation }) {
           <Text style={styles.textTerms}>Concordo com os termos de privacidade</Text>
         </View>
 
-        <ButtonCentralized handle={handleRegister} disable={isButtonEnabled} />
+        <ButtonCentralized text='Confirmar' handle={handleRegister} disable={isButtonEnabled} />
 
         <Divider />
 

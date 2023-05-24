@@ -76,7 +76,7 @@ export const styles = StyleSheet.create({
   },
   centerInfo: {
     padding: 15,
-    marginBottom: 15
+    marginBottom: 15,
   },
   infoUser: {
     fontSize: 40,
@@ -149,6 +149,9 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     marginTop: 15,
     backgroundColor: "gray",
+  },
+  btnCenterBottom: {
+    marginBottom: 15,
   },
   // Inputs
   input: {
