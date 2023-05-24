@@ -19,6 +19,15 @@ export default function FPasswordScreen({ navigation }) {
   const [showNewPassword, setShowNewPassword] = useState(true);
   const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(true);
 
+  const validatePasswordEqual = (newconfirmpassword) => {
+    setConfirmNewPassword(newconfirmpassword);
+    if (newpassword === newconfirmpassword) {
+      setErrorMessage("");
+    } else {
+      setErrorMessage("Senhas não coincidem.");
+    }
+  }
+
   return (
     <View style={styles.container}>
       <Logo />
@@ -46,7 +55,7 @@ export default function FPasswordScreen({ navigation }) {
           secureTextEntry={showConfirmNewPassword}
           textContentType="password"
           value={newconfirmpassword}
-          onChangeText={setConfirmNewPassword}
+          onChangeText={validatePasswordEqual}
           style={styles.input}
           right={
             <TextInput.Icon
