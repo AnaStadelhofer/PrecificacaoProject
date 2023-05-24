@@ -12,7 +12,8 @@ export const styles = StyleSheet.create({
   recipeContainer:{
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center",
+    // justifyContent: "center",
+    marginTop: 40,
     alignItems: "center",
     height: "100vh",  
   },
@@ -162,6 +163,11 @@ export const styles = StyleSheet.create({
     marginTop: 15,
   },
   //Receita
+  
+  iconsContainer: {
+    textAlign: 'end',
+    textAlignVertical: 'end',
+  },
   item: {
     backgroundColor: '#E8E8E8',
     padding: 10,
@@ -170,6 +176,7 @@ export const styles = StyleSheet.create({
     marginBottom: 20,
     marginTop: 20,
     minWidth: elementWidth,
+    textAlign: 'center',
   },
   itemTextTitle:{
     color: '#000000',
@@ -187,13 +194,20 @@ export const styles = StyleSheet.create({
   expandedItem: {
     backgroundColor: '#FAFAFA',
     width: '90%',
+    marginTop: -15,
     borderRadius: 8,
     boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)",
     overflow: 'hidden',
   },
+  
   icon: {
-    justifyContent: "right",
-    alignItems: "right",
     marginLeft: 10,
+    fontSize: 20,
+  },
+  arrowicon: {
+    textAlign: 'left', 
+    textAlignVertical: 'left',
+    marginRight: 10,
+    fontSize: 20,
   },
 });

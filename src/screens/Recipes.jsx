@@ -14,7 +14,8 @@ export default function Recipes({ navigation }) {
   const handleButtonPress = () => {};
   const [expanded, setExpanded] = useState(false);
   const heightAnim = useRef(new Animated.Value(0)).current;
-  const [messageVisible, setMessageVisible] = useState(false);
+  const [messageVisible, setMessageVisible] = useState(false)
+  const [icon, setIcon] = useState("arrow-down");
 
   const handleItemPress = () => {
     Animated.timing(heightAnim, {
@@ -23,7 +24,10 @@ export default function Recipes({ navigation }) {
       useNativeDriver: false,
     }).start();
     setExpanded(!expanded);
+    setIcon("arrow-up");
   };
+
+  
 
   return (
     <View style={styles.container}>
@@ -33,11 +37,17 @@ export default function Recipes({ navigation }) {
         </Text>
       ) : (
         <View style={styles.recipeContainer}>
-          <TouchableOpacity style={styles.item} onPress={handleItemPress}>
-            <Text style={styles.itemTextTitle}>Bolo de Pote
+          <TouchableOpacity style={styles.item} onPress={handleItemPress} >
+            <Text style={styles.itemTextTitle}>
+            <FontAwesome name={icon} style={styles.arrowicon} />Bolo de Pote
+            <TouchableOpacity style={styles.iconsContainer} onPress={null}>
                 <FontAwesome name="pencil" style={styles.icon} />
-                <FontAwesome name="trash" style={styles.icon} />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.iconsContainer } onPress={null}>
+                <FontAwesome name="trash" style={[styles.icon, { flex: 1 }]} />
+                </TouchableOpacity>
             </Text>
+            
           </TouchableOpacity>
           <Animated.View style={[styles.expandedItem, { height: heightAnim }]}>
             <Text style={styles.itemText}>Custo total: R$ 20,00</Text>
