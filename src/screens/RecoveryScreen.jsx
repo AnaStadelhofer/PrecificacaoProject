@@ -14,6 +14,7 @@ export default function RecoveryScreen({ navigation }) {
   const [mailUser, setMailUser] = useState("");
   const [dialogVisible, setDialogVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isEmailValid, setIsEmailValid] = useState("false");
 
   const handleRecovery = async (email) => {
     if (mailUser.trim() === "") {
@@ -51,10 +52,13 @@ export default function RecoveryScreen({ navigation }) {
 
     if (mailUser === "") {
       setErrorMessage("");
+      setIsEmailValid(false);
     } else if (!emailRegex.test(mailUser)) {
       setErrorMessage("E-mail informado é inválido.");
+      setIsEmailValid(false);
     } else {
       checkExistingEmail(mailUser);
+      setIsEmailValid(true);
     }
   };
 
@@ -96,7 +100,7 @@ export default function RecoveryScreen({ navigation }) {
           <TouchableOpacity
             style={styles.button}
             onPress={() => handleRecovery(mailUser)}
-            disabled={!mailUser}
+            disabled={!isEmailValid || mailUser.trim() === ""}
           >
             <Text style={styles.buttonText}>Recuperar Senha</Text>
           </TouchableOpacity>
