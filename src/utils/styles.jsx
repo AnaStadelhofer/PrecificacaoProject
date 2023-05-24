@@ -18,6 +18,14 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  recipeContainer:{
+    display: "flex",
+    flexDirection: "column",
+    // justifyContent: "center",
+    marginTop: 40,
+    alignItems: "center",
+    height: "100vh",  
+  },
   error: {
     color: "red",
     marginBottom: 10,
@@ -239,20 +247,51 @@ export const styles = StyleSheet.create({
     minWidth: "100%",
   },
   //Receita
+  
+  iconsContainer: {
+    textAlign: 'end',
+    textAlignVertical: 'end',
+  },
   item: {
-    backgroundColor: "blue",
+    backgroundColor: '#E8E8E8',
     padding: 10,
     borderRadius: 8,
+    boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)",
     marginBottom: 20,
+    marginTop: 20,
+    minWidth: elementWidth,
+    textAlign: 'center',
+  },
+  itemTextTitle:{
+    color: '#000000',
+    fontSize: 20,
+    textAlign: 'center',
+    textAlignVertical: 'center',
   },
   itemText: {
-    color: "white",
-    fontSize: 16,
+    color: '#000000',
+    fontSize: 20,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    marginTop: 18,
   },
   expandedItem: {
-    backgroundColor: "lightblue",
-    width: "80%",
+    backgroundColor: '#FAFAFA',
+    width: '90%',
+    marginTop: -15,
     borderRadius: 8,
-    overflow: "hidden",
+    boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)",
+    overflow: 'hidden',
+  },
+  
+  icon: {
+    marginLeft: 10,
+    fontSize: 20,
+  },
+  arrowicon: {
+    textAlign: 'left', 
+    textAlignVertical: 'left',
+    marginRight: 10,
+    fontSize: 20,
   },
 });
