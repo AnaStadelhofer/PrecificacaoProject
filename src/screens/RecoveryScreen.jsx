@@ -92,18 +92,31 @@ export default function RecoveryScreen({ navigation }) {
             <Text style={styles.errorMessage}>{errorMessage}</Text>
           )}
           <TextInput
-            placeholder="Email"
+            borderRadius={10}
+            placeholder="Email de recuperação"
+            placeholderTextColor={"#CDCDCD"}
             secureTextEntry={false}
             textContentType="emailAddress"
             value={mailUser}
             onChangeText={validateEmail}
           />
           <TouchableOpacity
+            width="296px"
+            height="39px"
+            borderRadius={10}
             style={styles.button}
             onPress={() => handleRecovery(mailUser)}
+
             disabled={!isEmailValid || mailUser.trim() === ""}
+
           >
             <Text style={styles.buttonText}>Recuperar Senha</Text>
+          </TouchableOpacity>
+          <Divider />
+          <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}>
+            <Text style={[styles.link, { color: "#CDCDCD" }]} color="#CDCDCD">
+              Voltar para Login
+            </Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>

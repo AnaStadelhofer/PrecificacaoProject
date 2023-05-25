@@ -6,9 +6,11 @@ import { TouchableOpacity } from "react-native";
 export default function ProfileScreen() {
   return (
     <View style={styles.container}>
-      <Text>Bem-vindo (a), Ana!</Text>
-      <Text>Informações do seu perfil.</Text>
-      <View>
+      <View style={[styles.centerInfo, {justifyContent: 'flex-start'}]}>
+        <Text style={styles.welcomeUser}>Bem-vindo (a), Ana!</Text>
+        <Text style={styles.infoUser}>Informações do seu perfil.</Text>
+      </View>
+      <View style={styles.container}>
         <TextInput
           placeholder="Ana Carolina Stadelhofer"
           // secureTextEntry={showPassword}
@@ -16,6 +18,7 @@ export default function ProfileScreen() {
           // value={password}
           // onChangeText={setPassword}
           style={styles.input}
+          editable={false}
         />
         <TextInput
           placeholder="ana.stadelhofer@teste.com.br"
@@ -24,19 +27,20 @@ export default function ProfileScreen() {
           // value={password}
           // onChangeText={setPassword}
           style={styles.input}
+          editable={false}
         />
       </View>
       <View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             onPress={() => navigation.navigate("LoginScreen")}
-            style={styles.buttonProfile}
+            style={styles.buttonProfileDiv}
           >
             <Text style={styles.buttonProfile}>Editar perfil</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => navigation.navigate("LoginScreen")}
-            style={styles.buttonProfile}
+            style={styles.buttonProfileDiv}
           >
             <Text style={styles.buttonProfile}>Editar senha</Text>
           </TouchableOpacity>
@@ -46,7 +50,7 @@ export default function ProfileScreen() {
           style={styles.button}
           // onPress={() => login(mailUser, password)}
         >
-          <Text>Deslogar</Text>
+          <Text style={styles.buttonText}>Deslogar</Text>
         </TouchableOpacity>
       </View>
     </View>
