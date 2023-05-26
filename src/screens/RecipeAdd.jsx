@@ -4,10 +4,63 @@ import { Text, TextInput } from "react-native-paper";
 import { styles } from "../utils/styles";
 import { ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import IngredientAdd from "./IngredientAdd";
-import ButtonCentralized from "../components/ButtonCentralized";
+import { auth } from "../config/firebase";
+import { collection } from "firebase/firestore";
+import { db } from "../config/firebase";
+import { useEffect } from "react";
+import { useState } from "react";
+import { addDoc } from "firebase/firestore";
+import { TouchableOpacity } from "react-native";
+
+const itemRef = collection(db, "Recipes");
 
 export default function RecipeAdd({ navigation }) {
+
+  useEffect(() => {
+    if (auth.currentUser.uid == null) {
+      navigation.navigate("LoginScreen");
+    }
+  }, [auth.currentUser.uid]);
+
+  const [nameRecipe, setNameRecipe] = useState("");
+  const [income, setIncome] = useState("");
+  const [typeProfit, setTypeProfit] = useState("");
+  const [profitValue, setProfitValue] = useState("");
+
+
+  const saveItemRecipe = (recipe) => {
+    try {
+      addDoc(itemRef, recipe)
+        .then((docRef) => {
+          console.log("Item criado: ", docRef.id);
+        })
+        .catch((error) => {
+          console.error("Error ao salvar item: ", error);
+        })
+        .finally(() => {
+          console.log("Registro finalizado");
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  function handleAddRecipe() {
+
+    const idDoUsuario = auth.currentUser.uid;
+
+    const recipe = {
+      nameRecipe: nameRecipe.trim(),
+      income: income.trim(),
+      typeProfit: typeProfit.trim(),
+      profitValue: profitValue.trim(),
+      userID: idDoUsuario,
+    };
+    console.log(recipe)
+    saveItemRecipe(recipe);
+    setNameRecipe("");
+  }
+
   return (
     <View style={styles.container}>
       <SafeAreaView>
@@ -17,6 +70,7 @@ export default function RecipeAdd({ navigation }) {
             style={styles.input}
             textContentType="text"
             editable={true}
+            onChangeText={setNameRecipe}
           />
 
           <TextInput
@@ -38,6 +92,7 @@ export default function RecipeAdd({ navigation }) {
             textContentType="text"
             keyboardType="numeric"
             editable={true}
+            onChangeText={setIncome}
           />
 
           <TextInput
@@ -69,6 +124,7 @@ export default function RecipeAdd({ navigation }) {
             placeholder="Tipo de lucro"
             textContentType="text"
             editable={true}
+            onChangeText={setTypeProfit}
           />
 
           <TextInput
@@ -77,6 +133,7 @@ export default function RecipeAdd({ navigation }) {
             textContentType="text"
             keyboardType="numeric"
             editable={true}
+            onChangeText={setProfitValue}
           />
 
           <TextInput
@@ -88,7 +145,13 @@ export default function RecipeAdd({ navigation }) {
           />
         </ScrollView>
         <View style={styles.btnCenterBottom}>
-          <ButtonCentralized text="Salvar" disable={true}></ButtonCentralized>
+          {/* <ButtonCentralized onPress={handleAddRecipe} text="Salvar" disable={true}/> */}
+          <TouchableOpacity
+            style={styles.button}
+            onPress={handleAddRecipe}
+          >
+            <Text style={styles.buttonText}>Salvar</Text>
+          </TouchableOpacity>
         </View>
       </SafeAreaView>
     </View>
