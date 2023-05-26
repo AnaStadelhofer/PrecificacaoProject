@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { widthPercentageToDP, heightPercentageToDP } from 'react-native-responsive-screen'; 
 
 const elementWidth = "90%";
 
@@ -12,11 +13,11 @@ export const styles = StyleSheet.create({
   },
   containerInner: {
     flex: 1,
-    minWidth: elementWidth,
     paddingHorizontal: 20,
     paddingVertical: 10,
+    flexDirection: 'column',
     justifyContent: "center",
-    alignItems: "center",
+    maxWidth: "100%",
   },
   recipeContainer:{
     display: "flex",
@@ -189,9 +190,11 @@ export const styles = StyleSheet.create({
     borderTopRightRadius: 10,
   },
   textInputContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "flex-end",
+    width: widthPercentageToDP('98%'), 
+    height: heightPercentageToDP('5%'),
+    flexDirection: 'column',
+    justifyContent: "center",
+    maxWidth: "100%",
   },
   inputAddItem: {
     height: 55,
@@ -217,12 +220,16 @@ export const styles = StyleSheet.create({
     backgroundColor: "gray",
   },
   cart: {
+    width: widthPercentageToDP('95%'), 
+    height: heightPercentageToDP('6%'),
     borderRadius: 10,
-    borderColor: "gray",
+    boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.25)",
     marginTop: 15,
     marginBottom: 15,
-    justifyContent: "space-between",
-    backgroundColor: "#E8E8E8",
+    backgroundColor: "#FEFEFE",
+    flexDirection: "column",
+    maxWidth: "100%",
+    justifyContent: "center",
 
     shadowColor: "black",
     shadowOffset: { width: 10, height: 10 },
@@ -232,12 +239,16 @@ export const styles = StyleSheet.create({
     minWidth: "100%",
   },
   cartEnable: {
+    width: widthPercentageToDP('95%'), 
+    height: heightPercentageToDP('6%'),
     borderRadius: 10,
     borderColor: "gray",
     marginTop: 15,
     marginBottom: 15,
-    justifyContent: "space-between",
+    justifyContent: "center",
     backgroundColor: "gray",
+    flexDirection: "column",
+    maxWidth: "100%",
 
     shadowColor: "black",
     shadowOffset: { width: 10, height: 10 },

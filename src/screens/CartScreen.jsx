@@ -8,6 +8,7 @@ import CartList from "./CartList";
 import CartSearch from "./CartSearch";
 import { auth } from "../config/firebase";
 
+
 const itemRef = collection(getFirestore(app), "Cart");
 
 export default function CartScreen({ navigation }) {
@@ -16,7 +17,7 @@ export default function CartScreen({ navigation }) {
     if (auth.currentUser.uid == undefined) {
       navigation.navigate("LoginScreen");
     }
-  }, [auth.currentUser.userID]);
+  }, [auth.currentUser.uid]);
 
   const [nameItem, setNameItem] = useState("");
   const [checkedItem, setCheckedItem] = useState(false);

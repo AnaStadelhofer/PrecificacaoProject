@@ -4,6 +4,7 @@ import { styles } from "../utils/styles";
 import { useState, useEffect} from "react";
 import { db } from "../config/firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
+import { widthPercentageToDP, heightPercentageToDP } from 'react-native-responsive-screen';
 
 export default function CartSearch() {
   const [search, setSearch] = useState("");
