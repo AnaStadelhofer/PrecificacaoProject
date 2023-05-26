@@ -2,15 +2,7 @@ import React, { useState } from "react";
 import { View, TouchableOpacity, SafeAreaView } from "react-native";
 import { TextInput, Text } from "react-native-paper";
 import { styles } from "../utils/styles";
-import { NavigationContainer } from '@react-navigation/native';
-
-import { auth } from "../config/firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
-
-import Icon from "react-native-vector-icons/FontAwesome";
 import Logo from "../components/Logo";
-
-import { Alert } from "react-native";
 import Divider from "../components/Divider";
 
 export default function FPasswordScreen({ navigation }) {

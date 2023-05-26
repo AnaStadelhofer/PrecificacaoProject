@@ -16,11 +16,11 @@ const itemRef = collection(db, "Recipes");
 
 export default function RecipeAdd({ navigation }) {
 
-  useEffect(() => {
-    if (auth.currentUser.uid == null) {
-      navigation.navigate("LoginScreen");
-    }
-  }, [auth.currentUser.uid]);
+  // useEffect(() => {
+  //   if (auth.currentUser.uid == null) {
+  //     navigation.navigate("LoginScreen");
+  //   }
+  // }, [auth.currentUser.uid]);
 
   const [nameRecipe, setNameRecipe] = useState("");
   const [income, setIncome] = useState("");

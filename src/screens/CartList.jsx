@@ -3,11 +3,9 @@ import { View, FlatList, ScrollView } from "react-native";
 import { TouchableOpacity } from "react-native";
 import { List } from "react-native-paper";
 import { Text } from "react-native-paper";
-import { TouchableHighlight } from "react-native";
 import { Alert } from "react-native";
 import {
   collection,
-  getFirestore,
   deleteDoc,
   onSnapshot,
   doc,
@@ -16,10 +14,7 @@ import {
 import { db } from "../config/firebase";
 import { styles } from "../utils/styles";
 import { updateDoc } from "firebase/firestore";
-import Dialog from "react-native-paper";
-import Button from "react-native-paper";
-import { auth
- } from "../config/firebase";
+import { auth } from "../config/firebase";
 import { where } from "firebase/firestore";
 
 const itemRef = collection(db, "Cart");
@@ -32,44 +27,67 @@ export default function CartList() {
   const [dialogVisible, setDialogVisible] = useState(false);
 
   useEffect(() => {
-    const queryInstance = query(itemRef, where("userID", '==', auth.currentUser.uid));
-    const cartQuery = onSnapshot(queryInstance, (snapshot) => {
-      console.log(snapshot);
-      const listCart = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setLoading(false);
-      if (listCart.length === 0) {
-        setCartEmpty(true);
-      } else {
-        setCart(listCart);
-        setCartEmpty(false);
-      }
-    });
-    return () => cartQuery();
+    try {
+      const queryInstance = query(
+        itemRef,
+        where("userID", "==", auth.currentUser.uid)
+      );
+      const cartQuery = onSnapshot(queryInstance, (snapshot) => {
+        console.log(snapshot);
+        const listCart = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setLoading(false);
+        if (listCart.length === 0) {
+          setCartEmpty(true);
+        } else {
+          setCart(listCart);
+          setCartEmpty(false);
+        }
+      });
+      return () => cartQuery();
+
+    } catch (error) {
+      Alert.alert("Aviso", "Ocorreu um erro, tente novamente mais tarde.", [
+        {
+          text: "OK",
+        },
+      ]);
+      console.log(error);
+    }
   }, []);
 
   const toggleCheckbox = (itemId) => {
-    setCart((prevCart) =>
-      prevCart.map((item) =>
-        item.id === itemId ? { ...item, isSelected: !item.isSelected } : item
-      )
-    );
+    try {
+      setCart((prevCart) =>
+        prevCart.map((item) =>
+          item.id === itemId ? { ...item, isSelected: !item.isSelected } : item
+        )
+      );
 
-    const docRef = doc(db, "Cart", itemId);
-    const checkProduct = !cart.find((item) => item.id === itemId)?.checkProduct;
+      const docRef = doc(db, "Cart", itemId);
+      const checkProduct = !cart.find((item) => item.id === itemId)
+        ?.checkProduct;
 
-    updateDoc(docRef, { checkProduct })
-      .then(() => console.log("Checkbox atualizado no Firebase"))
-      .catch((error) => console.log(error));
+      updateDoc(docRef, { checkProduct })
+        .then(() => console.log("Checkbox atualizado no Firebase"))
+        .catch((error) => console.log(error));
+
+    } catch (error) {
+      Alert.alert("Aviso", "Ocorreu um erro, tente novamente mais tarde.", [
+        {
+          text: "OK",
+        },
+      ]);
+      console.log(error);
+    }
   };
 
   function handleDeleteAlert(id) {
     Alert.alert("Aviso", "Você tem certeza que deseja deletar esse item?", [
       {
         text: "NÃO",
-        onPress: () => console.log("Cancel Pressed"),
       },
       {
         text: "SIM",
@@ -79,17 +97,25 @@ export default function CartList() {
   }
 
   function handleDelete(id) {
-    const docRef = doc(db, "Cart", id);
-    deleteDoc(docRef)
-      .then(() => console.log("Documento deletado com sucesso"))
-      .catch((error) => console.log(error));
+    try {
+      const docRef = doc(db, "Cart", id);
+      deleteDoc(docRef)
+        .then(() => console.log("Documento deletado com sucesso"))
+        .catch((error) => console.log(error));
+    } catch (error) {
+
+      Alert.alert("Aviso", "Ocorreu um erro, tente novamente mais tarde.", [
+        {
+          text: "OK",
+        },
+      ]);
+      console.log(error);
+    }
   }
 
   function handleEdit(id) {
     const selectedItem = cart.find((item) => item.id === id);
-    console.log("batata");
     showModalEdit(true);
-    
   }
 
   function hideModalEdit(id) {
@@ -98,16 +124,12 @@ export default function CartList() {
 
   const showModalEdit = (id) => {
     setDialogVisible(true);
-    edit(id)
-  }
+    edit(id);
+  };
 
   function edit(id) {
-    console.log(showModalEdit)
-    return(
-      <View>
-       
-      </View>
-    )
+    console.log(showModalEdit);
+    return <View></View>;
   }
 
   const renderItem = ({ item }) => (
@@ -153,11 +175,11 @@ export default function CartList() {
 
   return (
     <View style={styles.containerInner}>
-      
       <ScrollView horizontal={true}>
         {loading || cartEmpty ? (
-          // <ActivityIndicator size="large" />
-          <Text style={styles.emptyCart}>Ops! Parece que você não adicionou nenhum item na lista de compras!</Text>
+          <Text style={styles.emptyCart}>
+            Ops! Parece que você não adicionou nenhum item na lista de compras!
+          </Text>
         ) : (
           <FlatList
             data={cart}

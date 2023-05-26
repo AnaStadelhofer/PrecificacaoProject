@@ -8,12 +8,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function IngredientAdd({ navigation }) {
   return (
     <View style={styles.container}>
-      <SafeAreaView>
-        <TextInput
-          placeholder="NOME"
-          style={styles.input}
-        />
-      </SafeAreaView>
+      <TextInput></TextInput>
     </View>
   );
 }
