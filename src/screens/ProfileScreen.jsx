@@ -6,7 +6,7 @@ import { TouchableOpacity } from "react-native";
 export default function ProfileScreen() {
   return (
     <View style={styles.container}>
-      <View style={[styles.centerInfo, {justifyContent: 'flex-start'}]}>
+      <View style={[styles.centerInfo, { justifyContent: 'flex-start' , marginTop: '50px'}]}>
         <Text style={styles.welcomeUser}>Bem-vindo (a), Ana!</Text>
         <Text style={styles.infoUser}>Informações do seu perfil.</Text>
       </View>
@@ -17,7 +17,7 @@ export default function ProfileScreen() {
           textContentType="text"
           // value={password}
           // onChangeText={setPassword}
-          style={styles.input}
+          style={[styles.input, {height: '45px',width: '360px'}]}
           editable={false}
         />
         <TextInput
@@ -26,28 +26,27 @@ export default function ProfileScreen() {
           textContentType="text"
           // value={password}
           // onChangeText={setPassword}
-          style={styles.input}
+          style={[styles.input, {height: '45px',width: '360px'}]}
           editable={false}
         />
       </View>
-      <View>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("LoginScreen")}
-            style={styles.buttonProfileDiv}
-          >
-            <Text style={styles.buttonProfile}>Editar perfil</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("LoginScreen")}
-            style={styles.buttonProfileDiv}
-          >
-            <Text style={styles.buttonProfile}>Editar senha</Text>
-          </TouchableOpacity>
-        </View>
-
+      <View style={styles.buttonContainer}>
         <TouchableOpacity
-          style={styles.button}
+          onPress={() => navigation.navigate("LoginScreen")}
+          style={[styles.buttonProfileDiv, {height: '45px',width: '170px', marginBottom: '2px'}]}
+        >
+          <Text style={styles.buttonProfile}>Editar perfil</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("LoginScreen")}
+          style={[styles.buttonProfileDiv, {height: '45px',width: '170px', marginBottom: '2px'}]}
+        >
+          <Text style={styles.buttonProfile}>Editar senha</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.buttonCenterContainer}>
+        <TouchableOpacity
+          style={[styles.button, {height: '45px',width: '360px', marginBottom: '200px'}]}
           // onPress={() => login(mailUser, password)}
         >
           <Text style={styles.buttonText}>Deslogar</Text>

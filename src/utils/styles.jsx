@@ -106,11 +106,17 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
+  buttonCenterContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    width: '225px',
+    marginBottom: 20,
+  },
   buttonProfile: {
     minWidth: "40%",
     backgroundColor: "#6BA0D2",
     borderRadius: 10,
-    paddingVertical: 10,
+    paddingVertical: 0.5,
     paddingHorizontal: 15,
     color: "#fff",
     fontSize: 18,
