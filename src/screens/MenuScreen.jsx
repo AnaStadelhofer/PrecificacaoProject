@@ -14,6 +14,7 @@ import RecoveryScreen from './RecoveryScreen';
 import FPasswordScreen from './FPasswordScreen';
 import Recipes from './Recipes';
 import RecipeAdd from './RecipeAdd';
+import IngredientAdd from './IngredientAdd';
 
 
 // IMPORT COMPONENTS
@@ -81,6 +82,8 @@ export default function MenuScreen() {
                 <Stack.Screen name="FPasswordScreen" component={FPasswordScreen} options={{ title: 'FSenha'}} />
                 <Stack.Screen name="Recipes" component={Recipes} options={{ title: 'Receitas'}} />
                 <Stack.Screen name="RecoveryScreen" component={RecoveryScreen} options={{ title: 'RecoveryScreen'}} />
+                <Stack.Screen name="IngredientAdd" component={IngredientAdd} options={{ title: 'IngredientAdd'}} />
+
 
                 {/* <Stack.Screen name="RecoverPasswordScreen" component={RecoverPasswordScreen} options={{ title: 'Recuperar senha' }}/> */}
             </Stack.Navigator>
