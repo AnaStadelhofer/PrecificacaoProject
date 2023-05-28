@@ -12,67 +12,72 @@ export default function FPasswordScreen({ navigation }) {
   const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(true);
 
   const validatePasswordEqual = (newconfirmpassword) => {
-    setConfirmNewPassword(newconfirmpassword);
-    if (newpassword === newconfirmpassword) {
-      setErrorMessage("");
-    } else {
-      setErrorMessage("Senhas não coincidem.");
+    try {
+      setConfirmNewPassword(newconfirmpassword);
+      if (newpassword === newconfirmpassword) {
+        setErrorMessage("");
+      } else {
+        setErrorMessage("Senhas não coincidem.");
+      }
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
 
   return (
     <View style={styles.container}>
       <Logo />
       <SafeAreaView>
-      
-      <View>
-        <TextInput
-          placeholder="Senha"
-          secureTextEntry={showNewPassword}
-          textContentType="password"
-          value={newpassword}
-          onChangeText={setNewPassword}
-          style={styles.input}
-          right={
-            <TextInput.Icon
-              icon={showNewPassword ? "eye" : "eye-off"}
-              size={20}
-              style={{ marginRight: 10 }}
-              onPress={() => setShowNewPassword(!showNewPassword)}
-            />
-          }
-        />
-        <TextInput
-          placeholder="Confirmar Senha"
-          secureTextEntry={showConfirmNewPassword}
-          textContentType="password"
-          value={newconfirmpassword}
-          onChangeText={validatePasswordEqual}
-          style={styles.input}
-          right={
-            <TextInput.Icon
-              icon={showConfirmNewPassword ? "eye" : "eye-off"}
-              size={20}
-              style={{ marginRight: 10 }}
-              onPress={() => setShowConfirmNewPassword(!showConfirmNewPassword)}
-            />
-          }
-        >
-        </TextInput>
+        <View>
+          <TextInput
+            placeholder="Senha"
+            secureTextEntry={showNewPassword}
+            textContentType="password"
+            value={newpassword}
+            onChangeText={setNewPassword}
+            style={styles.input}
+            right={
+              <TextInput.Icon
+                icon={showNewPassword ? "eye" : "eye-off"}
+                size={20}
+                style={{ marginRight: 10 }}
+                onPress={() => setShowNewPassword(!showNewPassword)}
+              />
+            }
+          />
 
+          <TextInput
+            placeholder="Confirmar Senha"
+            secureTextEntry={showConfirmNewPassword}
+            textContentType="password"
+            value={newconfirmpassword}
+            onChangeText={validatePasswordEqual}
+            style={styles.input}
+            right={
+              <TextInput.Icon
+                icon={showConfirmNewPassword ? "eye" : "eye-off"}
+                size={20}
+                style={{ marginRight: 10 }}
+                onPress={() =>
+                  setShowConfirmNewPassword(!showConfirmNewPassword)
+                }
+              />
+            }
+          />
         </View>
 
-        <TouchableOpacity
-          style={styles.button}
-        >
+        <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>Confirmar</Text>
         </TouchableOpacity>
+
         <Divider />
+
         <View style={styles.textLinks}>
           <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}>
             <Text style={styles.link}>Voltar para o login?</Text>
           </TouchableOpacity>
         </View>
+        
       </SafeAreaView>
     </View>
   );

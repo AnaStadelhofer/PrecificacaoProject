@@ -45,9 +45,6 @@ function OptionsMenu({ navigation }) {
                 <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('RecoveryScreen')}>
                     <Text style={styles.buttonText}>RecoveryScreen</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('RecipeAdd')}>
-                    <Text style={styles.buttonText}>Criar receita</Text>
-                </TouchableOpacity>
             </SafeAreaView>
         </View>
     )
