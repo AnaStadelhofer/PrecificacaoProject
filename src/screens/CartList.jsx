@@ -183,6 +183,7 @@ export default function CartList() {
           )}
         </ScrollView>
       </SafeAreaView>
+
     </View>
   );
 }
