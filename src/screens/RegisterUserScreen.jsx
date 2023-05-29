@@ -49,6 +49,7 @@ export default function RegisterUserScreen({ navigation }) {
 
           const dadosParaInserir = {
             name: nameUser,
+            mail: mailUser,
             terms: true,
             userUID: userUID,
           };
@@ -149,7 +150,7 @@ export default function RegisterUserScreen({ navigation }) {
       setPasswordError("A senha deve ter pelo menos 6 caracteres.");
       validatePasswordEqual();
     } else if (!isStrongPassword(password)) {
-      setPasswordError("A senha pestá fraca.");
+      setPasswordError("A senha está fraca.");
       validatePasswordEqual();
     } else {
       setPasswordError("");
@@ -255,7 +256,7 @@ export default function RegisterUserScreen({ navigation }) {
         <Divider />
 
         <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}>
-          <Text style={styles.link}>Já possuo conta.</Text>
+          <Text style={styles.link}>Já possuo conta</Text>
         </TouchableOpacity>
       </SafeAreaView>
     </View>

@@ -120,13 +120,13 @@ export default function LoginScreen({ navigation }) {
           <TouchableOpacity
             onPress={() => navigation.navigate("FPasswordScreen")}
           >
-            <Text style={styles.link}>Esqueci minha senha.</Text>
+            <Text style={styles.link}>Esqueci minha senha</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={() => navigation.navigate("RegisterUserScreen")}
           >
-            <Text style={styles.link}>Não possuo conta.</Text>
+            <Text style={styles.link}>Não possuo conta</Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>

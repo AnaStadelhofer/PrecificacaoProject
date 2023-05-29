@@ -195,12 +195,12 @@ export const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: "center",
     maxWidth: "100%",
+
   },
   inputAddItem: {
     height: 55,
     borderColor: "#ccc",
     borderWidth: 1,
-    borderRadius: 5,
     paddingLeft: 10,
     marginBottom: 20,
     minWidth: elementWidth,
@@ -305,4 +305,49 @@ export const styles = StyleSheet.create({
     marginRight: 10,
     fontSize: 20,
   },
+  ///MODAL
+  modalInput: {
+    height: 60,
+    borderColor: "#ccc",
+    borderWidth: 1,
+    paddingLeft: 5,
+    minWidth: elementWidth,
+    backgroundColor: "white",
+    borderColor: "#777777",
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+  },
+  ingredientList: {
+    maxHeight: "30%",
+    backgroundColor: 'gray'
+  },
+  btnModal: {
+    justifyContent: 'center',
+    backgroundColor: "#6BA0D2",
+    padding: 15,
+    borderRadius: 10,
+    marginLeft: 10,
+  },
+  inputModal: {
+    height: 60,
+    marginBottom: 10,    
+    borderColor: "#ccc",
+    borderWidth: 1,
+    paddingLeft: 5,
+    minWidth: elementWidth,
+    backgroundColor: "white",
+    borderColor: "#777777",
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+  },
+  emptyCart: {
+    textAlign: 'center',
+    fontSize: 25,
+    color: 'gray',
+    padding: 20
+  }
 });

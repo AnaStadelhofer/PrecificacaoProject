@@ -8,6 +8,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import Logo from "../components/Logo";
 import { Alert } from "react-native";
 import Divider from "../components/Divider";
+import { FirebaseError } from "firebase/app";
 
 export default function RecoveryScreen({ navigation }) {
   const [mailUser, setMailUser] = useState("");
@@ -27,12 +28,12 @@ export default function RecoveryScreen({ navigation }) {
         "Um e-mail de recuperação foi enviado para o endereço informado."
       );
     } catch (error) {
-      if (error.code === "auth/user-not-found") {
+      if (error.code === "auth/user-not-found") {// Email não encontrado
         Alert.alert(
           "Erro",
           "Este usuário não existe. Por favor, verifique o e-mail."
         );
-      } else if (error.code === "auth/invalid-email") {
+      } else if (error.code === "auth/invalid-email") { //Email Invalido
         Alert.alert(
           "Erro",
           "Endereço de e-mail inválido. Por favor, verifique e tente novamente."
@@ -44,6 +45,39 @@ export default function RecoveryScreen({ navigation }) {
     }
   };
 
+  const validateEmail = (mailUser) => {
+    const emailRegex = /\S+@\S+\.\S+/;
+    setMailUser(mailUser);
+
+    if (mailUser === "") {
+      setErrorMessage("");
+    } else if (!emailRegex.test(mailUser)) {
+      setErrorMessage("E-mail informado é inválido.");
+    } else {
+      checkExistingEmail(mailUser);
+    }
+  };
+
+  const checkExistingEmail = async (mailUser) => {
+  try{
+    const snapshot = await 
+    Firebase.firestore()
+    .collection('users')
+    .where('email', '==', mailUser)
+    .get()
+    
+    if (!snapshot.empty) {
+      setErrorMessage("E-mail já cadastrado.", error);
+    } else {
+      setErrorMessage("");
+    }
+
+  }catch{
+    console.log("Erro ao validar e-mail.")
+    return false;
+  }
+  };
+
   return (
     <View style={styles.container}>
       <Logo />
@@ -53,19 +87,30 @@ export default function RecoveryScreen({ navigation }) {
             <Text style={styles.errorMessage}>{errorMessage}</Text>
           )}
           <TextInput
-            placeholder="Email"
+            borderRadius={10}
+            placeholder="Email de recuperação"
+            placeholderTextColor={"#CDCDCD"}
             secureTextEntry={false}
             textContentType="emailAddress"
             value={mailUser}
-            onChangeText={(mailUser) => setMailUser(mailUser)}
-            style={styles.input}
+            onChangeText={validateEmail}
           />
           <TouchableOpacity
+            width="296px"
+            height="39px"
+            borderRadius={10}
             style={styles.button}
-            onPress={() => Recovery(mailUser)}
-            disable={!mailUser}
+            onPress={() => handleRecovery(mailUser)}
+
+            disabled={!mailUser}
           >
             <Text style={styles.buttonText}>Recuperar Senha</Text>
+          </TouchableOpacity>
+          <Divider />
+          <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}>
+            <Text style={[styles.link, { color: "#CDCDCD" }]} color="#CDCDCD">
+              Voltar para Login
+            </Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>

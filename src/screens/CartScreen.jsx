@@ -1,9 +1,5 @@
 import { View } from "react-native";
-import { TextInput } from "react-native-paper";
-import { collection, getFirestore, addDoc } from "firebase/firestore";
-import { app } from "../config/firebase";
-import { useEffect, useState } from "react";
-import { styles } from "../utils/styles";
+import CartAdd from "./CartAdd";
 import CartList from "./CartList";
 import CartSearch from "./CartSearch";
 import { auth } from "../config/firebase";
@@ -51,24 +47,9 @@ export default function CartScreen({ navigation }) {
   }
 
   return (
-    <View style={styles.container}>
+    <View>
       <CartList />
-      <View style={styles.textInputContainer}>
-        <TextInput
-          placeholder="Adicionar item"
-          mode="outline"
-          onChangeText={setNameItem}
-          style={styles.inputAddItem}
-          right={
-            <TextInput.Icon
-              icon="plus"
-              size={20}
-              containerColor="lightgreen"
-              onPress={handleAddItem}
-            />
-          }
-        />
-      </View>
+      <CartAdd />
     </View>
   );
 }
