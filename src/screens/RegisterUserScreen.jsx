@@ -256,7 +256,7 @@ export default function RegisterUserScreen({ navigation }) {
         <Divider />
 
         <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}>
-          <Text style={styles.link}>Já possuo conta.</Text>
+          <Text style={styles.link}>Já possuo conta</Text>
         </TouchableOpacity>
       </SafeAreaView>
     </View>

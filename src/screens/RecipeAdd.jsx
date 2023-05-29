@@ -11,54 +11,41 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { addDoc } from "firebase/firestore";
 import { TouchableOpacity } from "react-native";
+import { updateDoc, doc } from "firebase/firestore";
+import IngredientList from "./IngredientList";
 
-const itemRef = collection(db, "Recipes");
-
-export default function RecipeAdd({ navigation }) {
-
-  useEffect(() => {
-    if (auth.currentUser.uid == null) {
-      navigation.navigate("LoginScreen");
-    }
-  }, [auth.currentUser.uid]);
-
+export default function RecipeAdd({ navigation, route }) {
+  const { recipeId, recipe } = route.params;
   const [nameRecipe, setNameRecipe] = useState("");
   const [income, setIncome] = useState("");
   const [typeProfit, setTypeProfit] = useState("");
   const [profitValue, setProfitValue] = useState("");
 
-
-  const saveItemRecipe = (recipe) => {
+  function handleEditRecipe() {
     try {
-      addDoc(itemRef, recipe)
-        .then((docRef) => {
-          console.log("Item criado: ", docRef.id);
+      const idDoUsuario = auth.currentUser.uid;
+
+      const updatedRecipe = {
+        nameRecipe: nameRecipe.trim(),
+        income: income.trim(),
+        typeProfit: typeProfit.trim(),
+        profitValue: profitValue.trim(),
+        userID: idDoUsuario,
+      };
+
+      const recipeRef = doc(db, "Recipes", recipeId);
+
+      updateDoc(recipeRef, updatedRecipe)
+        .then(() => {
+          console.log("Receita atualizada com sucesso!");
+          navigation.goBack(); // Volta para a tela anterior após a edição
         })
         .catch((error) => {
-          console.error("Error ao salvar item: ", error);
-        })
-        .finally(() => {
-          console.log("Registro finalizado");
+          console.error("Erro ao atualizar a receita: ", error);
         });
     } catch (error) {
       console.log(error);
     }
-  };
-
-  function handleAddRecipe() {
-
-    const idDoUsuario = auth.currentUser.uid;
-
-    const recipe = {
-      nameRecipe: nameRecipe.trim(),
-      income: income.trim(),
-      typeProfit: typeProfit.trim(),
-      profitValue: profitValue.trim(),
-      userID: idDoUsuario,
-    };
-    console.log(recipe)
-    saveItemRecipe(recipe);
-    setNameRecipe("");
   }
 
   return (
@@ -66,10 +53,11 @@ export default function RecipeAdd({ navigation }) {
       <SafeAreaView>
         <ScrollView horizontal={false}>
           <TextInput
-            placeholder="NOME"
+            placeholder="Nome da receita"
             style={styles.input}
             textContentType="text"
             editable={true}
+            value={recipe.nameRecipe}
             onChangeText={setNameRecipe}
           />
 
@@ -81,10 +69,12 @@ export default function RecipeAdd({ navigation }) {
             right={
               <TextInput.Icon
                 icon="plus"
-                onPress={() => navigation.navigate("IngredientAdd")}
+                onPress={() => navigation.navigate("IngredientAdd", { recipe, recipeId })}
               />
             }
           />
+
+        <IngredientList recipeId={recipeId}/>
 
           <TextInput
             style={styles.input}
@@ -145,11 +135,7 @@ export default function RecipeAdd({ navigation }) {
           />
         </ScrollView>
         <View style={styles.btnCenterBottom}>
-          {/* <ButtonCentralized onPress={handleAddRecipe} text="Salvar" disable={true}/> */}
-          <TouchableOpacity
-            style={styles.button}
-            onPress={handleAddRecipe}
-          >
+          <TouchableOpacity style={styles.button} onPress={handleEditRecipe}>
             <Text style={styles.buttonText}>Salvar</Text>
           </TouchableOpacity>
         </View>
