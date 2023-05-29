@@ -87,7 +87,7 @@ export default function CartList() {
   }
 
   function handleDelete(id) {
-    try {
+    try { 
       const docRef = doc(db, "Cart", id);
       deleteDoc(docRef)
         .then(() => console.log("Documento deletado com sucesso"))
