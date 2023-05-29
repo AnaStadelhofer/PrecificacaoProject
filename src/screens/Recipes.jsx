@@ -16,7 +16,7 @@ const recipesRef = collection(db, "Recipes");
 export default function Recipes({ navigation }) {
   const [expanded, setExpanded] = useState(false);
   const heightAnim = useRef(new Animated.Value(0)).current;
-  const [messageVisible, setMessageVisible] = useState(false);
+  const [messageVisible, setMessageVisible] = useState(true);
   const [icon, setIcon] = useState("arrow-down");
   const [nameRecipe, setNameRecipe] = useState("");
 
@@ -77,7 +77,7 @@ export default function Recipes({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.recipeContainer}>
+      {/* <View style={styles.recipeContainer}>
         <TouchableOpacity style={styles.item} onPress={handleItemPress}>
           <Text style={styles.itemTextTitle}>
             <FontAwesome name={icon} style={styles.arrowicon} />
@@ -94,8 +94,8 @@ export default function Recipes({ navigation }) {
           <Text style={styles.itemText}>Custo total: R$ 20,00</Text>
           <Text style={styles.itemText}>Preço final: R$ 25,00</Text>
         </Animated.View>
-      </View>
-      {/* <RecipesList /> */}
+      </View> */}
+      <RecipesList />
 
       <TouchableOpacity style={styles.recipebutton} onPress={toggleModal}>
         <Icon name="plus" size={24} color="black" />

@@ -103,24 +103,28 @@ export default function RecipesList() {
   const renderItem = ({ item }) => (
     <View>
       <SafeAreaView>
-        <View style={styles.recipeContainer}>
-          <TouchableOpacity style={styles.item} onPress={handleItemPress}>
-            <Text style={styles.itemTextTitle}>
-              <FontAwesome name={icon} style={styles.arrowicon} />
-              Bolo de Pote
-              <TouchableOpacity style={styles.iconsContainer} onPress={null}>
-                <FontAwesome name="pencil" style={styles.icon} />
+      <List.Item
+          title={item.nameRecipe}
+          data={recipes}
+          onPress={() => console.log("Pressionado")}
+          right={() => (
+            <View style={{ flexDirection: "row", ...styles.icons }}>
+              <TouchableOpacity
+                style={{ paddingLeft: 10 }}
+                onPress={() => console.log("Apertado")}
+              >
+                <List.Icon icon="pencil" size={28} />
               </TouchableOpacity>
-              <TouchableOpacity style={styles.iconsContainer} onPress={null}>
-                <FontAwesome name="trash" style={[styles.icon, { flex: 1 }]} />
+
+              <TouchableOpacity
+                style={{ paddingLeft: 10 }}
+                onPress={() => console.log("batata")}
+              >
+                <List.Icon icon="delete" size={28} />
               </TouchableOpacity>
-            </Text>
-          </TouchableOpacity>
-          <Animated.View style={[styles.expandedItem, { height: heightAnim }]}>
-            <Text style={styles.itemText}>Custo total: R$ 20,00</Text>
-            <Text style={styles.itemText}>Preço final: R$ 25,00</Text>
-          </Animated.View>
-        </View>
+            </View>
+          )}
+        />
       </SafeAreaView>
     </View>
   );
