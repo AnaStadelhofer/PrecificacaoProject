@@ -14,10 +14,6 @@ export default function CartAdd({ navigation }) {
   const [nameItem, setNameItem] = useState("");
   const [checkedItem, setCheckedItem] = useState(false);
 
-  if (auth.currentUser == null) {
-    navigation.navigate("LoginScreen");
-  }
-
   const saveItemCart = (cart) => {
     try {
       addDoc(itemRef, cart)
