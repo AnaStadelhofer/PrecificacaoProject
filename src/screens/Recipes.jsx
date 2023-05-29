@@ -1,18 +1,15 @@
-import { View, TouchableOpacity, SafeAreaView } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import React, { useRef, useState } from "react";
 import { TextInput, Text } from "react-native-paper";
-import { collection, getFirestore, addDoc } from "firebase/firestore";
-import { app } from "../config/firebase";
-import { Animated, StyleSheet } from "react-native";
-import { useEffect } from "react";
+import { collection, addDoc } from "firebase/firestore";
+import { Animated } from "react-native";
 import { styles } from "../utils/styles";
-import Button from "react-native-paper";
-import CartList from "./CartList";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { FontAwesome } from "@expo/vector-icons";
 import Modal from "react-native-modal";
 import { auth } from "../config/firebase";
 import { db } from "../config/firebase";
+import RecipesList from "./RecipesList";
+import { FontAwesome } from "@expo/vector-icons";
 
 const recipesRef = collection(db, "Recipes");
 
@@ -49,8 +46,8 @@ export default function Recipes({ navigation }) {
         .then((docRef) => {
           const recipeId = docRef.id;
           console.log("Item criado: ", docRef.id);
-          toggleModal()
-          navigation.navigate("RecipeAdd", { recipe, recipeId }); 
+          toggleModal();
+          navigation.navigate("RecipeAdd", { recipe, recipeId });
         })
         .catch((error) => {
           console.error("Error ao salvar item: ", error);
@@ -80,30 +77,26 @@ export default function Recipes({ navigation }) {
 
   return (
     <View style={styles.container}>
-      {messageVisible ? (
-        <Text style={styles.emptyCart}>
-          Ops! Parece que você não criou nenhuma receita ainda!
-        </Text>
-      ) : (
-        <View style={styles.recipeContainer}>
-          <TouchableOpacity style={styles.item} onPress={handleItemPress}>
-            <Text style={styles.itemTextTitle}>
-              <FontAwesome name={icon} style={styles.arrowicon} />
-              Bolo de Pote
-              <TouchableOpacity style={styles.iconsContainer} onPress={null}>
-                <FontAwesome name="pencil" style={styles.icon} />
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.iconsContainer} onPress={null}>
-                <FontAwesome name="trash" style={[styles.icon, { flex: 1 }]} />
-              </TouchableOpacity>
-            </Text>
-          </TouchableOpacity>
-          <Animated.View style={[styles.expandedItem, { height: heightAnim }]}>
-            <Text style={styles.itemText}>Custo total: R$ 20,00</Text>
-            <Text style={styles.itemText}>Preço final: R$ 25,00</Text>
-          </Animated.View>
-        </View>
-      )}
+      <View style={styles.recipeContainer}>
+        <TouchableOpacity style={styles.item} onPress={handleItemPress}>
+          <Text style={styles.itemTextTitle}>
+            <FontAwesome name={icon} style={styles.arrowicon} />
+            Bolo de Pote
+            <TouchableOpacity style={styles.iconsContainer} onPress={null}>
+              <FontAwesome name="pencil" style={styles.icon} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.iconsContainer} onPress={null}>
+              <FontAwesome name="trash" style={[styles.icon, { flex: 1 }]} />
+            </TouchableOpacity>
+          </Text>
+        </TouchableOpacity>
+        <Animated.View style={[styles.expandedItem, { height: heightAnim }]}>
+          <Text style={styles.itemText}>Custo total: R$ 20,00</Text>
+          <Text style={styles.itemText}>Preço final: R$ 25,00</Text>
+        </Animated.View>
+      </View>
+      {/* <RecipesList /> */}
+
       <TouchableOpacity style={styles.recipebutton} onPress={toggleModal}>
         <Icon name="plus" size={24} color="black" />
       </TouchableOpacity>
@@ -119,7 +112,7 @@ export default function Recipes({ navigation }) {
             borderRadius: 15,
           }}
         >
-          <Text style={{fontSize: 20, textAlign: 'left'}}>Criar receita</Text>
+          <Text style={{ fontSize: 20, textAlign: "left" }}>Criar receita</Text>
           <TextInput
             placeholder="Nome da Receita"
             style={styles.inputModal}
