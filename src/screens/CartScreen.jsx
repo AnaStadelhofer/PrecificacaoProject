@@ -13,10 +13,10 @@ const itemRef = collection(getFirestore(app), "Cart");
 export default function CartScreen({ navigation }) {
 
   useEffect(() => {
-    if (auth.currentUser.uid == undefined) {
+    if (auth.currentUser == null) {
       navigation.navigate("LoginScreen");
     }
-  }, [auth.currentUser.userID]);
+  }, [auth.currentUser]);
 
   const [nameItem, setNameItem] = useState("");
   const [checkedItem, setCheckedItem] = useState(false);

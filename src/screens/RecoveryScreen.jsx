@@ -3,7 +3,6 @@ import { View, TouchableOpacity, SafeAreaView } from "react-native";
 import { TextInput, Text, Dialog, Button } from "react-native-paper";
 import { styles } from "../utils/styles";
 import { auth } from "../config/firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Logo from "../components/Logo";
 import { Alert } from "react-native";
@@ -13,6 +12,7 @@ export default function RecoveryScreen({ navigation }) {
   const [mailUser, setMailUser] = useState("");
   const [dialogVisible, setDialogVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
 
   const handleRecovery = async (email) => {
     if (mailUser.trim() === "") {
@@ -62,7 +62,7 @@ export default function RecoveryScreen({ navigation }) {
           />
           <TouchableOpacity
             style={styles.button}
-            onPress={() => Recovery(mailUser)}
+            onPress={() => handleRecovery(mailUser)}
             disable={!mailUser}
           >
             <Text style={styles.buttonText}>Recuperar Senha</Text>
