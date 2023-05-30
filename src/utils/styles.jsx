@@ -11,6 +11,12 @@ export const styles = StyleSheet.create({
     backgroundColor: "#fff",
     maxWidth: "100%",
   },
+  containerCard: {
+    flex: 1,
+    justifyContent: "center",
+    backgroundColor: "#fff",
+    maxWidth: "100%",
+  },
   containerInner: {
     flex: 1,
     paddingHorizontal: 20,
@@ -195,7 +201,6 @@ export const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: "center",
     maxWidth: "100%",
-
   },
   inputAddItem: {
     height: 55,
@@ -209,7 +214,6 @@ export const styles = StyleSheet.create({
     borderBottomRightRadius: 10,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
-    borderColor: "#777777",
   },
   // Item carrinho
   listCart: {
@@ -220,8 +224,8 @@ export const styles = StyleSheet.create({
     backgroundColor: "gray",
   },
   cart: {
-    width: widthPercentageToDP('95%'), 
-    height: heightPercentageToDP('6%'),
+    width: widthPercentageToDP('98%'), 
+    height: heightPercentageToDP('5%'),
     borderRadius: 10,
     boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.25)",
     marginTop: 15,

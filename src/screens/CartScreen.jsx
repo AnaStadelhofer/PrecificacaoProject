@@ -2,10 +2,14 @@ import { View } from "react-native";
 import CartAdd from "./CartAdd";
 import CartList from "./CartList";
 import CartSearch from "./CartSearch";
-import { auth } from "../config/firebase";
+import { auth, db } from "../config/firebase";
+import { collection } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
+import React, { useEffect, useState } from 'react';
+import { styles } from "../utils/styles";
 
 
-const itemRef = collection(getFirestore(app), "Cart");
+const itemRef = collection(db, "Cart");
 
 export default function CartScreen({ navigation }) {
 
@@ -47,7 +51,7 @@ export default function CartScreen({ navigation }) {
   }
 
   return (
-    <View>
+    <View style={styles.containerCard}>
       <CartList />
       <CartAdd />
     </View>
