@@ -4,11 +4,19 @@ import { styles } from "../utils/styles";
 import { TouchableOpacity } from "react-native";
 import { auth } from "../config/firebase";
 import { useState } from "react";
+import { useEffect } from "react";
 
 
 
 export default function ProfileScreen() {
   const [isLoggedOut, setIsLoggedOut] = useState(false);
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+  const currentUser = auth.currentUser;
+  if (currentUser) {
+    setUser(currentUser);
+  }
+  },[]);
   const handleSignOut = () => {
     auth.signOut()
       .then(() => {
@@ -33,26 +41,20 @@ export default function ProfileScreen() {
           { justifyContent: "flex-start", marginTop: "50px" },
         ]}
       >
-        <Text style={styles.welcomeUser}>Bem-vindo (a), Ana!</Text>
+        <Text style={styles.welcomeUser}>
+          Bem-vindo (a), {user ? user.displayName.split(' ')[0] : ''}!
+        </Text>
         <Text style={styles.infoUser}>Informações do seu perfil.</Text>
       </View>
       <View style={styles.container}>
-        <TextInput
-          placeholder="Ana Carolina Stadelhofer"
-          // secureTextEntry={showPassword}
-          textContentType="text"
-          // value={password}
-          // onChangeText={setPassword}
-          style={[styles.input, { height: "45px", width: "360px" }]}
+      <TextInput
+          placeholder={user ? user.displayName : ''}
+          style={[styles.input, { height: '45px', width: '360px' }]}
           editable={false}
         />
         <TextInput
-          placeholder="ana.stadelhofer@teste.com.br"
-          // secureTextEntry={showPassword}
-          textContentType="text"
-          // value={password}
-          // onChangeText={setPassword}
-          style={[styles.input, { height: "45px", width: "360px" }]}
+          placeholder={user ? user.email : ''}
+          style={[styles.input, { height: '45px', width: '360px' }]}
           editable={false}
         />
       </View>
