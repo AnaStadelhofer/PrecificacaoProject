@@ -29,7 +29,6 @@ export const styles = StyleSheet.create({
   },
   error: {
     color: "red",
-    marginBottom: 10,
   },
   // Texts
   checkboxContainer: {
@@ -120,7 +119,7 @@ export const styles = StyleSheet.create({
   button: {
     justifyContent: "center",
     alignItems: "center",
-    minWidth: elementWidth,
+    width: widthPercentageToDP('90%'), 
     height: 50,
     backgroundColor: "#6BA0D2",
     borderRadius: 10,
@@ -144,7 +143,7 @@ export const styles = StyleSheet.create({
   buttonEnabled: {
     justifyContent: "center",
     alignItems: "center",
-    minWidth: elementWidth,
+    width: widthPercentageToDP('90%'), 
     height: 50,
     backgroundColor: "#6BA0D2",
     borderRadius: 10,
@@ -153,7 +152,7 @@ export const styles = StyleSheet.create({
   buttonDisabled: {
     justifyContent: "center",
     alignItems: "center",
-    minWidth: elementWidth,
+    width: widthPercentageToDP('90%'), 
     height: 50,
     borderRadius: 10,
     marginTop: 15,
@@ -165,11 +164,10 @@ export const styles = StyleSheet.create({
   // Inputs
   input: {
     height: 60,
-    borderColor: "#ccc",
     borderWidth: 1,
     paddingLeft: 5,
-    marginBottom: 22,
-    minWidth: elementWidth,
+    marginTop: 22,
+    width: widthPercentageToDP('90%'), 
     backgroundColor: "white",
     borderColor: "#777777",
     borderBottomLeftRadius: 10,
@@ -178,6 +176,19 @@ export const styles = StyleSheet.create({
     borderTopRightRadius: 10,
   },
   inputError: {
+    height: 60,
+    borderColor: "red",
+    borderWidth: 1,
+    paddingLeft: 5,
+    marginTop: 22,
+    width: widthPercentageToDP('90%'), 
+    backgroundColor: "white",
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+  },
+  textInputContainerIngre: {
     height: 60,
     borderColor: "red",
     borderWidth: 1,
@@ -199,7 +210,6 @@ export const styles = StyleSheet.create({
   },
   inputAddItem: {
     height: 55,
-    borderColor: "#ccc",
     borderWidth: 1,
     paddingLeft: 10,
     marginBottom: 20,
@@ -344,10 +354,66 @@ export const styles = StyleSheet.create({
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
   },
+  modalBack: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "white",
+    maxHeight: "25%",
+    minHeight: 200,
+    borderRadius: 15,
+  },
   emptyCart: {
     textAlign: 'center',
     fontSize: 25,
     color: 'gray',
     padding: 20
-  }
+  },
+  // INGREDIENTE
+  textInputContainerIngre: {
+    width: widthPercentageToDP('90%'), 
+    height: heightPercentageToDP('5%'),
+    flexDirection: 'column',
+    justifyContent: "center",
+    maxWidth: "100%",
+    marginBottom: '5%'
+  },
+  listIngredient: {
+    width: widthPercentageToDP('90%'), 
+    height: heightPercentageToDP('20%'), 
+    backgroundColor: 'white',
+    marginTop: 20,
+    borderRadius: 10,
+    borderColor: '#777777',
+    borderWidth: 1,
+    flex: 1
+  },
+  divInput: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  column: {
+    flex: 1,
+    alignItems: "center",
+  },
+  divIcon: {
+    flexDirection: 'row',
+  },
+  divIconRight: {
+    flex: 1,
+    alignItems: "flex-end",
+  },
+  inputDiv: {
+    height: 60,
+    borderWidth: 1,
+    paddingLeft: 5,
+    marginTop: 22,
+    width: widthPercentageToDP('44%'), 
+    backgroundColor: "white",
+    borderColor: "#777777",
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+  },
 });
