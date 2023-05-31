@@ -103,14 +103,7 @@ export default function Recipes({ navigation }) {
 
       <Modal isVisible={isModalVisible} onBackdropPress={toggleModal}>
         <View
-          style={{
-            flex: 1,
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "white",
-            maxHeight: "25%",
-            borderRadius: 15,
-          }}
+          style={styles.modalBack}
         >
           <Text style={{ fontSize: 20, textAlign: "left" }}>Criar receita</Text>
           <TextInput

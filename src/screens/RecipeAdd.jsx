@@ -49,7 +49,7 @@ export default function RecipeAdd({ navigation, route }) {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { alignItems: "center" }]}>
       <SafeAreaView>
         <ScrollView horizontal={false}>
           <TextInput
@@ -59,22 +59,84 @@ export default function RecipeAdd({ navigation, route }) {
             editable={true}
             value={recipe.nameRecipe}
             onChangeText={setNameRecipe}
+            right={<TextInput.Icon icon="information" />}
           />
 
-          <TextInput
-            style={styles.input}
-            placeholder="Ingredientes"
-            textContentType="text"
-            editable={true}
-            right={
-              <TextInput.Icon
-                icon="plus"
-                onPress={() => navigation.navigate("IngredientAdd", { recipe, recipeId })}
-              />
-            }
-          />
+          <View style={styles.listIngredient}>
+            <View style={styles.divIcon}>
+              <View style={styles.divIconRight}>
+                <TextInput.Icon icon="plus" />
+              </View>
 
-        <IngredientList recipeId={recipeId}/>
+              <View style={styles.divIconRight}>
+                <TextInput.Icon icon="information" />
+              </View>
+            </View>
+            {/* <TextInput
+              style={styles.input}
+              placeholder="Ingredientes"
+              textContentType="text"
+              editable={true}
+              right={
+                <TextInput.Icon
+                  icon="plus"
+                  onPress={() =>
+                    navigation.navigate("IngredientAdd", { recipe, recipeId })
+                  }
+                />
+              }
+            /> */}
+            <ScrollView horizontal={false}>
+              <Text>batata</Text>
+              <Text>batata</Text>
+              <Text>batata</Text>
+              <Text>batata</Text>
+              <Text>batata</Text>
+              <Text>batata</Text>
+              <Text>batata</Text>
+              <Text>batata</Text>
+              <Text>batata</Text>
+
+              <Text>batata</Text>
+
+              <Text>batata</Text>
+
+              <Text>batata</Text>
+
+              <Text>batata</Text>
+
+              <Text>batata</Text>
+
+              <Text>batata</Text>
+
+              <Text>batata</Text>
+
+              <Text>batata</Text>
+              <Text>batata</Text>
+              <Text>batata</Text>
+              <Text>batata</Text>
+              <Text>batata</Text>
+              <Text>batata</Text>
+              <Text>batata</Text>
+              <Text>batata</Text>
+
+              <Text>batata</Text>
+              <Text>batata</Text>
+              <Text>batata</Text>
+              <Text>batata</Text>
+              <Text>batata</Text>
+              <Text>batata</Text>
+              <Text>batata</Text>
+              <Text>batata</Text>
+              <Text>batata</Text>
+              <Text>batata</Text>
+              <Text>batata</Text>
+              <Text>batata</Text>
+              <Text>batata</Text>
+            </ScrollView>
+          </View>
+
+          <IngredientList recipeId={recipeId} />
 
           <TextInput
             style={styles.input}
@@ -83,23 +145,32 @@ export default function RecipeAdd({ navigation, route }) {
             keyboardType="numeric"
             editable={true}
             onChangeText={setIncome}
+            right={<TextInput.Icon icon="information" />}
           />
 
-          <TextInput
-            style={styles.input}
-            placeholder="Custo de contas"
-            textContentType="text"
-            keyboardType="numeric"
-            editable={false}
-          />
+          <View style={styles.divInput}>
+            <View style={styles.column}>
+              <TextInput
+                style={styles.inputDiv}
+                placeholder="Custo de contas"
+                textContentType="text"
+                keyboardType="numeric"
+                editable={false}
+                right={<TextInput.Icon icon="information" />} // Alterei de icon para name
+              />
+            </View>
 
-          <TextInput
-            style={styles.input}
-            placeholder="Custo total"
-            textContentType="text"
-            keyboardType="numeric"
-            editable={false}
-          />
+            <View style={styles.column}>
+              <TextInput
+                style={styles.inputDiv}
+                placeholder="Custo total"
+                textContentType="text"
+                keyboardType="numeric"
+                editable={false}
+                right={<TextInput.Icon icon="information" />} // Alterei de icon para name
+              />
+            </View>
+          </View>
 
           <TextInput
             style={styles.input}
@@ -107,24 +178,32 @@ export default function RecipeAdd({ navigation, route }) {
             textContentType="text"
             keyboardType="numeric"
             editable={false}
+            right={<TextInput.Icon icon="information" />}
           />
 
-          <TextInput
-            style={styles.input}
-            placeholder="Tipo de lucro"
-            textContentType="text"
-            editable={true}
-            onChangeText={setTypeProfit}
-          />
-
-          <TextInput
-            style={styles.input}
-            placeholder="Valor lucro"
-            textContentType="text"
-            keyboardType="numeric"
-            editable={true}
-            onChangeText={setProfitValue}
-          />
+          <View style={styles.divInput}>
+            <View style={styles.column}>
+              <TextInput
+                style={styles.inputDiv}
+                placeholder="Tipo de lucro"
+                textContentType="text"
+                editable={true}
+                onChangeText={setTypeProfit}
+                right={<TextInput.Icon icon="information" />}
+              />
+            </View>
+            <View style={styles.column}>
+              <TextInput
+                style={styles.inputDiv}
+                placeholder="Valor lucro"
+                textContentType="text"
+                keyboardType="numeric"
+                editable={true}
+                onChangeText={setProfitValue}
+                right={<TextInput.Icon icon="information" />}
+              />
+            </View>
+          </View>
 
           <TextInput
             style={styles.input}
@@ -132,7 +211,13 @@ export default function RecipeAdd({ navigation, route }) {
             textContentType="text"
             keyboardType="numeric"
             editable={false}
+            right={<TextInput.Icon icon="information" />}
           />
+          <View style={[styles.textLinks, { marginBottom: "5%" }]}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Text style={styles.link}>Voltar</Text>
+            </TouchableOpacity>
+          </View>
         </ScrollView>
         <View style={styles.btnCenterBottom}>
           <TouchableOpacity style={styles.button} onPress={handleEditRecipe}>

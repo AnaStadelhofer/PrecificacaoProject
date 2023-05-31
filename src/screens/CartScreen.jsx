@@ -5,6 +5,7 @@ import { auth } from "../config/firebase";
 import { db } from "../config/firebase";
 import { collection } from "firebase/firestore";
 import { useEffect } from "react";
+import { styles } from "../utils/styles";
 
 const itemRef = collection(db, "Cart");
 
@@ -18,7 +19,7 @@ export default function CartScreen({ navigation }) {
 
 
   return (
-    <View>
+    <View style={styles.container}>
       <CartList />
       <CartAdd />
     </View>
