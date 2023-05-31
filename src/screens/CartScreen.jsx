@@ -11,7 +11,6 @@ import { auth } from "../config/firebase";
 const itemRef = collection(getFirestore(app), "Cart");
 
 export default function CartScreen({ navigation }) {
-
   useEffect(() => {
     if (auth.currentUser == null) {
       navigation.navigate("LoginScreen");
@@ -22,7 +21,6 @@ export default function CartScreen({ navigation }) {
   const [checkedItem, setCheckedItem] = useState(false);
 
   const saveItemCart = (cart) => {
-
     addDoc(itemRef, cart)
       .then((docRef) => {
         console.log("Item criado: ", docRef.id);
@@ -36,7 +34,6 @@ export default function CartScreen({ navigation }) {
   };
 
   function handleAddItem() {
-
     const idDoUsuario = auth.currentUser.uid;
 
     const cart = {

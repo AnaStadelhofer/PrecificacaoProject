@@ -18,13 +18,13 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  recipeContainer:{
+  recipeContainer: {
     display: "flex",
     flexDirection: "column",
     // justifyContent: "center",
     marginTop: 40,
     alignItems: "center",
-    height: "100vh",  
+    height: "100vh",
   },
   error: {
     color: "red",
@@ -109,7 +109,7 @@ export const styles = StyleSheet.create({
   buttonCenterContainer: {
     flexDirection: "row",
     justifyContent: "center",
-    width: '225px',
+    width: "225px",
     marginBottom: 20,
   },
   buttonProfile: {
@@ -253,50 +253,50 @@ export const styles = StyleSheet.create({
     minWidth: "100%",
   },
   //Receita
-  
+
   iconsContainer: {
-    textAlign: 'end',
-    textAlignVertical: 'end',
+    textAlign: "end",
+    textAlignVertical: "end",
   },
   item: {
-    backgroundColor: '#E8E8E8',
+    backgroundColor: "#E8E8E8",
     padding: 10,
     borderRadius: 8,
     boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)",
     marginBottom: 20,
     marginTop: 20,
     minWidth: elementWidth,
-    textAlign: 'center',
+    textAlign: "center",
   },
-  itemTextTitle:{
-    color: '#000000',
+  itemTextTitle: {
+    color: "#000000",
     fontSize: 20,
-    textAlign: 'center',
-    textAlignVertical: 'center',
+    textAlign: "center",
+    textAlignVertical: "center",
   },
   itemText: {
-    color: '#000000',
+    color: "#000000",
     fontSize: 20,
-    textAlign: 'center',
-    textAlignVertical: 'center',
+    textAlign: "center",
+    textAlignVertical: "center",
     marginTop: 18,
   },
   expandedItem: {
-    backgroundColor: '#FAFAFA',
-    width: '90%',
+    backgroundColor: "#FAFAFA",
+    width: "90%",
     marginTop: -15,
     borderRadius: 8,
     boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)",
-    overflow: 'hidden',
+    overflow: "hidden",
   },
-  
+
   icon: {
     marginLeft: 10,
     fontSize: 20,
   },
   arrowicon: {
-    textAlign: 'left', 
-    textAlignVertical: 'left',
+    textAlign: "left",
+    textAlignVertical: "left",
     marginRight: 10,
     fontSize: 20,
   },
