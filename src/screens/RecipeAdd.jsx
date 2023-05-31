@@ -91,7 +91,6 @@ export default function RecipeAdd({ navigation, route }) {
             </ScrollView>
           </View>
 
-          <IngredientList recipeId={recipeId} />
 
           <TextInput
             style={styles.input}

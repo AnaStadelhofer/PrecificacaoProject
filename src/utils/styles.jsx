@@ -1,5 +1,8 @@
 import { StyleSheet } from "react-native";
-import { widthPercentageToDP, heightPercentageToDP } from 'react-native-responsive-screen'; 
+import {
+  widthPercentageToDP,
+  heightPercentageToDP,
+} from "react-native-responsive-screen";
 
 const elementWidth = "90%";
 
@@ -15,17 +18,17 @@ export const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20,
     paddingVertical: 10,
-    flexDirection: 'column',
+    flexDirection: "column",
     justifyContent: "center",
     maxWidth: "100%",
   },
-  recipeContainer:{
+  recipeContainer: {
     display: "flex",
     flexDirection: "column",
     // justifyContent: "center",
     marginTop: 40,
     alignItems: "center",
-    height: "100vh",  
+    height: "100vh",
   },
   error: {
     color: "red",
@@ -119,7 +122,7 @@ export const styles = StyleSheet.create({
   button: {
     justifyContent: "center",
     alignItems: "center",
-    width: widthPercentageToDP('90%'), 
+    width: widthPercentageToDP("90%"),
     height: 50,
     backgroundColor: "#6BA0D2",
     borderRadius: 10,
@@ -143,7 +146,7 @@ export const styles = StyleSheet.create({
   buttonEnabled: {
     justifyContent: "center",
     alignItems: "center",
-    width: widthPercentageToDP('90%'), 
+    width: widthPercentageToDP("90%"),
     height: 50,
     backgroundColor: "#6BA0D2",
     borderRadius: 10,
@@ -152,7 +155,7 @@ export const styles = StyleSheet.create({
   buttonDisabled: {
     justifyContent: "center",
     alignItems: "center",
-    width: widthPercentageToDP('90%'), 
+    width: widthPercentageToDP("90%"),
     height: 50,
     borderRadius: 10,
     marginTop: 15,
@@ -167,7 +170,7 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     paddingLeft: 5,
     marginTop: 22,
-    width: widthPercentageToDP('90%'), 
+    width: widthPercentageToDP("90%"),
     backgroundColor: "white",
     borderColor: "#777777",
     borderBottomLeftRadius: 10,
@@ -181,7 +184,7 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     paddingLeft: 5,
     marginTop: 22,
-    width: widthPercentageToDP('90%'), 
+    width: widthPercentageToDP("90%"),
     backgroundColor: "white",
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
@@ -201,12 +204,11 @@ export const styles = StyleSheet.create({
     borderTopRightRadius: 10,
   },
   textInputContainer: {
-    width: widthPercentageToDP('98%'), 
-    height: heightPercentageToDP('5%'),
-    flexDirection: 'column',
+    width: widthPercentageToDP("98%"),
+    height: heightPercentageToDP("5%"),
+    flexDirection: "column",
     justifyContent: "center",
     maxWidth: "100%",
-
   },
   inputAddItem: {
     height: 55,
@@ -230,8 +232,8 @@ export const styles = StyleSheet.create({
     backgroundColor: "gray",
   },
   cart: {
-    width: widthPercentageToDP('95%'), 
-    height: heightPercentageToDP('6%'),
+    width: widthPercentageToDP("95%"),
+    height: heightPercentageToDP("6%"),
     borderRadius: 10,
     boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.25)",
     marginTop: 15,
@@ -249,8 +251,8 @@ export const styles = StyleSheet.create({
     minWidth: "100%",
   },
   cartEnable: {
-    width: widthPercentageToDP('95%'), 
-    height: heightPercentageToDP('6%'),
+    width: widthPercentageToDP("95%"),
+    height: heightPercentageToDP("6%"),
     borderRadius: 10,
     borderColor: "gray",
     marginTop: 15,
@@ -268,50 +270,50 @@ export const styles = StyleSheet.create({
     minWidth: "100%",
   },
   //Receita
-  
+
   iconsContainer: {
-    textAlign: 'end',
-    textAlignVertical: 'end',
+    textAlign: "end",
+    textAlignVertical: "end",
   },
   item: {
-    backgroundColor: '#E8E8E8',
+    backgroundColor: "#E8E8E8",
     padding: 10,
     borderRadius: 8,
     boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)",
     marginBottom: 20,
     marginTop: 20,
     minWidth: elementWidth,
-    textAlign: 'center',
+    textAlign: "center",
   },
-  itemTextTitle:{
-    color: '#000000',
+  itemTextTitle: {
+    color: "#000000",
     fontSize: 20,
-    textAlign: 'center',
-    textAlignVertical: 'center',
+    textAlign: "center",
+    textAlignVertical: "center",
   },
   itemText: {
-    color: '#000000',
+    color: "#000000",
     fontSize: 20,
-    textAlign: 'center',
-    textAlignVertical: 'center',
+    textAlign: "center",
+    textAlignVertical: "center",
     marginTop: 18,
   },
   expandedItem: {
-    backgroundColor: '#FAFAFA',
-    width: '90%',
+    backgroundColor: "#FAFAFA",
+    width: "90%",
     marginTop: -15,
     borderRadius: 8,
     boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)",
-    overflow: 'hidden',
+    overflow: "hidden",
   },
-  
+
   icon: {
     marginLeft: 10,
     fontSize: 20,
   },
   arrowicon: {
-    textAlign: 'left', 
-    textAlignVertical: 'left',
+    textAlign: "left",
+    textAlignVertical: "left",
     marginRight: 10,
     fontSize: 20,
   },
@@ -330,11 +332,13 @@ export const styles = StyleSheet.create({
     borderTopRightRadius: 10,
   },
   ingredientList: {
-    maxHeight: "30%",
-    backgroundColor: 'gray'
+    width: widthPercentageToDP("95%"),
+    height: heightPercentageToDP("5%"),
+    marginTop: 10,
+    backgroundColor: "#D9D9D9",
   },
   btnModal: {
-    justifyContent: 'center',
+    justifyContent: "center",
     backgroundColor: "#6BA0D2",
     padding: 15,
     borderRadius: 10,
@@ -342,7 +346,7 @@ export const styles = StyleSheet.create({
   },
   inputModal: {
     height: 60,
-    marginBottom: 10,    
+    marginBottom: 10,
     borderColor: "#ccc",
     borderWidth: 1,
     paddingLeft: 5,
@@ -364,33 +368,33 @@ export const styles = StyleSheet.create({
     borderRadius: 15,
   },
   emptyCart: {
-    textAlign: 'center',
+    textAlign: "center",
     fontSize: 25,
-    color: 'gray',
-    padding: 20
+    color: "gray",
+    padding: 20,
   },
-  // INGREDIENTE E RECEITA 
+  // INGREDIENTE E RECEITA
   textInputContainerIngre: {
-    width: widthPercentageToDP('90%'), 
-    height: heightPercentageToDP('5%'),
-    flexDirection: 'column',
+    width: widthPercentageToDP("90%"),
+    height: heightPercentageToDP("5%"),
+    flexDirection: "column",
     justifyContent: "center",
     maxWidth: "100%",
-    marginBottom: '5%'
+    marginBottom: "5%",
   },
   listIngredient: {
-    width: widthPercentageToDP('90%'), 
-    height: heightPercentageToDP('20%'), 
-    backgroundColor: 'white',
+    width: widthPercentageToDP("90%"),
+    height: heightPercentageToDP("20%"),
+    backgroundColor: "white",
     marginTop: 20,
     borderRadius: 10,
-    borderColor: '#777777',
+    borderColor: "#777777",
     borderWidth: 1,
-    flex: 1
+    flex: 1,
   },
   divInput: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   column: {
     flex: 1,
@@ -401,7 +405,7 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     paddingLeft: 5,
     marginTop: 22,
-    width: widthPercentageToDP('44%'), 
+    width: widthPercentageToDP("44%"),
     backgroundColor: "white",
     borderColor: "#777777",
     borderBottomLeftRadius: 10,
@@ -411,22 +415,22 @@ export const styles = StyleSheet.create({
   },
   // INPUT INGREDIENTE
   divIcon: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     paddingHorizontal: 10,
     marginTop: 10,
   },
   divIconLeft: {
     flex: 1,
-    alignItems: 'flex-start',
-    fontSize: 20
+    alignItems: "flex-start",
+    fontSize: 20,
   },
   divIconRight: {
     marginLeft: 30,
-    alignItems: 'flex-end',
+    alignItems: "flex-end",
   },
   textLeft: {
-    textAlign: 'left',
+    textAlign: "left",
   },
 });
