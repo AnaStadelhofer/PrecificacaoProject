@@ -11,6 +11,13 @@ export const styles = StyleSheet.create({
     backgroundColor: "#fff",
     maxWidth: "100%",
   },
+  containerLogo: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#fff",
+    maxWidth: "100%",
+  },
   containerCard: {
     flex: 1,
     justifyContent: "center",
@@ -41,7 +48,9 @@ export const styles = StyleSheet.create({
   checkboxContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 15,
+    marginBottom: 8,
+    marginLeft: 12,
+    marginRight: -5,
   },
   checkbox: {
     width: 25,
@@ -196,11 +205,15 @@ export const styles = StyleSheet.create({
     borderTopRightRadius: 10,
   },
   textInputContainer: {
-    width: widthPercentageToDP('98%'), 
-    height: heightPercentageToDP('5%'),
+    width: widthPercentageToDP('96%'), 
+    height: heightPercentageToDP('7%'),
+    maxWidth: "100%",
     flexDirection: 'column',
     justifyContent: "center",
-    maxWidth: "100%",
+    alignItems: 'center',
+    minWidth: "100%",
+    marginBottom: 5,
+    marginTop: 15,
   },
   inputAddItem: {
     height: 55,
@@ -225,7 +238,7 @@ export const styles = StyleSheet.create({
   },
   cart: {
     width: widthPercentageToDP('98%'), 
-    height: heightPercentageToDP('5%'),
+    height: heightPercentageToDP('7%'),
     borderRadius: 10,
     boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.25)",
     marginTop: 15,
@@ -243,8 +256,8 @@ export const styles = StyleSheet.create({
     minWidth: "100%",
   },
   cartEnable: {
-    width: widthPercentageToDP('95%'), 
-    height: heightPercentageToDP('6%'),
+    width: widthPercentageToDP('98%'), 
+    height: heightPercentageToDP('7%'),
     borderRadius: 10,
     borderColor: "gray",
     marginTop: 15,
