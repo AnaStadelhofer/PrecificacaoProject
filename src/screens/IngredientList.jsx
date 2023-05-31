@@ -86,14 +86,15 @@ export default function IngredientList({ recipeId }) {
     try {
       const queryInstance = query(itemRef, where("recipeId", "==", recipeId));
       const ingredientQuery = onSnapshot(queryInstance, (snapshot) => {
-        console.log(snapshot);
         const listIngredient = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
         if (listIngredient.length === 0) {
+          console.log("carinho vazio")
         } else {
           setIngredient(listIngredient);
+          console.log(listIngredient)
         }
       });
       return () => ingredientQuery();

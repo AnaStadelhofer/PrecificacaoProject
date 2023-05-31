@@ -13,12 +13,14 @@ import { addDoc } from "firebase/firestore";
 import { TouchableOpacity } from "react-native";
 import { updateDoc, doc } from "firebase/firestore";
 import IngredientList from "./IngredientList";
+import { Alert } from "react-native";
 
 export default function RecipeAdd({ navigation, route }) {
   const { recipeId, recipe } = route.params;
   const [nameRecipe, setNameRecipe] = useState("");
   const [income, setIncome] = useState("");
   const [typeProfit, setTypeProfit] = useState("");
+  const [message, setMessage] = useState("");
   const [profitValue, setProfitValue] = useState("");
 
   function handleEditRecipe() {
@@ -48,6 +50,14 @@ export default function RecipeAdd({ navigation, route }) {
     }
   }
 
+  const openAlertInfo = (message) => {
+    Alert.alert("Info", message, [
+      {
+        text: "OK",
+      },
+    ]);
+  };
+
   return (
     <View style={[styles.container, { alignItems: "center" }]}>
       <SafeAreaView>
@@ -59,7 +69,16 @@ export default function RecipeAdd({ navigation, route }) {
             editable={true}
             value={recipe.nameRecipe}
             onChangeText={setNameRecipe}
-            right={<TextInput.Icon icon="information" />}
+            right={
+              <TextInput.Icon
+                onPress={() =>
+                  openAlertInfo(
+                    "Neste campo deverá ser informado o nome da receita que deseja cadastrar."
+                  )
+                }
+                icon="information"
+              />
+            }
           />
 
           <View style={styles.listIngredient}>
@@ -82,6 +101,11 @@ export default function RecipeAdd({ navigation, route }) {
                 <TextInput.Icon
                   styles={{ textAlign: "right" }}
                   icon="information"
+                  onPress={() =>
+                    openAlertInfo(
+                      "Neste campo deverá ser cadastrado todos ingredientes que serão utilizada na receita."
+                    )
+                  }
                 />
               </View>
             </View>
@@ -91,7 +115,6 @@ export default function RecipeAdd({ navigation, route }) {
             </ScrollView>
           </View>
 
-
           <TextInput
             style={styles.input}
             placeholder="Rendimento"
@@ -99,7 +122,16 @@ export default function RecipeAdd({ navigation, route }) {
             keyboardType="numeric"
             editable={true}
             onChangeText={setIncome}
-            right={<TextInput.Icon icon="information" />}
+            right={
+              <TextInput.Icon
+                onPress={() =>
+                  openAlertInfo(
+                    "Neste campo deverá ser informado a quantidade que a receita rende, exemplo: uma receita de cupcake rende 20 unidades."
+                  )
+                }
+                icon="information"
+              />
+            }
           />
 
           <View style={styles.divInput}>
@@ -110,7 +142,16 @@ export default function RecipeAdd({ navigation, route }) {
                 textContentType="text"
                 keyboardType="numeric"
                 editable={false}
-                right={<TextInput.Icon icon="information" />} // Alterei de icon para name
+                right={
+                  <TextInput.Icon
+                    onPress={() =>
+                      openAlertInfo(
+                        "Neste campo irá ter a porcentagem de custos que vai ser aplicado em cima da receita, sendo eles: conta de água, luz, gás, taxa do MEI e entre outros."
+                      )
+                    }
+                    icon="information"
+                  />
+                } // Alterei de icon para name
               />
             </View>
 
@@ -121,7 +162,16 @@ export default function RecipeAdd({ navigation, route }) {
                 textContentType="text"
                 keyboardType="numeric"
                 editable={false}
-                right={<TextInput.Icon icon="information" />} // Alterei de icon para name
+                right={
+                  <TextInput.Icon
+                    onPress={() =>
+                      openAlertInfo(
+                        "Neste campo será feito um calculo de todo o custo da receita, sem conta o lucro obtido pelo usuário."
+                      )
+                    }
+                    icon="information"
+                  />
+                } // Alterei de icon para name
               />
             </View>
           </View>
@@ -132,7 +182,16 @@ export default function RecipeAdd({ navigation, route }) {
             textContentType="text"
             keyboardType="numeric"
             editable={false}
-            right={<TextInput.Icon icon="information" />}
+            right={
+              <TextInput.Icon
+                onPress={() =>
+                  openAlertInfo(
+                    "Neste campo vai ser calculado o custo da receita para cada unidade."
+                  )
+                }
+                icon="information"
+              />
+            }
           />
 
           <View style={styles.divInput}>
@@ -143,7 +202,10 @@ export default function RecipeAdd({ navigation, route }) {
                 textContentType="text"
                 editable={true}
                 onChangeText={setTypeProfit}
-                right={<TextInput.Icon icon="information" />}
+                right={<TextInput.Icon                 onPress={() =>
+                  openAlertInfo("Neste campo deverá ser informado o nome da receita que deseja cadastrar.")
+                }
+                icon="information" />}
               />
             </View>
             <View style={styles.column}>

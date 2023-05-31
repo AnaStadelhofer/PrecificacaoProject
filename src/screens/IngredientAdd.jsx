@@ -20,28 +20,47 @@ export default function IngredientAdd({ navigation, route }) {
   const [isButtonEnabled, setButtonEnabled] = useState(false);
   const [totalInvalid, setTotalInvalid] = useState(false);
 
+  const [errorFields, setErrorFields] = useState({
+    ingredient: false,
+    price: false,
+    totalPurchased: false,
+    totalUsed: false,
+  });
+
   const checkFields = () => {
-    if (ingredient && price && totalPurchased && totalUsed && totalInvalid == false) {
+    if (
+      ingredient &&
+      price &&
+      totalPurchased &&
+      totalUsed &&
+      totalInvalid == false
+    ) {
       setButtonEnabled(true);
-      console.log("COMPRADO " + typeof parseInt(totalPurchased.trim()))
-      console.log("USADO: " + typeof parseInt(totalUsed.trim()))
-      console.log("PREÇO USADO DO INGREDIENTE: " + (parseFloat(price) / (parseFloat(totalPurchased) - parseFloat(totalUsed))))
+      // console.log("COMPRADO " + typeof parseInt(totalPurchased.trim()))
+      // console.log("USADO: " + typeof parseInt(totalUsed.trim()))
+      // console.log("PREÇO USADO DO INGREDIENTE: " + (parseFloat(price) / (parseFloat(totalPurchased) - parseFloat(totalUsed))))
     } else {
       setButtonEnabled(false);
-      console.log("COMPRADO " + typeof totalPurchased)
-      console.log("USADO: " + typeof totalUsed)
-      console.log("PREÇO USADO DO INGREDIENTE: " + (parseFloat(price) / (parseFloat(totalPurchased) - parseFloat(totalUsed))))
-
+      // console.log("COMPRADO " + typeof totalPurchased)
+      // console.log("USADO: " + typeof totalUsed)
+      // console.log("PREÇO USADO DO INGREDIENTE: " + (parseFloat(price) / (parseFloat(totalPurchased) - parseFloat(totalUsed))))
     }
   };
 
+  // function checkInput(data) {
+  //   if (data.length < 1) {
+  //     console.log("erro");
+  //   }
+  //   console.log(data);
+  // }
+
   const checkFieldTotal = (totalPurchased, totalUsed) => {
-    if(totalPurchased < totalUsed){
-      setTotalInvalid(true)
+    if (totalPurchased < totalUsed) {
+      setTotalInvalid(true);
     } else {
-      setTotalInvalid(false)
+      setTotalInvalid(false);
     }
-  }
+  };
 
   const saveItemIngredient = (ingredients) => {
     try {
@@ -62,7 +81,7 @@ export default function IngredientAdd({ navigation, route }) {
   };
 
   function handleAddIngredients() {
-    const cleanedPrice = price.trim().replace(/^R\$|\s/g, '');
+    const cleanedPrice = price.trim().replace(/^R\$|\s/g, "");
 
     const ingredients = {
       ingredient: ingredient.trim(),
@@ -76,7 +95,7 @@ export default function IngredientAdd({ navigation, route }) {
   }
 
   return (
-    <View style={[styles.container, { justifyContent: "flex-start" }]}>
+    <View style={[styles.container, { justifyContent: "flex-start", alignItems: "center" }]}>
       <SafeAreaView>
         <ScrollView horizontal={false}>
           <View>
@@ -91,6 +110,7 @@ export default function IngredientAdd({ navigation, route }) {
                 setIngredient(text);
                 checkFields();
               }}
+              error={errorFields.ingredient}
             />
 
             <TextInputMask
@@ -114,9 +134,22 @@ export default function IngredientAdd({ navigation, route }) {
               style={styles.input}
               value={price}
               onChangeText={(text) => {
-                  setPrice(text)
-                  checkFields()
+                if (text.length < 1) {
+                  setErrorFields({
+                    ...errorFields,
+                    price: true,
+                  });
+                } else {
+                  setErrorFields({
+                    ...errorFields,
+                    price: false,
+                  });
+                }
+
+                setPrice(text);
+                checkFields();
               }}
+              error={errorFields.price}
             />
 
             <TextInput
@@ -127,21 +160,21 @@ export default function IngredientAdd({ navigation, route }) {
               style={styles.input}
               value={totalPurchased}
               onChangeText={(text) => {
-                if (text === "") {
-                  setTotalPurchased("");
-                  checkFields();
-                  checkFieldTotal(0, parseInt(totalUsed));
+                if (text.length < 1) {
+                  setErrorFields({
+                    ...errorFields,
+                    totalPurchased: true,
+                  });
+                
                 } else {
-                  const intValue = parseInt(text);
-                  if (!isNaN(intValue)) {
-                    const regex = /^[0-9]+$/;
-                    if (regex.test(text)) {
-                      setTotalPurchased(text);
-                      checkFields();
-                      checkFieldTotal(parseInt(totalPurchased), intValue);
-                    }
-                  }
+                  setErrorFields({
+                    ...errorFields,
+                    totalPurchased: false,
+                  });
                 }
+                setTotalPurchased(text);
+                checkFields();
+                checkFieldTotal(text, totalUsed);
               }}
             />
 
@@ -153,26 +186,29 @@ export default function IngredientAdd({ navigation, route }) {
               style={totalInvalid ? styles.inputError : styles.input}
               value={totalUsed}
               onChangeText={(text) => {
-                if (text === "") {
-                  setTotalUsed("");
-                  checkFields();
-                  checkFieldTotal(parseInt(totalPurchased), 0);
+                if (text.length < 1) {
+                  setErrorFields({
+                    ...errorFields,
+                    totalUsed: true,
+                  });
                 } else {
-                  const intValue = parseInt(text);
-                  if (!isNaN(intValue)) {
-                    const regex = /^[0-9]+$/;
-                    if (regex.test(text)) {
-                      setTotalUsed(text);
-                      checkFields();
-                      checkFieldTotal(intValue, parseInt(totalUsed));
-                    }
-                  }
+                  setErrorFields({
+                    ...errorFields,
+                    totalUsed: false,
+                  });
+                  console.log("Estou dentro do programado");
                 }
+                setTotalUsed(text);
+                checkFields();
+                checkFieldTotal(totalPurchased, text);
               }}
             />
+
             {totalInvalid && (
-          <Text style={styles.error}>O total usado não pode ser menor que o total comprado.</Text>
-        )}
+              <Text style={styles.error}>
+                O total usado não pode ser menor que o total comprado.
+              </Text>
+            )}
           </View>
         </ScrollView>
 
