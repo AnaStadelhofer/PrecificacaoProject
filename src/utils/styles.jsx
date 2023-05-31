@@ -369,7 +369,7 @@ export const styles = StyleSheet.create({
     color: 'gray',
     padding: 20
   },
-  // INGREDIENTE
+  // INGREDIENTE E RECEITA 
   textInputContainerIngre: {
     width: widthPercentageToDP('90%'), 
     height: heightPercentageToDP('5%'),
@@ -396,13 +396,6 @@ export const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
   },
-  divIcon: {
-    flexDirection: 'row',
-  },
-  divIconRight: {
-    flex: 1,
-    alignItems: "flex-end",
-  },
   inputDiv: {
     height: 60,
     borderWidth: 1,
@@ -415,5 +408,25 @@ export const styles = StyleSheet.create({
     borderBottomRightRadius: 10,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
+  },
+  // INPUT INGREDIENTE
+  divIcon: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    marginTop: 10,
+  },
+  divIconLeft: {
+    flex: 1,
+    alignItems: 'flex-start',
+    fontSize: 20
+  },
+  divIconRight: {
+    marginLeft: 30,
+    alignItems: 'flex-end',
+  },
+  textLeft: {
+    textAlign: 'left',
   },
 });

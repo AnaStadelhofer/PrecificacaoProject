@@ -64,75 +64,30 @@ export default function RecipeAdd({ navigation, route }) {
 
           <View style={styles.listIngredient}>
             <View style={styles.divIcon}>
-              <View style={styles.divIconRight}>
-                <TextInput.Icon icon="plus" />
+              <View style={styles.divIconLeft}>
+                <Text style={styles.textLeft}>Ingredientes</Text>
               </View>
 
               <View style={styles.divIconRight}>
-                <TextInput.Icon icon="information" />
-              </View>
-            </View>
-            {/* <TextInput
-              style={styles.input}
-              placeholder="Ingredientes"
-              textContentType="text"
-              editable={true}
-              right={
                 <TextInput.Icon
-                  icon="plus"
+                  styles={{ textAlign: "right" }}
                   onPress={() =>
                     navigation.navigate("IngredientAdd", { recipe, recipeId })
                   }
+                  icon="plus"
                 />
-              }
-            /> */}
+              </View>
+
+              <View style={styles.divIconRight}>
+                <TextInput.Icon
+                  styles={{ textAlign: "right" }}
+                  icon="information"
+                />
+              </View>
+            </View>
+
             <ScrollView horizontal={false}>
-              <Text>batata</Text>
-              <Text>batata</Text>
-              <Text>batata</Text>
-              <Text>batata</Text>
-              <Text>batata</Text>
-              <Text>batata</Text>
-              <Text>batata</Text>
-              <Text>batata</Text>
-              <Text>batata</Text>
-
-              <Text>batata</Text>
-
-              <Text>batata</Text>
-
-              <Text>batata</Text>
-
-              <Text>batata</Text>
-
-              <Text>batata</Text>
-
-              <Text>batata</Text>
-
-              <Text>batata</Text>
-
-              <Text>batata</Text>
-              <Text>batata</Text>
-              <Text>batata</Text>
-              <Text>batata</Text>
-              <Text>batata</Text>
-              <Text>batata</Text>
-              <Text>batata</Text>
-              <Text>batata</Text>
-
-              <Text>batata</Text>
-              <Text>batata</Text>
-              <Text>batata</Text>
-              <Text>batata</Text>
-              <Text>batata</Text>
-              <Text>batata</Text>
-              <Text>batata</Text>
-              <Text>batata</Text>
-              <Text>batata</Text>
-              <Text>batata</Text>
-              <Text>batata</Text>
-              <Text>batata</Text>
-              <Text>batata</Text>
+              <IngredientList recipeId={recipeId} />
             </ScrollView>
           </View>
 
