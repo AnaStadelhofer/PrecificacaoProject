@@ -13,6 +13,11 @@ const itemRef = collection(db, "Cart");
 export default function CartAdd({ navigation }) {
   const [nameItem, setNameItem] = useState("");
   const [checkedItem, setCheckedItem] = useState(false);
+  const[isButtonEnabled, setIsButtonEnabled] = useState(false);
+
+  useEffect(() => {
+    setIsButtonEnabled(nameItem.trim().length > 0);
+  }, [nameItem]);
 
   const saveItemCart = (cart) => {
     try {
@@ -66,6 +71,7 @@ export default function CartAdd({ navigation }) {
         <TextInput
           placeholder="Adicionar item"
           mode="outline"
+          value={nameItem}
           onChangeText={setNameItem}
           style={styles.inputAddItem}
           right={
@@ -74,6 +80,7 @@ export default function CartAdd({ navigation }) {
               size={20}
               containerColor="lightgreen"
               onPress={handleAddItem}
+              disabled={!isButtonEnabled}
             />
           }
         />
