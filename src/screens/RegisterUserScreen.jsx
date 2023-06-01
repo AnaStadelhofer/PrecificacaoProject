@@ -148,14 +148,12 @@ export default function RegisterUserScreen({ navigation }) {
       setPasswordError("");
     } else if (password.length < 6) {
       setPasswordError("A senha deve ter pelo menos 6 caracteres.");
-      validatePasswordEqual();
     } else if (!isStrongPassword(password)) {
       setPasswordError("A senha está fraca.");
-      validatePasswordEqual();
     } else {
       setPasswordError("");
-      validatePasswordEqual();
     }
+    validatePasswordEqual(confirmPassword);
   };
 
   const validatePasswordEqual = (confirmPassword) => {
