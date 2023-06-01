@@ -20,7 +20,7 @@ export default function ProfileScreen() {
     <View style={styles.container}>
       <View style={[styles.centerInfo, { justifyContent: "flex-start" }]}>
         <Text style={styles.welcomeUser}>
-          Bem-vindo (a), {user ? user.name?.split(" ")[0] : ""}!
+          Bem-vindo (a), {user ? user.name: ""}!
         </Text>
         <Text style={styles.infoUser}>Informações do seu perfil.</Text>
       </View>
