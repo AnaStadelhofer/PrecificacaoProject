@@ -24,7 +24,7 @@ const Stack = createNativeStackNavigator();
 function OptionsMenu({ navigation }) {
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, {alignItems: 'center'}]}>
             <Logo/>
             <SafeAreaView>
                 <Text style={styles.textInittial}> Seja bem-vindo ao nosso aplicativo! </Text>

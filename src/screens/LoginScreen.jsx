@@ -72,7 +72,7 @@ export default function LoginScreen({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {alignItems: 'center'}]}>
       <Logo />
       <SafeAreaView>
         <View>

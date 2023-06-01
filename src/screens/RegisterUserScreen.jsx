@@ -176,7 +176,7 @@ export default function RegisterUserScreen({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {alignItems: 'center'}]}>
       <SafeAreaView>
         <TextInput
           placeholder="Nome"
@@ -239,7 +239,7 @@ export default function RegisterUserScreen({ navigation }) {
           <Text style={styles.error}>{confirmPasswordError}</Text>
         )}
 
-        <View style={styles.checkboxContainer}>
+        <View style={[styles.checkboxContainer, , {marginTop: 20}]}>
           <TouchableOpacity
             onPress={toggleCheckbox}
           >
@@ -248,7 +248,7 @@ export default function RegisterUserScreen({ navigation }) {
             ></View>
             
           </TouchableOpacity>
-          <Text style={styles.textTerms}>Concordo com os termos de privacidade</Text>
+          <Text style={[styles.textTerms]}>Concordo com os termos de privacidade</Text>
         </View>
 
         <ButtonCentralized text='Confirmar' handle={handleRegister} disable={isButtonEnabled} />
