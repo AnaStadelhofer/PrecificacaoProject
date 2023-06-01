@@ -14,6 +14,19 @@ export const styles = StyleSheet.create({
     backgroundColor: "#fff",
     maxWidth: "100%",
   },
+  containerLogo: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#fff",
+    maxWidth: "100%",
+  },
+  containerCard: {
+    flex: 1,
+    justifyContent: "center",
+    backgroundColor: "#fff",
+    maxWidth: "100%",
+  },
   containerInner: {
     flex: 1,
     paddingHorizontal: 20,
@@ -37,7 +50,9 @@ export const styles = StyleSheet.create({
   checkboxContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 15,
+    marginBottom: 8,
+    marginLeft: 12,
+    marginRight: -5,
   },
   checkbox: {
     width: 25,
@@ -204,11 +219,15 @@ export const styles = StyleSheet.create({
     borderTopRightRadius: 10,
   },
   textInputContainer: {
-    width: widthPercentageToDP("98%"),
-    height: heightPercentageToDP("5%"),
-    flexDirection: "column",
-    justifyContent: "center",
+    width: widthPercentageToDP('96%'), 
+    height: heightPercentageToDP('7%'),
     maxWidth: "100%",
+    flexDirection: 'column',
+    justifyContent: "center",
+    alignItems: 'center',
+    minWidth: "100%",
+    marginBottom: 5,
+    marginTop: 15,
   },
   inputAddItem: {
     height: 55,
@@ -221,7 +240,6 @@ export const styles = StyleSheet.create({
     borderBottomRightRadius: 10,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
-    borderColor: "#777777",
   },
   // Item carrinho
   listCart: {

@@ -19,7 +19,8 @@ export default function CartScreen({ navigation }) {
 
 
   return (
-    <View style={styles.container}>
+    <View style={styles.containerCard}>
+
       <CartList />
       <CartAdd />
     </View>

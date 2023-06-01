@@ -68,6 +68,8 @@ export default function CartAdd({ navigation }) {
           mode="outline"
           onChangeText={setNameItem}
           style={styles.inputAddItem}
+          underlineColor="transparent"
+          activeUnderlineColor="transparent"
           right={
             <TextInput.Icon
               icon="plus"
