@@ -2,17 +2,31 @@ import { Text, TextInput } from "react-native-paper";
 import { View } from "react-native";
 import { styles } from "../utils/styles";
 import { TouchableOpacity } from "react-native";
+import { getUserData } from "../utils/user";
 
 export default function ProfileScreen() {
+  useEffect(() => {
+    const currentUser = auth.currentUser;
+    console.log(currentUser.email);
+    if (currentUser) {
+      getUserData().then((data) => {
+        setUser(data);
+        console.log(data);
+      });
+      // setUser(currentUser);
+    }
+  }, [auth?.currentUser]);
   return (
     <View style={styles.container}>
-      <View style={[styles.centerInfo, {justifyContent: 'flex-start'}]}>
-        <Text style={styles.welcomeUser}>Bem-vindo (a), Ana!</Text>
+      <View style={[styles.centerInfo, { justifyContent: "flex-start" }]}>
+        <Text style={styles.welcomeUser}>
+          Bem-vindo (a), {user ? user.name?.split(" ")[0] : ""}!
+        </Text>
         <Text style={styles.infoUser}>Informações do seu perfil.</Text>
       </View>
       <View style={styles.container}>
         <TextInput
-          placeholder="Ana Carolina Stadelhofer"
+          placeholder={user ? user.name : ""}
           // secureTextEntry={showPassword}
           textContentType="text"
           // value={password}
@@ -21,7 +35,7 @@ export default function ProfileScreen() {
           editable={false}
         />
         <TextInput
-          placeholder="ana.stadelhofer@teste.com.br"
+          placeholder={auth.currentUser?.email}
           // secureTextEntry={showPassword}
           textContentType="text"
           // value={password}
