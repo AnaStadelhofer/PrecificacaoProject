@@ -19,9 +19,9 @@ import {
 import { db, auth } from "../config/firebase";
 import { styles } from "../utils/styles";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Icon from "react-native-vector-icons/FontAwesome";
-import { FontAwesome } from "@expo/vector-icons";
-import { Animated } from "react-native";
+// import Icon from "react-native-vector-icons/FontAwesome";
+// import { FontAwesome } from "@expo/vector-icons";
+// import { Animated } from "react-native";
 
 
 
@@ -30,22 +30,22 @@ const itemRef = collection(db, "Recipes");
 export default function RecipesList() {
   const [recipes, setRecipe] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [recipeEmpty, setRecipeEmpty] = useState(false);
+  const [recipeEmpty, setRecipeEmpty] = useState(true);
   const [isSelected, setIsSelected] = useState(false);
   const [dialogVisible, setDialogVisible] = useState(false);
-  const [icon, setIcon] = useState("arrow-down");
-  const heightAnim = useRef(new Animated.Value(0)).current;
+  // const [icon, setIcon] = useState("arrow-down");
+  // const heightAnim = useRef(new Animated.Value(0)).current;
 
 
-  const handleItemPress = () => {
-    Animated.timing(heightAnim, {
-      toValue: expanded ? 0 : 100,
-      duration: 300,
-      useNativeDriver: false,
-    }).start();
-    setExpanded(!expanded);
-    setIcon("arrow-up");
-  };
+  // const handleItemPress = () => {
+  //   Animated.timing(heightAnim, {
+  //     toValue: expanded ? 0 : 100,
+  //     duration: 300,
+  //     useNativeDriver: false,
+  //   }).start();
+  //   setExpanded(!expanded);
+  //   setIcon("arrow-up");
+  // };
 
   useEffect(() => {
     try {
@@ -61,7 +61,7 @@ export default function RecipesList() {
         }));
         setLoading(false);
         if (listRecipe.length === 0) {
-          setRecipeEmpty(true);
+          // setRecipeEmpty(true);
         } else {
           setRecipe(listRecipe);
         }

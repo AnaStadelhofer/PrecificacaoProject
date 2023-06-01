@@ -13,12 +13,14 @@ import { addDoc } from "firebase/firestore";
 import { TouchableOpacity } from "react-native";
 import { updateDoc, doc } from "firebase/firestore";
 import IngredientList from "./IngredientList";
+import { Alert } from "react-native";
 
 export default function RecipeAdd({ navigation, route }) {
   const { recipeId, recipe } = route.params;
   const [nameRecipe, setNameRecipe] = useState("");
   const [income, setIncome] = useState("");
   const [typeProfit, setTypeProfit] = useState("");
+  const [message, setMessage] = useState("");
   const [profitValue, setProfitValue] = useState("");
 
   function handleEditRecipe() {
@@ -48,8 +50,16 @@ export default function RecipeAdd({ navigation, route }) {
     }
   }
 
+  const openAlertInfo = (message) => {
+    Alert.alert("Info", message, [
+      {
+        text: "OK",
+      },
+    ]);
+  };
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { alignItems: "center" }]}>
       <SafeAreaView>
         <ScrollView horizontal={false}>
           <TextInput
@@ -59,22 +69,51 @@ export default function RecipeAdd({ navigation, route }) {
             editable={true}
             value={recipe.nameRecipe}
             onChangeText={setNameRecipe}
-          />
-
-          <TextInput
-            style={styles.input}
-            placeholder="Ingredientes"
-            textContentType="text"
-            editable={true}
             right={
               <TextInput.Icon
-                icon="plus"
-                onPress={() => navigation.navigate("IngredientAdd", { recipe, recipeId })}
+                onPress={() =>
+                  openAlertInfo(
+                    "Neste campo deverá ser informado o nome da receita que deseja cadastrar."
+                  )
+                }
+                icon="information"
               />
             }
           />
 
-        <IngredientList recipeId={recipeId}/>
+          <View style={styles.listIngredient}>
+            <View style={styles.divIcon}>
+              <View style={styles.divIconLeft}>
+                <Text style={styles.textLeft}>Ingredientes</Text>
+              </View>
+
+              <View style={styles.divIconRight}>
+                <TextInput.Icon
+                  styles={{ textAlign: "right" }}
+                  onPress={() =>
+                    navigation.navigate("IngredientAdd", { recipe, recipeId })
+                  }
+                  icon="plus"
+                />
+              </View>
+
+              <View style={styles.divIconRight}>
+                <TextInput.Icon
+                  styles={{ textAlign: "right" }}
+                  icon="information"
+                  onPress={() =>
+                    openAlertInfo(
+                      "Neste campo deverá ser cadastrado todos ingredientes que serão utilizada na receita."
+                    )
+                  }
+                />
+              </View>
+            </View>
+
+            <ScrollView horizontal={false}>
+              <IngredientList recipeId={recipeId} />
+            </ScrollView>
+          </View>
 
           <TextInput
             style={styles.input}
@@ -83,23 +122,59 @@ export default function RecipeAdd({ navigation, route }) {
             keyboardType="numeric"
             editable={true}
             onChangeText={setIncome}
+            right={
+              <TextInput.Icon
+                onPress={() =>
+                  openAlertInfo(
+                    "Neste campo deverá ser informado a quantidade que a receita rende, exemplo: uma receita de cupcake rende 20 unidades."
+                  )
+                }
+                icon="information"
+              />
+            }
           />
 
-          <TextInput
-            style={styles.input}
-            placeholder="Custo de contas"
-            textContentType="text"
-            keyboardType="numeric"
-            editable={false}
-          />
+          <View style={styles.divInput}>
+            <View style={styles.column}>
+              <TextInput
+                style={styles.inputDiv}
+                placeholder="Custo de contas"
+                textContentType="text"
+                keyboardType="numeric"
+                editable={false}
+                right={
+                  <TextInput.Icon
+                    onPress={() =>
+                      openAlertInfo(
+                        "Neste campo irá ter a porcentagem de custos que vai ser aplicado em cima da receita, sendo eles: conta de água, luz, gás, taxa do MEI e entre outros."
+                      )
+                    }
+                    icon="information"
+                  />
+                } // Alterei de icon para name
+              />
+            </View>
 
-          <TextInput
-            style={styles.input}
-            placeholder="Custo total"
-            textContentType="text"
-            keyboardType="numeric"
-            editable={false}
-          />
+            <View style={styles.column}>
+              <TextInput
+                style={styles.inputDiv}
+                placeholder="Custo total"
+                textContentType="text"
+                keyboardType="numeric"
+                editable={false}
+                right={
+                  <TextInput.Icon
+                    onPress={() =>
+                      openAlertInfo(
+                        "Neste campo será feito um calculo de todo o custo da receita, sem conta o lucro obtido pelo usuário."
+                      )
+                    }
+                    icon="information"
+                  />
+                } // Alterei de icon para name
+              />
+            </View>
+          </View>
 
           <TextInput
             style={styles.input}
@@ -107,24 +182,44 @@ export default function RecipeAdd({ navigation, route }) {
             textContentType="text"
             keyboardType="numeric"
             editable={false}
+            right={
+              <TextInput.Icon
+                onPress={() =>
+                  openAlertInfo(
+                    "Neste campo vai ser calculado o custo da receita para cada unidade."
+                  )
+                }
+                icon="information"
+              />
+            }
           />
 
-          <TextInput
-            style={styles.input}
-            placeholder="Tipo de lucro"
-            textContentType="text"
-            editable={true}
-            onChangeText={setTypeProfit}
-          />
-
-          <TextInput
-            style={styles.input}
-            placeholder="Valor lucro"
-            textContentType="text"
-            keyboardType="numeric"
-            editable={true}
-            onChangeText={setProfitValue}
-          />
+          <View style={styles.divInput}>
+            <View style={styles.column}>
+              <TextInput
+                style={styles.inputDiv}
+                placeholder="Tipo de lucro"
+                textContentType="text"
+                editable={true}
+                onChangeText={setTypeProfit}
+                right={<TextInput.Icon                 onPress={() =>
+                  openAlertInfo("Neste campo deverá ser informado o nome da receita que deseja cadastrar.")
+                }
+                icon="information" />}
+              />
+            </View>
+            <View style={styles.column}>
+              <TextInput
+                style={styles.inputDiv}
+                placeholder="Valor lucro"
+                textContentType="text"
+                keyboardType="numeric"
+                editable={true}
+                onChangeText={setProfitValue}
+                right={<TextInput.Icon icon="information" />}
+              />
+            </View>
+          </View>
 
           <TextInput
             style={styles.input}
@@ -132,7 +227,13 @@ export default function RecipeAdd({ navigation, route }) {
             textContentType="text"
             keyboardType="numeric"
             editable={false}
+            right={<TextInput.Icon icon="information" />}
           />
+          <View style={[styles.textLinks, { marginBottom: "5%" }]}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Text style={styles.link}>Voltar</Text>
+            </TouchableOpacity>
+          </View>
         </ScrollView>
         <View style={styles.btnCenterBottom}>
           <TouchableOpacity style={styles.button} onPress={handleEditRecipe}>
