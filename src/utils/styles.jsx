@@ -1,17 +1,13 @@
 import { StyleSheet } from "react-native";
-import { widthPercentageToDP, heightPercentageToDP } from 'react-native-responsive-screen'; 
+import {
+  widthPercentageToDP,
+  heightPercentageToDP,
+} from "react-native-responsive-screen";
 
 const elementWidth = "90%";
 
 export const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#fff",
-    maxWidth: "100%",
-  },
-  containerLogo: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
@@ -28,17 +24,17 @@ export const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20,
     paddingVertical: 10,
-    flexDirection: 'column',
+    flexDirection: "column",
     justifyContent: "center",
-    maxWidth: "100%",
+    alignSelf: "stretch",
   },
-  recipeContainer:{
+  recipeContainer: {
     display: "flex",
     flexDirection: "column",
     // justifyContent: "center",
     marginTop: 40,
     alignItems: "center",
-    height: "100vh",  
+    height: "100vh",
   },
   error: {
     color: "red",
@@ -121,6 +117,7 @@ export const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
+    alignSelf: "stretch",
   },
   buttonProfile: {
     minWidth: "40%",
@@ -191,6 +188,10 @@ export const styles = StyleSheet.create({
     borderBottomRightRadius: 10,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
+    alignSelf: "stretch",
+    justifyContent: 'center',
+    marginLeft: 10,
+    marginRight: 10
   },
   inputError: {
     height: 60,
@@ -204,13 +205,19 @@ export const styles = StyleSheet.create({
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
   },
+  RegisterCamps: {
+    alignSelf: "stretch",
+    justifyContent: 'center',
+    marginLeft: 10,
+    marginRight: 10
+  },
   textInputContainer: {
-    width: widthPercentageToDP('96%'), 
-    height: heightPercentageToDP('7%'),
+    width: widthPercentageToDP("96%"),
+    height: heightPercentageToDP("7%"),
     maxWidth: "100%",
-    flexDirection: 'column',
+    flexDirection: "column",
     justifyContent: "center",
-    alignItems: 'center',
+    alignItems: "center",
     minWidth: "100%",
     marginBottom: 5,
     marginTop: 15,
@@ -237,8 +244,8 @@ export const styles = StyleSheet.create({
     backgroundColor: "gray",
   },
   cart: {
-    width: widthPercentageToDP('98%'), 
-    height: heightPercentageToDP('7%'),
+    width: widthPercentageToDP("98%"),
+    height: heightPercentageToDP("7%"),
     borderRadius: 10,
     boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.25)",
     marginTop: 15,
@@ -256,8 +263,8 @@ export const styles = StyleSheet.create({
     minWidth: "100%",
   },
   cartEnable: {
-    width: widthPercentageToDP('98%'), 
-    height: heightPercentageToDP('7%'),
+    width: widthPercentageToDP("98%"),
+    height: heightPercentageToDP("7%"),
     borderRadius: 10,
     borderColor: "gray",
     marginTop: 15,
@@ -275,50 +282,50 @@ export const styles = StyleSheet.create({
     minWidth: "100%",
   },
   //Receita
-  
+
   iconsContainer: {
-    textAlign: 'end',
-    textAlignVertical: 'end',
+    textAlign: "end",
+    textAlignVertical: "end",
   },
   item: {
-    backgroundColor: '#E8E8E8',
+    backgroundColor: "#E8E8E8",
     padding: 10,
     borderRadius: 8,
     boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)",
     marginBottom: 20,
     marginTop: 20,
     minWidth: elementWidth,
-    textAlign: 'center',
+    textAlign: "center",
   },
-  itemTextTitle:{
-    color: '#000000',
+  itemTextTitle: {
+    color: "#000000",
     fontSize: 20,
-    textAlign: 'center',
-    textAlignVertical: 'center',
+    textAlign: "center",
+    textAlignVertical: "center",
   },
   itemText: {
-    color: '#000000',
+    color: "#000000",
     fontSize: 20,
-    textAlign: 'center',
-    textAlignVertical: 'center',
+    textAlign: "center",
+    textAlignVertical: "center",
     marginTop: 18,
   },
   expandedItem: {
-    backgroundColor: '#FAFAFA',
-    width: '90%',
+    backgroundColor: "#FAFAFA",
+    width: "90%",
     marginTop: -15,
     borderRadius: 8,
     boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)",
-    overflow: 'hidden',
+    overflow: "hidden",
   },
-  
+
   icon: {
     marginLeft: 10,
     fontSize: 20,
   },
   arrowicon: {
-    textAlign: 'left', 
-    textAlignVertical: 'left',
+    textAlign: "left",
+    textAlignVertical: "left",
     marginRight: 10,
     fontSize: 20,
   },
@@ -338,10 +345,10 @@ export const styles = StyleSheet.create({
   },
   ingredientList: {
     maxHeight: "30%",
-    backgroundColor: 'gray'
+    backgroundColor: "gray",
   },
   btnModal: {
-    justifyContent: 'center',
+    justifyContent: "center",
     backgroundColor: "#6BA0D2",
     padding: 15,
     borderRadius: 10,
@@ -349,7 +356,7 @@ export const styles = StyleSheet.create({
   },
   inputModal: {
     height: 60,
-    marginBottom: 10,    
+    marginBottom: 10,
     borderColor: "#ccc",
     borderWidth: 1,
     paddingLeft: 5,
@@ -362,9 +369,9 @@ export const styles = StyleSheet.create({
     borderTopRightRadius: 10,
   },
   emptyCart: {
-    textAlign: 'center',
+    textAlign: "center",
     fontSize: 25,
-    color: 'gray',
-    padding: 20
-  }
+    color: "gray",
+    padding: 20,
+  },
 });

@@ -23,8 +23,6 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { FontAwesome } from "@expo/vector-icons";
 import { Animated } from "react-native";
 
-
-
 const itemRef = collection(db, "Recipes");
 
 export default function RecipesList() {
@@ -35,7 +33,6 @@ export default function RecipesList() {
   const [dialogVisible, setDialogVisible] = useState(false);
   const [icon, setIcon] = useState("arrow-down");
   const heightAnim = useRef(new Animated.Value(0)).current;
-
 
   const handleItemPress = () => {
     Animated.timing(heightAnim, {
@@ -103,12 +100,14 @@ export default function RecipesList() {
   const renderItem = ({ item }) => (
     <View>
       <SafeAreaView>
-      <List.Item
+        <List.Item
           title={item.nameRecipe}
+          style={{ alignSelf: "stretch" }}
           data={recipes}
           onPress={() => console.log("Pressionado")}
           right={() => (
-            <View style={{ flexDirection: "row", ...styles.icons }}>
+            // <View style={{ flexDirection: "row", ...styles.icons }}>
+            <View style={{ alignSelf: "stretch", flexDirection: "row" }}>
               <TouchableOpacity
                 style={{ paddingLeft: 10 }}
                 onPress={() => console.log("Apertado")}
@@ -130,9 +129,9 @@ export default function RecipesList() {
   );
 
   return (
-    <View style={styles.recipeContainer}>
-      <SafeAreaView>
-        <ScrollView horizontal={false}>
+    <View style={{ alignSelf: "stretch", justifyContent: "center" }}>
+      <SafeAreaView style={{ alignSelf: "stretch", maxWidth: 768 }}>
+        <ScrollView>
           {loading || recipeEmpty ? (
             <Text style={styles.emptyCart}>
               Ops! Parece que você não adicionou nenhum item na lista de

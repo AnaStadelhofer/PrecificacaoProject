@@ -177,7 +177,7 @@ export default function RegisterUserScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <SafeAreaView>
+      <SafeAreaView style={styles.RegisterCamps}>
         <TextInput
           placeholder="Nome"
           secureTextEntry={false}

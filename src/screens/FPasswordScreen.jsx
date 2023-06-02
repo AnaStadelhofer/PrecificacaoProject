@@ -27,7 +27,7 @@ export default function FPasswordScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Logo />
-      <SafeAreaView>
+      <SafeAreaView style={styles.RegisterCamps}>
         <View>
           <TextInput
             placeholder="Senha"

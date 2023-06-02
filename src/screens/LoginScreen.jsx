@@ -74,7 +74,7 @@ export default function LoginScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Logo />
-      <SafeAreaView>
+      <SafeAreaView style={styles.RegisterCamps}>
         <View>
           {errorMessage && (
             <Text style={styles.errorMessage}>{errorMessage}</Text>

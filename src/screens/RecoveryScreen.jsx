@@ -81,7 +81,7 @@ export default function RecoveryScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Logo />
-      <SafeAreaView>
+      <SafeAreaView style={styles.RegisterCamps}>
         <View>
           {errorMessage !== "" && (
             <Text style={styles.errorMessage}>{errorMessage}</Text>
