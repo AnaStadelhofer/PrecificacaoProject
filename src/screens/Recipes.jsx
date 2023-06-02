@@ -1,6 +1,6 @@
 import { View, TouchableOpacity } from "react-native";
 import React, { useRef, useState } from "react";
-import { TextInput, Text } from "react-native-paper";
+import { TextInput, Text, Dialog} from "react-native-paper";
 import { collection, addDoc } from "firebase/firestore";
 // import { Animated } from "react-native";
 import { styles } from "../utils/styles";
@@ -21,6 +21,7 @@ export default function Recipes({ navigation }) {
   const [nameRecipe, setNameRecipe] = useState("");
 
   const [isModalVisible, setModalVisible] = useState(false);
+  const [isDialogVisible, setDialogVisible] = useState(false);
 
   if (auth.currentUser == null) {
     navigation.navigate("LoginScreen");
@@ -38,6 +39,10 @@ export default function Recipes({ navigation }) {
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
+  };
+
+  const toggleDialog = () => {
+    setMessageVisible(!isDialogVisible);
   };
 
   const saveItemRecipe = (recipe) => {
@@ -61,6 +66,10 @@ export default function Recipes({ navigation }) {
   };
 
   function handleAddRecipe() {
+    if (nameRecipe.trim() === "") {
+      toggleDialog();
+      return;
+    }
     try {
       const idDoUsuario = auth.currentUser.uid;
 
