@@ -60,7 +60,7 @@ export default function Recipes({ navigation }) {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={styles.recipeContainer}>
  
       <RecipesList />
 

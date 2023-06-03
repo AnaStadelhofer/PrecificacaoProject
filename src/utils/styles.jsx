@@ -37,7 +37,7 @@ export const styles = StyleSheet.create({
   recipeContainer: {
     flex: 1,
     maxWidth: "100%",
-    backgroundColor: 'gray',
+    backgroundColor: "gray",
   },
   error: {
     color: "red",
@@ -455,11 +455,11 @@ export const styles = StyleSheet.create({
     marginTop: 15,
     marginBottom: 15,
     backgroundColor: "#FEFEFE",
+    justifyContent: "center", 
     shadowColor: "black",
     shadowOffset: { width: 10, height: 10 },
     shadowOpacity: 0.8,
     shadowRadius: 4,
     elevation: 10,
-    
-  }
+  },
 });

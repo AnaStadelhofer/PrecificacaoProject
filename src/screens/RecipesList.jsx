@@ -104,7 +104,7 @@ export default function RecipesList() {
     <View style={[styles.cardRecipe]}>
       <SafeAreaView>
         <List.Item
-          
+
           title={item.nameRecipe}
           data={recipes}
           onPress={() => console.log("Pressionado")}
@@ -119,7 +119,7 @@ export default function RecipesList() {
 
               <TouchableOpacity
                 style={{ paddingLeft: 10 }}
-                onPress={() => console.log("batata")}
+                onPress={() => handleDeleteAlert(item.id)}
               >
                 <List.Icon icon="delete" size={28} />
               </TouchableOpacity>
@@ -150,7 +150,7 @@ export default function RecipesList() {
   );
 
   return (
-    <View style={styles.recipeContainer}>
+    <View>
       <SafeAreaView>
         {loading || recipeEmpty ? (
           <Text style={styles.emptyCart}>
