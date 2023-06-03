@@ -10,7 +10,6 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    // alignItems: "center",
     backgroundColor: "#fff",
     maxWidth: "100%",
   },
@@ -21,7 +20,7 @@ export const styles = StyleSheet.create({
     backgroundColor: "#fff",
     maxWidth: "100%",
   },
-  containerCard: {
+  containerCart: {
     flex: 1,
     justifyContent: "center",
     backgroundColor: "#fff",
@@ -36,12 +35,9 @@ export const styles = StyleSheet.create({
     maxWidth: "100%",
   },
   recipeContainer: {
-    display: "flex",
-    flexDirection: "column",
-    // justifyContent: "center",
-    marginTop: 40,
-    alignItems: "center",
-    height: "100vh",
+    flex: 1,
+    maxWidth: "100%",
+    backgroundColor: "gray",
   },
   error: {
     textAlign: "left",
@@ -220,12 +216,12 @@ export const styles = StyleSheet.create({
     borderTopRightRadius: 10,
   },
   textInputContainer: {
-    width: widthPercentageToDP('96%'), 
-    height: heightPercentageToDP('7%'),
+    width: widthPercentageToDP("96%"),
+    height: heightPercentageToDP("7%"),
     maxWidth: "100%",
-    flexDirection: 'column',
+    flexDirection: "column",
     justifyContent: "center",
-    alignItems: 'center',
+    alignItems: "center",
     minWidth: "100%",
     marginBottom: 5,
     marginTop: 15,
@@ -261,7 +257,6 @@ export const styles = StyleSheet.create({
     flexDirection: "column",
     maxWidth: "100%",
     justifyContent: "center",
-
     shadowColor: "black",
     shadowOffset: { width: 10, height: 10 },
     shadowOpacity: 0.8,
@@ -280,7 +275,6 @@ export const styles = StyleSheet.create({
     backgroundColor: "gray",
     flexDirection: "column",
     maxWidth: "100%",
-
     shadowColor: "black",
     shadowOffset: { width: 10, height: 10 },
     shadowOpacity: 0.8,
@@ -472,5 +466,22 @@ export const styles = StyleSheet.create({
   },
   textLeft: {
     textAlign: "left",
+  },
+  // RECIPE
+  cardRecipe: {
+    maxWidth: widthPercentageToDP("95%"),
+    height: heightPercentageToDP("10%"),
+    borderRadius: 10,
+    marginHorizontal: 20,
+    boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.25)",
+    marginTop: 15,
+    marginBottom: 15,
+    backgroundColor: "#FEFEFE",
+    justifyContent: "center", 
+    shadowColor: "black",
+    shadowOffset: { width: 10, height: 10 },
+    shadowOpacity: 0.8,
+    shadowRadius: 4,
+    elevation: 10,
   },
 });
