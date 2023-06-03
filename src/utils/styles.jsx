@@ -40,6 +40,7 @@ export const styles = StyleSheet.create({
     backgroundColor: "gray",
   },
   error: {
+    textAlign: "left",
     color: "red",
   },
   // Texts
@@ -351,6 +352,7 @@ export const styles = StyleSheet.create({
   },
   btnModal: {
     justifyContent: "center",
+    alignItems: "center",
     backgroundColor: "#6BA0D2",
     padding: 15,
     borderRadius: 10,
@@ -370,10 +372,30 @@ export const styles = StyleSheet.create({
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
   },
+  modalError: {
+    minWidth: elementWidth,
+    height: 60,
+    borderColor: "red",
+    borderWidth: 1,
+    paddingLeft: 5,
+    backgroundColor: "white",
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+  },
+  modalErrorText: {
+  textAlign: "left",
+  color: "red",
+  alignSelf: "flex-start",
+  paddingLeft: 25,
+  paddingBottom: 20,
+  },
   modalBack: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    padding: 20,
     backgroundColor: "white",
     maxHeight: "25%",
     minHeight: 200,

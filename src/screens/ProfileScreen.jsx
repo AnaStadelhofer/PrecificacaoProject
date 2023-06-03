@@ -2,8 +2,28 @@ import { Text, TextInput } from "react-native-paper";
 import { View } from "react-native";
 import { styles } from "../utils/styles";
 import { TouchableOpacity } from "react-native";
+import { auth } from "../config/firebase";
+import { useState } from "react";
 
-export default function ProfileScreen() {
+export default function ProfileScreen({navigation}) {
+  
+  const [isLoggedOut, setIsLoggedOut] = useState(false);
+  const handleSignOut = () => {
+    auth.signOut()
+      .then(() => {
+        console.log('Sign-out successful');
+        setIsLoggedOut(true);
+        console.log(auth.currentUser)
+      })
+      .catch((error) => {
+        console.log('Sign-out error:', error);
+      });
+  };
+
+  if (isLoggedOut) {
+    navigation.navigate('LoginScreen');
+  }
+
   return (
     <View style={styles.container}>
       <View style={[styles.centerInfo, {justifyContent: 'flex-start'}]}>
@@ -48,7 +68,7 @@ export default function ProfileScreen() {
 
         <TouchableOpacity
           style={styles.button}
-          // onPress={() => login(mailUser, password)}
+          onPress={handleSignOut}
         >
           <Text style={styles.buttonText}>Deslogar</Text>
         </TouchableOpacity>
