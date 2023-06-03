@@ -1,6 +1,6 @@
 import { View, TouchableOpacity } from "react-native";
 import React, { useRef, useState } from "react";
-import { TextInput, Text, Dialog} from "react-native-paper";
+import { TextInput, Text, Dialog, Button} from "react-native-paper";
 import { collection, addDoc } from "firebase/firestore";
 // import { Animated } from "react-native";
 import { styles } from "../utils/styles";
@@ -21,7 +21,8 @@ export default function Recipes({ navigation }) {
   const [nameRecipe, setNameRecipe] = useState("");
 
   const [isModalVisible, setModalVisible] = useState(false);
-  const [isDialogVisible, setDialogVisible] = useState(false);
+  const [recipeEmpty, setRecipeEmpty] = useState("");
+  //const [dialogVisible, setDialogVisible] = useState(false);
 
   if (auth.currentUser == null) {
     navigation.navigate("LoginScreen");
@@ -39,10 +40,6 @@ export default function Recipes({ navigation }) {
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
-  };
-
-  const toggleDialog = () => {
-    setMessageVisible(!isDialogVisible);
   };
 
   const saveItemRecipe = (recipe) => {
@@ -67,7 +64,7 @@ export default function Recipes({ navigation }) {
 
   function handleAddRecipe() {
     if (nameRecipe.trim() === "") {
-      toggleDialog();
+      setRecipeEmpty("Campo obrigatorío.");
       return;
     }
     try {
@@ -117,14 +114,16 @@ export default function Recipes({ navigation }) {
           <Text style={{ fontSize: 20, textAlign: "left" }}>Criar receita</Text>
           <TextInput
             placeholder="Nome da Receita"
-            style={styles.inputModal}
+            style={recipeEmpty ? styles.modalError : styles.inputModal}
             textContentType="text"
             editable={true}
             onChangeText={setNameRecipe}
           />
+          {recipeEmpty && <Text style={styles.modalErrorText}>{recipeEmpty}</Text> }
           <View
             style={{
               flexDirection: "row",
+              justifyContent: "center"
             }}
           >
             <TouchableOpacity style={styles.btnModal} onPress={toggleModal}>
@@ -136,6 +135,15 @@ export default function Recipes({ navigation }) {
           </View>
         </View>
       </Modal>
+      {/* <Dialog visible={dialogVisible} onDismiss={() => setDialogVisible(false)}>
+        <Dialog.Title>Atenção</Dialog.Title>
+        <Dialog.Content>
+          <Text>Por favor, preencha o nome da receita</Text>
+        </Dialog.Content>
+        <Dialog.Actions>
+            <Button onPress={() => setDialogVisible(false)}>Ok</Button>
+        </Dialog.Actions>
+      </Dialog> */}
     </View>
   );
 }
