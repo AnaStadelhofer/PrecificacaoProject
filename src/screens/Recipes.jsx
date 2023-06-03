@@ -116,7 +116,7 @@ export default function Recipes({ navigation }) {
             placeholder="Nome da Receita"
             style={recipeEmpty ? styles.modalError : styles.inputModal}
             textContentType="text"
-            editable={true}
+            value={nameRecipe}
             onChangeText={setNameRecipe}
           />
           {recipeEmpty && <Text style={styles.modalErrorText}>{recipeEmpty}</Text> }
