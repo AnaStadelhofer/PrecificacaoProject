@@ -62,6 +62,11 @@ export default function Recipes({ navigation }) {
     }
   };
 
+  const clearRecipeName = () => {
+    setNameRecipe("");
+  };
+  
+
   function handleAddRecipe() {
     if (nameRecipe.trim() === "") {
       setRecipeEmpty("Campo obrigatorío.");
@@ -103,7 +108,8 @@ export default function Recipes({ navigation }) {
       </View> */}
       {/* <RecipesList /> */}
 
-      <TouchableOpacity style={styles.recipebutton} onPress={toggleModal}>
+      <TouchableOpacity style={styles.recipebutton} onPress={() => {toggleModal(); setNameRecipe('');}}>
+
         <Icon name="plus" size={24} color="black" />
       </TouchableOpacity>
 
