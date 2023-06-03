@@ -5,7 +5,7 @@ import { TouchableOpacity } from "react-native";
 import { auth } from "../config/firebase";
 import { useState } from "react";
 
-export default function ProfileScreen() {
+export default function ProfileScreen({navigation}) {
   
   const [isLoggedOut, setIsLoggedOut] = useState(false);
   const handleSignOut = () => {
