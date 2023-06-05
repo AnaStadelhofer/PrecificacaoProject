@@ -2,9 +2,14 @@ import { Text, TextInput } from "react-native-paper";
 import { View } from "react-native";
 import { styles } from "../utils/styles";
 import { TouchableOpacity } from "react-native";
+import { auth } from "../config/firebase";
+import { useState } from "react";
+import { useEffect } from "react";
 import { getUserData } from "../utils/user";
 
 export default function ProfileScreen() {
+  const [isLoggedOut, setIsLoggedOut] = useState(false);
+  const [user, setUser] = useState(null);
   useEffect(() => {
     const currentUser = auth.currentUser;
     console.log(currentUser.email);
