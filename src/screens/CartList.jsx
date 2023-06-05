@@ -156,7 +156,6 @@ export default function CartList() {
       
       <ScrollView horizontal={false}>
         {loading || cartEmpty ? (
-          // <ActivityIndicator size="large" />
           <Text style={styles.emptyCart}>Ops! Parece que você não adicionou nenhum item na lista de compras!</Text>
         ) : (
           <FlatList
