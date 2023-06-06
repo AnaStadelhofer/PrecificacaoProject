@@ -56,6 +56,7 @@ export default function RecipesList() {
           id: doc.id,
           ...doc.data(),
         }));
+        console.log(auth.currentUser);
         setLoading(false);
         if (listRecipe.length === 0) {
           setRecipeEmpty(true);
@@ -98,7 +99,9 @@ export default function RecipesList() {
   }
 
   const renderItem = ({ item }) => (
-    <View>
+    console.log(item),
+
+    <View style={[styles.cardRecipe]}>
       <SafeAreaView>
         <List.Item
           title={item.nameRecipe}
@@ -117,35 +120,54 @@ export default function RecipesList() {
 
               <TouchableOpacity
                 style={{ paddingLeft: 10 }}
-                onPress={() => console.log("batata")}
+                onPress={() => handleDeleteAlert(item.id)}
               >
                 <List.Icon icon="delete" size={28} />
               </TouchableOpacity>
             </View>
           )}
         />
+
+        {/* <View style={styles.recipeContainer}>
+        <TouchableOpacity style={styles.item} onPress={handleItemPress}>
+          <Text style={styles.itemTextTitle}>
+            <FontAwesome name={icon} style={styles.arrowicon} />
+            Bolo de Pote
+            <TouchableOpacity style={styles.iconsContainer} onPress={null}>
+              <FontAwesome name="pencil" style={styles.icon} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.iconsContainer} onPress={null}>
+              <FontAwesome name="trash" style={[styles.icon, { flex: 1 }]} />
+            </TouchableOpacity>
+          </Text>
+        </TouchableOpacity>
+        <Animated.View style={[styles.expandedItem, { height: heightAnim }]}>
+          <Text style={styles.itemText}>Custo total: R$ 20,00</Text>
+          <Text style={styles.itemText}>Preço final: R$ 25,00</Text>
+        </Animated.View>
+      </View> */}
       </SafeAreaView>
     </View>
   );
 
   return (
-    <View style={{ alignSelf: "stretch", justifyContent: "center" }}>
-      <SafeAreaView style={{ alignSelf: "stretch", maxWidth: 768 }}>
-        <ScrollView>
-          {loading || recipeEmpty ? (
-            <Text style={styles.emptyCart}>
-              Ops! Parece que você não adicionou nenhum item na lista de
-              compras!
-            </Text>
-          ) : (
+
+    <View>
+      <SafeAreaView>
+        {loading || recipeEmpty ? (
+          <Text style={styles.emptyCart}>
+            Ops! Parece que você não adicionou nenhum item na lista de compras!
+          </Text>
+        ) : (
+          <ScrollView horizontal={false}>
             <FlatList
               data={recipes}
               renderItem={renderItem}
               keyExtractor={(item) => item.id}
               contentContainerStyle={{ flexGrow: 1 }}
             />
-          )}
-        </ScrollView>
+          </ScrollView>
+        )}
       </SafeAreaView>
     </View>
   );

@@ -14,6 +14,8 @@ import FPasswordScreen from './FPasswordScreen';
 import Recipes from './Recipes';
 import RecipeAdd from './RecipeAdd';
 import IngredientAdd from './IngredientAdd';
+import CartAdd from './CartAdd';
+import IngredientList from './IngredientList';
 
 // IMPORT COMPONENTS
 import Logo from '../components/Logo';
@@ -23,7 +25,7 @@ const Stack = createNativeStackNavigator();
 function OptionsMenu({ navigation }) {
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, {alignItems: 'center'}]}>
             <Logo/>
             <SafeAreaView>
                 <Text style={styles.textInittial}> Seja bem-vindo ao nosso aplicativo! </Text>
@@ -64,6 +66,9 @@ export default function MenuScreen() {
                 <Stack.Screen name="Recipes" component={Recipes} options={{ title: 'Receitas'}} />
                 <Stack.Screen name="RecoveryScreen" component={RecoveryScreen} options={{ title: 'RecoveryScreen'}} />
                 <Stack.Screen name="IngredientAdd" component={IngredientAdd} options={{ title: 'IngredientAdd'}} />
+                <Stack.Screen name="CartAdd" component={CartAdd} options={{ title: 'CartAdd'}} />
+                <Stack.Screen name="IngredientList" component={IngredientList} options={{ title: 'IngredientList'}} />
+
             </Stack.Navigator>
         </NavigationContainer>
     )

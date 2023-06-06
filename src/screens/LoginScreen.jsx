@@ -26,7 +26,7 @@ export default function LoginScreen({ navigation }) {
       );
       const user = userCredential.user;
       console.log("User logged in: ", user);
-      navigation.navigate("CartScreen");
+      navigation.navigate("MenuScreen")
     } catch (error) {
       if (error.code === "auth/user-not-found") {
         // setErrorMessage("Este usuário não existe. Por favor, verifique o e-mail.");
@@ -71,7 +71,7 @@ export default function LoginScreen({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {alignItems: 'center'}]}>
       <Logo />
       <SafeAreaView style={styles.RegisterCamps}>
         <View>

@@ -149,14 +149,12 @@ export default function RegisterUserScreen({ navigation }) {
       setPasswordError("");
     } else if (password.length < 6) {
       setPasswordError("A senha deve ter pelo menos 6 caracteres.");
-      validatePasswordEqual();
     } else if (!isStrongPassword(password)) {
       setPasswordError("A senha está fraca.");
-      validatePasswordEqual();
     } else {
       setPasswordError("");
-      validatePasswordEqual();
     }
+    validatePasswordEqual(confirmPassword);
   };
 
   const validatePasswordEqual = (confirmPassword) => {
@@ -177,8 +175,10 @@ export default function RegisterUserScreen({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
-      <SafeAreaView style={styles.RegisterCamps}>
+
+    <View style={[styles.container, {alignItems: 'center'}]}>
+      <SafeAreaView>
+
         <TextInput
           placeholder="Nome"
           secureTextEntry={false}
@@ -248,7 +248,7 @@ export default function RegisterUserScreen({ navigation }) {
           <Text style={styles.error}>{confirmPasswordError}</Text>
         )}
 
-        <View style={styles.checkboxContainer}>
+        <View style={[styles.checkboxContainer, , {marginTop: 20}]}>
           <TouchableOpacity
             onPress={toggleCheckbox}
           >
@@ -257,7 +257,7 @@ export default function RegisterUserScreen({ navigation }) {
             ></View>
             
           </TouchableOpacity>
-          <Text style={styles.textTerms}>Concordo com os termos de privacidade</Text>
+          <Text style={[styles.textTerms]}>Concordo com os termos de privacidade</Text>
         </View>
 
         <ButtonCentralized text='Confirmar' handle={handleRegister} disable={isButtonEnabled} />

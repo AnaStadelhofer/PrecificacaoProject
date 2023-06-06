@@ -17,12 +17,15 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from "../utils/styles";
 import { TouchableOpacity } from "react-native";
 import { Alert } from "react-native";
+import { Text } from "react-native-paper";
 
 const itemRef = collection(db, "Ingredient");
 
-export default function IngredientList({ recipeId }) {
+export default function IngredientList({ navigation, recipeId }) {
   const [ingredient, setIngredient] = useState([]);
+  const [listEmpty, setListEmpty] = useState(false);
   console.log(recipeId);
+  console.log();
 
   function handleDeleteIngredient(id) {
     try {
@@ -52,48 +55,80 @@ export default function IngredientList({ recipeId }) {
     ]);
   }
 
-
   const renderItem = ({ item }) => (
-    <View>
-      <SafeAreaView>
-        <List.Item
-          title={item.ingredient}
-          data={ingredient}
-          onPress={() => console.log("Pressionado")}
-          right={() => (
-            <View style={{ flexDirection: "row", ...styles.icons }}>
-              <TouchableOpacity
-                style={{ paddingLeft: 10 }}
-                onPress={() => console.log("Apertado o edit")}
-              >
-                <List.Icon icon="pencil" size={28} />
-              </TouchableOpacity>
+    <View style={styles.ingredientRegisters}>
+      <List.Item
+        title={item.ingredient + " - R$ " + item.totalPrice}
+        data={ingredient}
+        right={() => (
+          <View style={{ flexDirection: "row" }}>
+            <TouchableOpacity
+              style={{ paddingLeft: 10 }}
+              onPress={() =>
+                navigation.navigate("IngredientAdd", {
+                  recipeId,
+                  isEditing: true,
+                  ingredientData: item,
+                })
+              }
+            >
+              <List.Icon icon="pencil" size={28} />
+            </TouchableOpacity>
 
-              <TouchableOpacity
-                style={{ paddingLeft: 10 }}
-                onPress={() => handleDeleteAlert(item.id)}
-              >
-                <List.Icon icon="delete" size={28} />
-              </TouchableOpacity>
-            </View>
-          )}
-        />
-      </SafeAreaView>
+            <TouchableOpacity
+              style={{ paddingLeft: 10, paddingRight: 10 }}
+              onPress={() => handleDeleteAlert(item.id)}
+            >
+              <List.Icon icon="delete" size={28} />
+            </TouchableOpacity>
+          </View>
+        )}
+      />
     </View>
   );
+
+  // const renderItem = ({ item }) => (
+  //   <View style={{marginBottom: 15, backgroundColor: "#D9D9D9",  }}>
+  //     <SafeAreaView>
+  //       <List.Item
+  //         title={item.ingredient}
+  //         data={ingredient}
+  //         right={() => (
+  //           <View style={{ flexDirection: "row", ...styles.icons }}>
+  //             <TouchableOpacity
+  //               style={{ paddingLeft: 10 }}
+  //             >
+  //               <List.Icon icon="pencil" size={28} />
+  //             </TouchableOpacity>
+
+  //             <TouchableOpacity
+  //               style={{ paddingLeft: 10 }}
+  //               onPress={() => handleDeleteAlert(item.id)}
+  //             >
+  //               <List.Icon icon="delete" size={28} />
+  //             </TouchableOpacity>
+  //           </View>
+  //         )}
+  //       />
+  //     </SafeAreaView>
+  //   </View>
+  // );
 
   useEffect(() => {
     try {
       const queryInstance = query(itemRef, where("recipeId", "==", recipeId));
       const ingredientQuery = onSnapshot(queryInstance, (snapshot) => {
-        console.log(snapshot);
         const listIngredient = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
         if (listIngredient.length === 0) {
+          console.log("ID DA RECEITA: " + recipeId);
+          setListEmpty(true);
         } else {
           setIngredient(listIngredient);
+          console.log(listIngredient);
+          setListEmpty(false);
         }
       });
       return () => ingredientQuery();
@@ -103,14 +138,20 @@ export default function IngredientList({ recipeId }) {
   }, []);
 
   return (
-    <View style={styles.ingredientList}>
+    <View>
       <ScrollView horizontal={false}>
-        <FlatList
-          data={ingredient}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id}
-          contentContainerStyle={{ flexGrow: 1 }}
-        />
+        {listEmpty ? (
+          <Text style={styles.emptyCart}>
+            Ops! Parece que você não adicionou nenhum ingrediente ainda!
+          </Text>
+        ) : (
+          <FlatList
+            data={ingredient}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id}
+            contentContainerStyle={{ flexGrow: 1 }}
+          />
+        )}
       </ScrollView>
     </View>
   );
