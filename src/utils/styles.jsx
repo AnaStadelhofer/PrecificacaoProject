@@ -140,6 +140,7 @@ export const styles = StyleSheet.create({
     backgroundColor: "#6BA0D2",
     borderRadius: 10,
     marginTop: 15,
+    marginLeft:10,
   },
   recipebutton: {
     position: "absolute",
@@ -164,6 +165,7 @@ export const styles = StyleSheet.create({
     backgroundColor: "#6BA0D2",
     borderRadius: 10,
     marginTop: 15,
+    marginLeft:10,
   },
   buttonDisabled: {
     justifyContent: "center",
@@ -173,6 +175,7 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     marginTop: 15,
     backgroundColor: "gray",
+    marginLeft:10,
   },
   btnCenterBottom: {
     marginBottom: 15,
@@ -207,6 +210,10 @@ export const styles = StyleSheet.create({
     borderBottomRightRadius: 10,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
+    alignSelf: "stretch",
+    justifyContent: 'center',
+    marginLeft: 10,
+    marginRight: 10
   },
   textInputContainerIngre: {
     height: 60,
