@@ -38,6 +38,8 @@ export default function ProfileScreen({navigation}) {
           // value={password}
           // onChangeText={setPassword}
           style={styles.input}
+          underlineColor="transparent"
+          activeUnderlineColor="transparent"
           editable={false}
         />
         <TextInput
@@ -47,6 +49,8 @@ export default function ProfileScreen({navigation}) {
           // value={password}
           // onChangeText={setPassword}
           style={styles.input}
+          underlineColor="transparent"
+          activeUnderlineColor="transparent"
           editable={false}
         />
       </View>

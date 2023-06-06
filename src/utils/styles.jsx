@@ -32,7 +32,7 @@ export const styles = StyleSheet.create({
     paddingVertical: 10,
     flexDirection: "column",
     justifyContent: "center",
-    maxWidth: "100%",
+    alignSelf: "stretch",
   },
   recipeContainer: {
     flex: 1,
@@ -120,6 +120,7 @@ export const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
+    alignSelf: "stretch",
   },
   buttonProfile: {
     minWidth: "40%",
@@ -189,6 +190,10 @@ export const styles = StyleSheet.create({
     borderBottomRightRadius: 10,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
+    alignSelf: "stretch",
+    justifyContent: 'center',
+    marginLeft: 10,
+    marginRight: 10
   },
   inputError: {
     height: 60,
@@ -214,6 +219,16 @@ export const styles = StyleSheet.create({
     borderBottomRightRadius: 10,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
+    alignSelf: "stretch",
+    justifyContent: 'center',
+    marginLeft: 10,
+    marginRight: 10
+  },
+  RegisterCamps: {
+    alignSelf: "stretch",
+    justifyContent: 'center',
+    marginLeft: 10,
+    marginRight: 10
   },
   textInputContainer: {
     width: widthPercentageToDP("96%"),

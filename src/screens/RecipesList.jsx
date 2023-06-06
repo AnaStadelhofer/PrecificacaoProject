@@ -104,12 +104,13 @@ export default function RecipesList() {
     <View style={[styles.cardRecipe]}>
       <SafeAreaView>
         <List.Item
-
           title={item.nameRecipe}
+          style={{ alignSelf: "stretch" }}
           data={recipes}
           onPress={() => console.log("Pressionado")}
           right={() => (
-            <View style={{ flexDirection: "row", ...styles.icons }}>
+            // <View style={{ flexDirection: "row", ...styles.icons }}>
+            <View style={{ alignSelf: "stretch", flexDirection: "row" }}>
               <TouchableOpacity
                 style={{ paddingLeft: 10 }}
                 onPress={() => console.log("Apertado")}
@@ -150,6 +151,7 @@ export default function RecipesList() {
   );
 
   return (
+
     <View>
       <SafeAreaView>
         {loading || recipeEmpty ? (

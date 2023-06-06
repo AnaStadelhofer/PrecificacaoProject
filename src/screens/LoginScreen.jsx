@@ -17,7 +17,6 @@ export default function LoginScreen({ navigation }) {
   const [errorMessage, setErrorMessage] = useState(null);
   const [emailError, setEmailError] = useState("");
 
-
   const login = async (email, password) => {
     try {
       const userCredential = await signInWithEmailAndPassword(
@@ -74,7 +73,7 @@ export default function LoginScreen({ navigation }) {
   return (
     <View style={[styles.container, {alignItems: 'center'}]}>
       <Logo />
-      <SafeAreaView>
+      <SafeAreaView style={styles.RegisterCamps}>
         <View>
           {errorMessage && (
             <Text style={styles.errorMessage}>{errorMessage}</Text>
@@ -87,6 +86,8 @@ export default function LoginScreen({ navigation }) {
             onChangeText={validateEmail}
             keyboardType="email-address"
             style={emailError ? styles.inputError : styles.input}
+            underlineColor="transparent"
+            activeUnderlineColor="transparent"
           />
           {emailError && <Text style={styles.error}>{emailError}</Text>}
 
@@ -97,6 +98,8 @@ export default function LoginScreen({ navigation }) {
             value={password}
             onChangeText={setPassword}
             style={styles.input}
+            underlineColor="transparent"
+            activeUnderlineColor="transparent"
             keyboardType="default"
             right={
               <TextInput.Icon
