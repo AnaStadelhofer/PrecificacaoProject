@@ -116,7 +116,8 @@ export default function IngredientList({ navigation, recipeId }) {
 
   useEffect(() => {
     try {
-      const queryInstance = query(itemRef, where("recipeId", "==", recipeId));
+      //, where("recipeId", "==", recipeId)
+      const queryInstance = query(itemRef);
       const ingredientQuery = onSnapshot(queryInstance, (snapshot) => {
         const listIngredient = snapshot.docs.map((doc) => ({
           id: doc.id,
