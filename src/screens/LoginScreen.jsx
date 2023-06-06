@@ -17,7 +17,6 @@ export default function LoginScreen({ navigation }) {
   const [errorMessage, setErrorMessage] = useState(null);
   const [emailError, setEmailError] = useState("");
 
-
   const login = async (email, password) => {
     try {
       const userCredential = await signInWithEmailAndPassword(
@@ -27,7 +26,7 @@ export default function LoginScreen({ navigation }) {
       );
       const user = userCredential.user;
       console.log("User logged in: ", user);
-      navigation.navigate("CartScreen")
+      navigation.navigate("CartScreen");
     } catch (error) {
       if (error.code === "auth/user-not-found") {
         // setErrorMessage("Este usuário não existe. Por favor, verifique o e-mail.");
@@ -87,6 +86,8 @@ export default function LoginScreen({ navigation }) {
             onChangeText={validateEmail}
             keyboardType="email-address"
             style={emailError ? styles.inputError : styles.input}
+            underlineColor="transparent"
+            activeUnderlineColor="transparent"
           />
           {emailError && <Text style={styles.error}>{emailError}</Text>}
 
@@ -97,6 +98,8 @@ export default function LoginScreen({ navigation }) {
             value={password}
             onChangeText={setPassword}
             style={styles.input}
+            underlineColor="transparent"
+            activeUnderlineColor="transparent"
             keyboardType="default"
             right={
               <TextInput.Icon

@@ -17,8 +17,8 @@ export default function RecoveryScreen({ navigation }) {
 
   const handleRecovery = async (email) => {
     if (mailUser.trim() === "") {
-        setErrorMessage("Por favor, insira o e-mail.");
-        return;
+      setErrorMessage("Por favor, insira o e-mail.");
+      return;
     }
     try {
       await auth.sendPasswordResetEmail(email);
@@ -28,12 +28,14 @@ export default function RecoveryScreen({ navigation }) {
         "Um e-mail de recuperação foi enviado para o endereço informado."
       );
     } catch (error) {
-      if (error.code === "auth/user-not-found") {// Email não encontrado
+      if (error.code === "auth/user-not-found") {
+        // Email não encontrado
         Alert.alert(
           "Erro",
           "Este usuário não existe. Por favor, verifique o e-mail."
         );
-      } else if (error.code === "auth/invalid-email") { //Email Invalido
+      } else if (error.code === "auth/invalid-email") {
+        //Email Invalido
         Alert.alert(
           "Erro",
           "Endereço de e-mail inválido. Por favor, verifique e tente novamente."
@@ -59,23 +61,21 @@ export default function RecoveryScreen({ navigation }) {
   };
 
   const checkExistingEmail = async (mailUser) => {
-  try{
-    const snapshot = await 
-    Firebase.firestore()
-    .collection('users')
-    .where('email', '==', mailUser)
-    .get()
-    
-    if (!snapshot.empty) {
-      setErrorMessage("E-mail já cadastrado.", error);
-    } else {
-      setErrorMessage("");
-    }
+    try {
+      const snapshot = await Firebase.firestore()
+        .collection("users")
+        .where("email", "==", mailUser)
+        .get();
 
-  }catch{
-    console.log("Erro ao validar e-mail.")
-    return false;
-  }
+      if (!snapshot.empty) {
+        setErrorMessage("E-mail já cadastrado.", error);
+      } else {
+        setErrorMessage("");
+      }
+    } catch {
+      console.log("Erro ao validar e-mail.");
+      return false;
+    }
   };
 
   return (
@@ -89,11 +89,13 @@ export default function RecoveryScreen({ navigation }) {
           <TextInput
             borderRadius={10}
             placeholder="Email de recuperação"
-            placeholderTextColor={"#CDCDCD"}
             secureTextEntry={false}
             textContentType="emailAddress"
             value={mailUser}
             onChangeText={validateEmail}
+            style={styles.input}
+            underlineColor="transparent"
+            activeUnderlineColor="transparent"
           />
           <TouchableOpacity
             width="296px"
@@ -101,7 +103,6 @@ export default function RecoveryScreen({ navigation }) {
             borderRadius={10}
             style={styles.button}
             onPress={() => handleRecovery(mailUser)}
-
             disabled={!mailUser}
           >
             <Text style={styles.buttonText}>Recuperar Senha</Text>

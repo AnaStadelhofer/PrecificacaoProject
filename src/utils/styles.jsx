@@ -204,6 +204,10 @@ export const styles = StyleSheet.create({
     borderBottomRightRadius: 10,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
+    alignSelf: "stretch",
+    justifyContent: 'center',
+    marginLeft: 10,
+    marginRight: 10
   },
   RegisterCamps: {
     alignSelf: "stretch",
