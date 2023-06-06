@@ -231,12 +231,6 @@ export const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10
   },
-  RegisterCamps: {
-    alignSelf: "stretch",
-    justifyContent: 'center',
-    marginLeft: 10,
-    marginRight: 10
-  },
   textInputContainer: {
     width: widthPercentageToDP("96%"),
     height: heightPercentageToDP("7%"),
