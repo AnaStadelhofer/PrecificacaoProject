@@ -140,7 +140,16 @@ export const styles = StyleSheet.create({
     backgroundColor: "#6BA0D2",
     borderRadius: 10,
     marginTop: 15,
-    marginLeft:10,
+  },
+  buttonLogin:{
+    justifyContent: "center",
+    alignItems: "center",
+    width: widthPercentageToDP("90%"),
+    height: 50,
+    backgroundColor: "#6BA0D2",
+    borderRadius: 10,
+    marginTop: 15,
+    marginLeft: 10,
   },
   recipebutton: {
     position: "absolute",
