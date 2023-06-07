@@ -445,6 +445,38 @@ export const styles = StyleSheet.create({
     color: "gray",
     padding: 20,
   },
+  modalContent: {
+    backgroundColor: 'white',
+  },
+  modalTitle: {
+    justifyContent: "center",
+    textAlign: "center",
+    paddingBottom: 20,
+    fontWeight: "bold",
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    marginLeft: 10,
+    marginRight: 10,
+  },
+  modalSubText: {
+    justifyContent: "center",
+    textAlign: "center",
+    paddingBottom: 20,
+    marginLeft: 6,
+    marginRight: 6,
+  },
+  modalText: {
+    justifyContent: "center",
+    textAlign: "justify",
+    paddingBottom: 20,
+    marginLeft: 6,
+    marginRight: 6,
+  },
+  modalButtonContainer: {
+    color: '#10C9F1',
+    justifyContent: "center",
+    textAlign: "center",
+  },
   // INGREDIENTE E RECEITA
   textInputContainerIngre: {
     width: widthPercentageToDP("90%"),
