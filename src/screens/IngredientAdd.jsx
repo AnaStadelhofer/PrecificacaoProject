@@ -8,6 +8,7 @@ import { db } from "../config/firebase";
 import { addDoc } from "firebase/firestore";
 import ButtonCentralized from "../components/ButtonCentralized";
 import { TextInputMask } from "react-native-masked-text";
+import { useFocusEffect } from "@react-navigation/core";
 
 const itemRef = collection(db, "Ingredient");
 
@@ -61,22 +62,28 @@ export default function IngredientAdd({ navigation, route }) {
 
   const handleCountPrice = () => {
     const cleanedPrice = price.trim().replace(/^R\$|\s/g, "");
-
-    totalUsedConverted = totalUsed;
-    totalPurchasedConverted = totalPurchased;
-
-    finalPrice = parseFloat(cleanedPrice);
-
+  
+    const totalUsedConverted = parseInt(totalUsed.trim());
+    const totalPurchasedConverted = parseInt(totalPurchased.trim());
+  
+    let totalPrice = 0;
     if (
       !isNaN(totalPurchasedConverted) &&
       !isNaN(finalPrice) &&
       !isNaN(totalUsedConverted)
     ) {
       totalPrice = (finalPrice / totalPurchasedConverted) * totalUsedConverted;
-      console.log("Total Comprado " + totalPurchasedConverted + " Preço do produto " + finalPrice + " dividido por " + totalUsedConverted + " total Usado resultado no preço total " + totalPrice
-      );
     }
+  
+    const updatedIngredients = {
+      ...ingredients,
+      totalPrice: totalPrice.toFixed(2), // Convert to string with 2 decimal places
+    };
+  
+    saveItemIngredient(updatedIngredients);
   };
+  
+
 
   const saveItemIngredient = (ingredients) => {
     try {
@@ -98,18 +105,30 @@ export default function IngredientAdd({ navigation, route }) {
 
   function handleAddIngredients() {
     const cleanedPrice = price.trim().replace(/^R\$|\s/g, "");
-    handleCountPrice()
+    handleCountPrice();
+  
     const ingredients = {
       ingredient: ingredient.trim(),
       price: cleanedPrice,
       totalPurchased: parseInt(totalPurchased.trim()),
       totalUsed: parseInt(totalUsed.trim()),
       recipeId: recipeId.trim(),
-      totalPrice: totalPrice
+      totalPrice: 0, // Initialize with 0 for now
     };
-    console.log(ingredients);
+  
     saveItemIngredient(ingredients);
   }
+  
+
+  useFocusEffect(() => {
+    if (isEditing) {
+      setIngredient(ingredientData.ingredient);
+      setPrice(ingredientData.price);
+      setTotalPurchased(ingredientData.totalPurchased.toString());
+      setTotalUsed(ingredientData.totalUsed.toString());
+      setButtonEnabled(true);
+    }
+  }, [isEditing, ingredientData]);
 
   return (
     <View
