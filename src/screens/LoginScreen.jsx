@@ -73,7 +73,7 @@ export default function LoginScreen({ navigation }) {
   return (
     <View style={[styles.container, {alignItems: 'center'}]}>
       <Logo />
-      <SafeAreaView style={styles.RegisterCamps}>
+      <SafeAreaView>
         <View>
           {errorMessage && (
             <Text style={styles.errorMessage}>{errorMessage}</Text>
@@ -113,7 +113,7 @@ export default function LoginScreen({ navigation }) {
         </View>
 
         <TouchableOpacity
-          style={styles.button}
+          style={styles.buttonLogin}
           onPress={() => login(mailUser, password)}
         >
           <Text style={styles.buttonText}>Confirmar</Text>
