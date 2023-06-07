@@ -110,7 +110,7 @@ export const styles = StyleSheet.create({
   // Buttons
   buttonProfileDiv: {
     flex: 1,
-    marginHorizontal: 10,
+    marginHorizontal: 3,
     minWidth: "40%",
     backgroundColor: "#6BA0D2",
     borderRadius: 10,
@@ -120,7 +120,6 @@ export const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignSelf: "stretch",
   },
   buttonProfile: {
     minWidth: "40%",
@@ -129,7 +128,7 @@ export const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 15,
     color: "#fff",
-    fontSize: 18,
+    fontSize: 15,
     textAlign: "center",
   },
   button: {
@@ -140,8 +139,18 @@ export const styles = StyleSheet.create({
     backgroundColor: "#6BA0D2",
     borderRadius: 10,
     marginTop: 15,
-    marginLeft:10,
   },
+  buttonDeslog: {
+    justifyContent: "center",
+    alignItems: "center",
+    width: widthPercentageToDP("90%"),
+    height: 50,
+    backgroundColor: "#6BA0D2",
+    borderRadius: 10,
+    marginTop: 5,
+    marginBottom: 25
+  },
+
   recipebutton: {
     position: "absolute",
     bottom: 20,
