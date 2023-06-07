@@ -140,6 +140,16 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     marginTop: 15,
   },
+  buttonLogin:{
+    justifyContent: "center",
+    alignItems: "center",
+    width: widthPercentageToDP("90%"),
+    height: 50,
+    backgroundColor: "#6BA0D2",
+    borderRadius: 10,
+    marginTop: 15,
+    marginLeft: 10,
+  },
   buttonDeslog: {
     justifyContent: "center",
     alignItems: "center",

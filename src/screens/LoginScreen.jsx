@@ -113,7 +113,7 @@ export default function LoginScreen({ navigation }) {
         </View>
 
         <TouchableOpacity
-          style={styles.button}
+          style={styles.buttonLogin}
           onPress={() => login(mailUser, password)}
         >
           <Text style={styles.buttonText}>Confirmar</Text>
