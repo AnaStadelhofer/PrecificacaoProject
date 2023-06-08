@@ -27,7 +27,7 @@ export default function FPasswordScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Logo />
-      <SafeAreaView>
+      <SafeAreaView style={styles.RegisterCamps}>
         <View>
           <TextInput
             placeholder="Senha"
@@ -36,6 +36,8 @@ export default function FPasswordScreen({ navigation }) {
             value={newpassword}
             onChangeText={setNewPassword}
             style={styles.input}
+            underlineColor="transparent"
+            activeUnderlineColor="transparent"
             right={
               <TextInput.Icon
                 icon={showNewPassword ? "eye" : "eye-off"}
@@ -53,6 +55,8 @@ export default function FPasswordScreen({ navigation }) {
             value={newconfirmpassword}
             onChangeText={validatePasswordEqual}
             style={styles.input}
+            underlineColor="transparent"
+            activeUnderlineColor="transparent"
             right={
               <TextInput.Icon
                 icon={showConfirmNewPassword ? "eye" : "eye-off"}
@@ -77,7 +81,6 @@ export default function FPasswordScreen({ navigation }) {
             <Text style={styles.link}>Voltar para o login?</Text>
           </TouchableOpacity>
         </View>
-        
       </SafeAreaView>
     </View>
   );

@@ -37,6 +37,8 @@ export default function ProfileScreen() {
           // value={password}
           // onChangeText={setPassword}
           style={styles.input}
+          underlineColor="transparent"
+          activeUnderlineColor="transparent"
           editable={false}
         />
         <TextInput
@@ -46,6 +48,8 @@ export default function ProfileScreen() {
           // value={password}
           // onChangeText={setPassword}
           style={styles.input}
+          underlineColor="transparent"
+          activeUnderlineColor="transparent"
           editable={false}
         />
       </View>
@@ -66,8 +70,8 @@ export default function ProfileScreen() {
         </View>
 
         <TouchableOpacity
-          style={styles.button}
-          // onPress={() => login(mailUser, password)}
+          style={styles.buttonDeslog}
+          onPress={handleSignOut}
         >
           <Text style={styles.buttonText}>Deslogar</Text>
         </TouchableOpacity>

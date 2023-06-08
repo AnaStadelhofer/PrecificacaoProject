@@ -19,33 +19,30 @@ import {
 import { db, auth } from "../config/firebase";
 import { styles } from "../utils/styles";
 import { SafeAreaView } from "react-native-safe-area-context";
-// import Icon from "react-native-vector-icons/FontAwesome";
-// import { FontAwesome } from "@expo/vector-icons";
-// import { Animated } from "react-native";
-
-
+import Icon from "react-native-vector-icons/FontAwesome";
+import { FontAwesome } from "@expo/vector-icons";
+import { Animated } from "react-native";
 
 const itemRef = collection(db, "Recipes");
 
 export default function RecipesList() {
   const [recipes, setRecipe] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [recipeEmpty, setRecipeEmpty] = useState(true);
+  const [recipeEmpty, setRecipeEmpty] = useState(false);
   const [isSelected, setIsSelected] = useState(false);
   const [dialogVisible, setDialogVisible] = useState(false);
-  // const [icon, setIcon] = useState("arrow-down");
-  // const heightAnim = useRef(new Animated.Value(0)).current;
+  const [icon, setIcon] = useState("arrow-down");
+  const heightAnim = useRef(new Animated.Value(0)).current;
 
-
-  // const handleItemPress = () => {
-  //   Animated.timing(heightAnim, {
-  //     toValue: expanded ? 0 : 100,
-  //     duration: 300,
-  //     useNativeDriver: false,
-  //   }).start();
-  //   setExpanded(!expanded);
-  //   setIcon("arrow-up");
-  // };
+  const handleItemPress = () => {
+    Animated.timing(heightAnim, {
+      toValue: expanded ? 0 : 100,
+      duration: 300,
+      useNativeDriver: false,
+    }).start();
+    setExpanded(!expanded);
+    setIcon("arrow-up");
+  };
 
   useEffect(() => {
     try {
@@ -59,9 +56,10 @@ export default function RecipesList() {
           id: doc.id,
           ...doc.data(),
         }));
+        console.log(auth.currentUser);
         setLoading(false);
         if (listRecipe.length === 0) {
-          // setRecipeEmpty(true);
+          setRecipeEmpty(true);
         } else {
           setRecipe(listRecipe);
         }
@@ -101,14 +99,18 @@ export default function RecipesList() {
   }
 
   const renderItem = ({ item }) => (
-    <View>
+    console.log(item),
+
+    <View style={[styles.cardRecipe]}>
       <SafeAreaView>
-      <List.Item
+        <List.Item
           title={item.nameRecipe}
+          style={{ alignSelf: "stretch" }}
           data={recipes}
           onPress={() => console.log("Pressionado")}
           right={() => (
-            <View style={{ flexDirection: "row", ...styles.icons }}>
+            // <View style={{ flexDirection: "row", ...styles.icons }}>
+            <View style={{ alignSelf: "stretch", flexDirection: "row" }}>
               <TouchableOpacity
                 style={{ paddingLeft: 10 }}
                 onPress={() => console.log("Apertado")}
@@ -118,35 +120,54 @@ export default function RecipesList() {
 
               <TouchableOpacity
                 style={{ paddingLeft: 10 }}
-                onPress={() => console.log("batata")}
+                onPress={() => handleDeleteAlert(item.id)}
               >
                 <List.Icon icon="delete" size={28} />
               </TouchableOpacity>
             </View>
           )}
         />
+
+        {/* <View style={styles.recipeContainer}>
+        <TouchableOpacity style={styles.item} onPress={handleItemPress}>
+          <Text style={styles.itemTextTitle}>
+            <FontAwesome name={icon} style={styles.arrowicon} />
+            Bolo de Pote
+            <TouchableOpacity style={styles.iconsContainer} onPress={null}>
+              <FontAwesome name="pencil" style={styles.icon} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.iconsContainer} onPress={null}>
+              <FontAwesome name="trash" style={[styles.icon, { flex: 1 }]} />
+            </TouchableOpacity>
+          </Text>
+        </TouchableOpacity>
+        <Animated.View style={[styles.expandedItem, { height: heightAnim }]}>
+          <Text style={styles.itemText}>Custo total: R$ 20,00</Text>
+          <Text style={styles.itemText}>Preço final: R$ 25,00</Text>
+        </Animated.View>
+      </View> */}
       </SafeAreaView>
     </View>
   );
 
   return (
-    <View style={styles.recipeContainer}>
+
+    <View>
       <SafeAreaView>
-        <ScrollView horizontal={false}>
-          {loading || recipeEmpty ? (
-            <Text style={styles.emptyCart}>
-              Ops! Parece que você não adicionou nenhum item na lista de
-              compras!
-            </Text>
-          ) : (
+        {loading || recipeEmpty ? (
+          <Text style={styles.emptyCart}>
+            Ops! Parece que você não adicionou nenhum item na lista de compras!
+          </Text>
+        ) : (
+          <ScrollView horizontal={false}>
             <FlatList
               data={recipes}
               renderItem={renderItem}
               keyExtractor={(item) => item.id}
               contentContainerStyle={{ flexGrow: 1 }}
             />
-          )}
-        </ScrollView>
+          </ScrollView>
+        )}
       </SafeAreaView>
     </View>
   );
