@@ -15,7 +15,7 @@ export default function Recipes({ navigation }) {
   const [nameRecipe, setNameRecipe] = useState("");
 
   const [isModalVisible, setModalVisible] = useState(false);
-  const [recipeEmpty, setRecipeEmpty] = useState("");
+  const [recipeEmpty, setRecipeEmpty] = useState(" ");
   //const [dialogVisible, setDialogVisible] = useState(false);
 
   if (auth.currentUser == null) {
@@ -24,6 +24,8 @@ export default function Recipes({ navigation }) {
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
+    setRecipeEmpty(" ")
+
   };
 
   const saveItemRecipe = (recipe) => {
@@ -64,6 +66,7 @@ export default function Recipes({ navigation }) {
       };
       console.log(recipe);
       saveItemRecipe(recipe);
+      setRecipeEmpty(" ")
     } catch (error) {
       console.log(error);
     }
@@ -90,7 +93,7 @@ export default function Recipes({ navigation }) {
             <TextInput
               placeholder="Nome da Receita"
               label="Nome da Receita"
-              style={recipeEmpty ? styles.inputModalError : styles.inputModal}
+              style={recipeEmpty != " " ? styles.inputModalError : styles.inputModal}
               textContentType="text"
               value={nameRecipe}
               onChangeText={setNameRecipe}
@@ -102,8 +105,8 @@ export default function Recipes({ navigation }) {
           <View
             style={{
               flexDirection: "row",
-              justifyContent: "end",
-              alignItems: "flex-end",
+              justifyContent: "flex-end",
+              alignItems: "flex-end"
             }}
           >
             <TouchableOpacity style={styles.btnModal} onPress={toggleModal}>

@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "PrecificacaoProject",
+    "name": "Priset",
     "slug": "PrecificacaoProject",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -21,10 +21,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.anastadelhofer.PrecificacaoProject"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "4fb8c41d-00e4-44ed-8b7a-84fd392e53e0"
+      }
     }
   }
 }

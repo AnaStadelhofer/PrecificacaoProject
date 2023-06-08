@@ -132,9 +132,13 @@ export default function RecipeAdd({ navigation, route }) {
 
       const updatedRecipe = {
         nameRecipe: nameRecipe.trim(),
-        revenue: revenue.trim(),
+        revenue: revenue,
         typeProfit: typeProfit.trim(),
-        profitValue: profitValue.trim(),
+        profitValue: profitValue,
+        unitCost: profitValue,
+        salePrice: salePrice,
+        totalPrice: totalPrice,
+        additional: additional,
         userID: idDoUsuario,
       };
 
