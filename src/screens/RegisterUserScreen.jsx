@@ -14,6 +14,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { styles } from "../utils/styles";
 import ButtonCentralized from "../components/ButtonCentralized";
 import Divider from "../components/Divider";
+import { ScrollView } from "react-native-web";
 
 export default function RegisterUserScreen({ navigation }) {
   const [password, setPassword] = useState("");
@@ -303,47 +304,50 @@ export default function RegisterUserScreen({ navigation }) {
               Ao utilizar nosso aplicativo, você concorda com os seguintes
               termos de serviço:
             </Text>
-            <Text style={styles.modalText}>
-              Uso do Aplicativo O aplicativo PRISET permite aos usuários
-              realizar precificação de produtos por meio do registro de
-              informações de e-mail, senha e nome. Os dados fornecidos serão
-              armazenados em nosso banco de dados para fins de autenticação e
-              identificação do usuário. Responsabilidade do Usuário Ao utilizar
-              o aplicativo PRISET, você é responsável por fornecer informações
-              de e-mail e senha corretas e mantê-las atualizadas. Você concorda
-              em manter suas credenciais de login em sigilo e não
-              compartilhá-las com terceiros. Qualquer atividade realizada em sua
-              conta é de sua responsabilidade. Privacidade Levamos a privacidade
-              dos usuários a sério. O aplicativo PRISET coleta e armazena apenas
-              as informações de e-mail, senha e nome fornecidas pelo usuário.
-              Nenhum dado pessoal adicional é coletado sem o seu consentimento.
-              Tomamos medidas adequadas para proteger suas informações, seguindo
-              as práticas recomendadas de segurança de dados. Uso das
-              Informações As informações fornecidas pelo usuário serão
-              utilizadas exclusivamente para fins de autenticação, identificação
-              e funcionamento adequado do aplicativo PRISET. Não compartilhamos,
-              vendemos ou divulgamos suas informações pessoais a terceiros, a
-              menos que seja necessário para cumprir com requisitos legais ou
-              com o seu consentimento. Alterações nos Termos de Serviço
-              Reservamo-nos o direito de alterar estes termos de serviço a
-              qualquer momento. Se ocorrerem alterações, você será notificado
-              por meio do aplicativo ou por outro meio de comunicação fornecido.
-              É responsabilidade do usuário revisar periodicamente os termos de
-              serviço atualizados. Limitação de Responsabilidade O uso do
-              aplicativo PRISET é por sua conta e risco. Não nos
-              responsabilizamos por quaisquer danos diretos, indiretos,
-              incidentais, consequenciais ou outros tipos de danos decorrentes
-              do uso ou incapacidade de uso do aplicativo. Contato Se você tiver
-              alguma dúvida, sugestão ou preocupação sobre estes termos de
-              serviço ou sobre o aplicativo PRISET, entre em contato conosco
-              pelo e-mail support@prisetapp.com.
-            </Text>
+
+              <Text style={styles.modalText}>
+                Uso do Aplicativo O aplicativo PRISET permite aos usuários
+                realizar precificação de produtos por meio do registro de
+                informações de e-mail, senha e nome. Os dados fornecidos serão
+                armazenados em nosso banco de dados para fins de autenticação e
+                identificação do usuário. Responsabilidade do Usuário Ao
+                utilizar o aplicativo PRISET, você é responsável por fornecer
+                informações de e-mail e senha corretas e mantê-las atualizadas.
+                Você concorda em manter suas credenciais de login em sigilo e
+                não compartilhá-las com terceiros. Qualquer atividade realizada
+                em sua conta é de sua responsabilidade. Privacidade Levamos a
+                privacidade dos usuários a sério. O aplicativo PRISET coleta e
+                armazena apenas as informações de e-mail, senha e nome
+                fornecidas pelo usuário. Nenhum dado pessoal adicional é
+                coletado sem o seu consentimento. Tomamos medidas adequadas para
+                proteger suas informações, seguindo as práticas recomendadas de
+                segurança de dados. Uso das Informações As informações
+                fornecidas pelo usuário serão utilizadas exclusivamente para
+                fins de autenticação, identificação e funcionamento adequado do
+                aplicativo PRISET. Não compartilhamos, vendemos ou divulgamos
+                suas informações pessoais a terceiros, a menos que seja
+                necessário para cumprir com requisitos legais ou com o seu
+                consentimento. Alterações nos Termos de Serviço Reservamo-nos o
+                direito de alterar estes termos de serviço a qualquer momento.
+                Se ocorrerem alterações, você será notificado por meio do
+                aplicativo ou por outro meio de comunicação fornecido. É
+                responsabilidade do usuário revisar periodicamente os termos de
+                serviço atualizados. Limitação de Responsabilidade O uso do
+                aplicativo PRISET é por sua conta e risco. Não nos
+                responsabilizamos por quaisquer danos diretos, indiretos,
+                incidentais, consequenciais ou outros tipos de danos decorrentes
+                do uso ou incapacidade de uso do aplicativo. Contato Se você
+                tiver alguma dúvida, sugestão ou preocupação sobre estes termos
+                de serviço ou sobre o aplicativo PRISET, entre em contato
+                conosco pelo e-mail support@prisetapp.com.
+              </Text>
+
             <View>
               <TouchableOpacity
                 onPress={closeTermsModal}
                 style={styles.modalButton}
               >
-                <Text style={styles.modalButtonContainer}>Fechar</Text>
+                <Text style={styles.modalButtonContainer}>FECHAR</Text>
               </TouchableOpacity>
             </View>
           </View>
