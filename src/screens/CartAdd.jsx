@@ -80,7 +80,7 @@ export default function CartAdd({ navigation }) {
             <TextInput.Icon
               icon="plus"
               size={20}
-              containerColor="lightgreen"
+              containerColor="#90C444"
               onPress={handleAddItem}
               disabled={!isButtonEnabled}
             />

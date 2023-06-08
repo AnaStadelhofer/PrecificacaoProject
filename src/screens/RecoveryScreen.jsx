@@ -86,7 +86,7 @@ export default function RecoveryScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Logo />
-      <SafeAreaView>
+      <SafeAreaView style={styles.RegisterCamps}>
         <View>
           {errorMessage !== "" && (
             <Text style={styles.errorMessage}>{errorMessage}</Text>
@@ -94,11 +94,13 @@ export default function RecoveryScreen({ navigation }) {
           <TextInput
             borderRadius={10}
             placeholder="Email de recuperação"
-            placeholderTextColor={"#CDCDCD"}
             secureTextEntry={false}
             textContentType="emailAddress"
             value={mailUser}
             onChangeText={validateEmail}
+            style={styles.input}
+            underlineColor="transparent"
+            activeUnderlineColor="transparent"
           />
           <TouchableOpacity
             width="296px"

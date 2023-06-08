@@ -14,14 +14,117 @@ import { TouchableOpacity } from "react-native";
 import { updateDoc, doc } from "firebase/firestore";
 import IngredientList from "./IngredientList";
 import { Alert } from "react-native";
+import { query, where, onSnapshot } from "firebase/firestore";
+import { TextInputMask } from "react-native-masked-text";
+
+// import Picker from "@ouroboros/react-native-picker";
+
+const itemRef = collection(db, "Ingredient");
 
 export default function RecipeAdd({ navigation, route }) {
   const { recipeId, recipe } = route.params;
   const [nameRecipe, setNameRecipe] = useState("");
-  const [income, setIncome] = useState("");
+  const [revenue, setRevenue] = useState(0);
   const [typeProfit, setTypeProfit] = useState("");
   const [message, setMessage] = useState("");
-  const [profitValue, setProfitValue] = useState("");
+  const [profitValue, setProfitValue] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [additional, setAdditional] = useState(10);
+  const [unitCost, setUnitCost] = useState(0);
+  const [salePrice, setSalePrice] = useState(0);
+
+  useEffect(() => {
+    try {
+      const queryInstance = query(itemRef, where("recipeId", "==", recipeId));
+      const ingredientQuery = onSnapshot(queryInstance, (snapshot) => {
+        const listIngredient = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        if (listIngredient.length === 0) {
+        } else {
+          const totalPriceQuery = listIngredient.reduce(
+            (accumulator, ingredient) =>
+              accumulator + parseFloat(ingredient.totalPrice),
+            0
+          );
+          console.log("Total Price: " + totalPriceQuery);
+          calculatingCosts(totalPriceQuery);
+        }
+      });
+      return () => ingredientQuery();
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  const calculatingCosts = (totalPriceQuery) => {
+    console.log("total do custo: " + totalPriceQuery * (additional / 100));
+    setTotalPrice(totalPriceQuery + totalPriceQuery * (additional / 100));
+  };
+
+  const calculationCost = (revenue, typeProfit, profitValue) => {
+    console.log("Rendimento: " + revenue);
+    console.log("Tipo de Lucro: " + typeProfit);
+    console.log("Valor do Lucro: " + profitValue);
+
+
+
+    // Calular custo total
+    // Soma do Ingrediente + taxa do custo adiciona
+    // Feito no calculatingCosts
+
+    
+
+    // Calcular preço total de venda
+    // totalprice + profitvalue 
+
+
+    if (typeProfit == "%") {
+      console.log("Tipo escolhido é porcentagem");
+      console.log("total de venda: " + (totalPrice + totalPrice * (profitValue / 100)));
+      setSalePrice(totalPrice + totalPrice * (profitValue / 100))
+
+    } else {
+      console.log("Tipo escolhido é valor fixo");
+      console.log('Total da venda: ' + (Number(profitValue) + Number(totalPrice)));
+      setSalePrice(Number(profitValue) + Number(totalPrice))
+    }
+
+    // Calcular preço de venda por unidade
+    //total de venda / por revenue
+
+
+    if (revenue == 0 || revenue == 1) {
+      console.log("Quantidade de rendimento é 0")
+      setUnitCost(salePrice)
+    } else {
+      console.log("Preço por unidade" + (salePrice / revenue))
+      setUnitCost(salePrice / revenue)
+
+    }
+
+
+
+    // console.log(
+    //   "Quantidade que rende " + revenue + " e o custo total é " + totalPrice
+    // );
+    // if (revenue == 0) {
+    //   setUnitCost(totalPrice);
+    //   console.log("custo por unidade é " + unitCost);
+    // } else {
+    //   setUnitCost(totalPrice / revenue);
+    //   console.log("custo por unidade é " + unitCost);
+    // }
+
+    // if (typeProfit == "%") {
+    //   console.log("Tipo escolhido é porcentagem");
+    // } else {
+    //   console.log("Tipo escolhido é valor fixo");
+    //   setSalePrice(parseInt(totalPrice) + parseInt(profitValue));
+    //   console.log(salePrice);
+    // }
+  };
 
   function handleEditRecipe() {
     try {
@@ -29,7 +132,7 @@ export default function RecipeAdd({ navigation, route }) {
 
       const updatedRecipe = {
         nameRecipe: nameRecipe.trim(),
-        income: income.trim(),
+        revenue: revenue.trim(),
         typeProfit: typeProfit.trim(),
         profitValue: profitValue.trim(),
         userID: idDoUsuario,
@@ -63,6 +166,7 @@ export default function RecipeAdd({ navigation, route }) {
       <SafeAreaView>
         <ScrollView horizontal={false}>
           <TextInput
+            label="Nome da Receita"
             placeholder="Nome da receita"
             style={styles.input}
             textContentType="text"
@@ -82,46 +186,57 @@ export default function RecipeAdd({ navigation, route }) {
           />
 
           <View style={styles.listIngredient}>
-            <View style={styles.divIcon}>
-              <View style={styles.divIconLeft}>
-                <Text style={styles.textLeft}>Ingredientes</Text>
-              </View>
+            <View style={{ marginBottom: 20 }}>
+              <View style={styles.divIcon}>
+                <View style={styles.divIconLeft}>
+                  <Text style={styles.textLeft}>Ingredientes</Text>
+                </View>
 
-              <View style={styles.divIconRight}>
-                <TextInput.Icon
-                  styles={{ textAlign: "right" }}
-                  onPress={() =>
-                    navigation.navigate("IngredientAdd", { recipe, recipeId })
-                  }
-                  icon="plus"
-                />
-              </View>
+                <View style={styles.divIconRight}>
+                  <TextInput.Icon
+                    styles={{ textAlign: "right" }}
+                    onPress={() =>
+                      navigation.navigate("IngredientAdd", {
+                        recipeId,
+                        isEditing: false,
+                        ingredientData: null,
+                      })
+                    }
+                    icon="plus"
+                  />
+                </View>
 
-              <View style={styles.divIconRight}>
-                <TextInput.Icon
-                  styles={{ textAlign: "right" }}
-                  icon="information"
-                  onPress={() =>
-                    openAlertInfo(
-                      "Neste campo deverá ser cadastrado todos ingredientes que serão utilizada na receita."
-                    )
-                  }
-                />
+                <View style={styles.divIconRight}>
+                  <TextInput.Icon
+                    styles={{ textAlign: "right" }}
+                    icon="information"
+                    onPress={() =>
+                      openAlertInfo(
+                        "Neste campo deverá ser cadastrado todos ingredientes que serão utilizada na receita."
+                      )
+                    }
+                  />
+                </View>
               </View>
             </View>
-
-            <ScrollView horizontal={false}>
+            <ScrollView horizontal={false} nestedScrollEnabled={true}>
               <IngredientList recipeId={recipeId} />
             </ScrollView>
           </View>
 
           <TextInput
             style={styles.input}
-            placeholder="Rendimento"
-            textContentType="text"
+            label="Rendimento"
+            // placeholder="Rendimento"
+            textContentType="number"
             keyboardType="numeric"
             editable={true}
-            onChangeText={setIncome}
+            onChangeText={(value) => {
+              setRevenue(value);
+              calculationCost(value, typeProfit, profitValue);
+              // console.log("Número de rendimento: " + value)
+            }}
+            value={revenue}
             right={
               <TextInput.Icon
                 onPress={() =>
@@ -137,11 +252,13 @@ export default function RecipeAdd({ navigation, route }) {
           <View style={styles.divInput}>
             <View style={styles.column}>
               <TextInput
+                label="Custo adicional"
                 style={styles.inputDiv}
-                placeholder="Custo de contas"
+                placeholder="Custo adicional"
                 textContentType="text"
                 keyboardType="numeric"
                 editable={false}
+                value={additional.toString() + " %"}
                 right={
                   <TextInput.Icon
                     onPress={() =>
@@ -157,11 +274,13 @@ export default function RecipeAdd({ navigation, route }) {
 
             <View style={styles.column}>
               <TextInput
+                label="Custo total"
                 style={styles.inputDiv}
                 placeholder="Custo total"
                 textContentType="text"
                 keyboardType="numeric"
                 editable={false}
+                value={"R$ " + totalPrice.toString()}
                 right={
                   <TextInput.Icon
                     onPress={() =>
@@ -171,17 +290,75 @@ export default function RecipeAdd({ navigation, route }) {
                     }
                     icon="information"
                   />
-                } // Alterei de icon para name
+                }
+              />
+            </View>
+          </View>
+
+          <View style={styles.divInput}>
+            <View style={styles.column}>
+              <TextInput
+                label="Tipo do lucro"
+                style={styles.inputDiv}
+                placeholder="Tipo de lucro"
+                textContentType="text"
+                editable={true}
+                value={typeProfit}
+                onChangeText={(value) => {
+                  setTypeProfit(value);
+                  // console.log("Tipo de lucro: " + value)
+                  calculationCost(revenue, value, profitValue);
+                }}
+                right={
+                  <TextInput.Icon
+                    onPress={() =>
+                      openAlertInfo(
+                        "Neste campo deverá ser informado o nome da receita que deseja cadastrar."
+                      )
+                    }
+                    icon="information"
+                  />
+                }
+              />
+            </View>
+            <View style={styles.column}>
+              <TextInput
+                label="Lucro"
+                style={styles.inputDiv}
+                placeholder="Lucro"
+                textContentType="text"
+                keyboardType="numeric"
+                editable={true}
+                value={profitValue.toString()}
+                onChangeText={(value) => {
+                  setProfitValue(value);
+                  // console.log("Valor do Lucro: " + value)
+                  calculationCost(revenue, typeProfit, value);
+                }}
+                right={<TextInput.Icon icon="information" />}
               />
             </View>
           </View>
 
           <TextInput
             style={styles.input}
-            placeholder="Custo por unidade"
+            label="Preço total de venda"
+            placeholder="Preço total de venda"
+            textContentType="text"
+            keyboardType="numeric"
+            value={"R$ " + salePrice.toString()}
+            editable={false}
+            right={<TextInput.Icon icon="information" />}
+          />
+
+          <TextInput
+            style={styles.input}
+            label="Custo de venda por unidade"
+            placeholder="Custo de venda por unidade"
             textContentType="text"
             keyboardType="numeric"
             editable={false}
+            value={"R$ " + unitCost.toString()}
             right={
               <TextInput.Icon
                 onPress={() =>
@@ -192,42 +369,6 @@ export default function RecipeAdd({ navigation, route }) {
                 icon="information"
               />
             }
-          />
-
-          <View style={styles.divInput}>
-            <View style={styles.column}>
-              <TextInput
-                style={styles.inputDiv}
-                placeholder="Tipo de lucro"
-                textContentType="text"
-                editable={true}
-                onChangeText={setTypeProfit}
-                right={<TextInput.Icon                 onPress={() =>
-                  openAlertInfo("Neste campo deverá ser informado o nome da receita que deseja cadastrar.")
-                }
-                icon="information" />}
-              />
-            </View>
-            <View style={styles.column}>
-              <TextInput
-                style={styles.inputDiv}
-                placeholder="Valor lucro"
-                textContentType="text"
-                keyboardType="numeric"
-                editable={true}
-                onChangeText={setProfitValue}
-                right={<TextInput.Icon icon="information" />}
-              />
-            </View>
-          </View>
-
-          <TextInput
-            style={styles.input}
-            placeholder="Preço final"
-            textContentType="text"
-            keyboardType="numeric"
-            editable={false}
-            right={<TextInput.Icon icon="information" />}
           />
           <View style={[styles.textLinks, { marginBottom: "5%" }]}>
             <TouchableOpacity onPress={() => navigation.goBack()}>

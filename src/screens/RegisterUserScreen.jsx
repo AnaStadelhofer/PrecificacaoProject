@@ -9,6 +9,7 @@ import { styles } from "../utils/styles";
 import ButtonCentralized from "../components/ButtonCentralized";
 import Divider from "../components/Divider";
 
+
 export default function RegisterUserScreen({ navigation }) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -174,8 +175,10 @@ export default function RegisterUserScreen({ navigation }) {
   };
 
   return (
+
     <View style={[styles.container, {alignItems: 'center'}]}>
       <SafeAreaView>
+
         <TextInput
           placeholder="Nome"
           secureTextEntry={false}
@@ -183,6 +186,8 @@ export default function RegisterUserScreen({ navigation }) {
           value={nameUser}
           onChangeText={validateName}
           style={nameError ? styles.inputError : styles.input}
+          underlineColor="transparent"
+          activeUnderlineColor="transparent"
           keyBoardType="default"
         />
         {nameError && <Text style={styles.error}>{nameError}</Text>}
@@ -193,6 +198,8 @@ export default function RegisterUserScreen({ navigation }) {
           value={mailUser}
           onChangeText={validateEmail}
           style={emailError ? styles.inputError : styles.input}
+          underlineColor="transparent"
+          activeUnderlineColor="transparent"
           keyBoardType="email-address"
         />
         {emailError && <Text style={styles.error}>{emailError}</Text>}
@@ -204,6 +211,8 @@ export default function RegisterUserScreen({ navigation }) {
           value={password}
           onChangeText={validatePassword}
           style={passwordError ? styles.inputError : styles.input}
+          underlineColor="transparent"
+          activeUnderlineColor="transparent"
           keyBoardType="default"
           right={
             <TextInput.Icon
@@ -223,6 +232,8 @@ export default function RegisterUserScreen({ navigation }) {
           value={confirmPassword}
           onChangeText={validatePasswordEqual}
           style={confirmPasswordError ? styles.inputError : styles.input}
+          underlineColor="transparent"
+          activeUnderlineColor="transparent"
           keyBoardType="default"
           right={
             <TextInput.Icon

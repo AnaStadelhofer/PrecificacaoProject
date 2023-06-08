@@ -12,13 +12,16 @@ import { TextInputMask } from "react-native-masked-text";
 const itemRef = collection(db, "Ingredient");
 
 export default function IngredientAdd({ navigation, route }) {
-  const { recipe, recipeId } = route.params;
+  const { recipeId, isEditing, ingredientData } = route.params;
   const [ingredient, setIngredient] = useState("");
   const [price, setPrice] = useState("");
   const [totalPurchased, setTotalPurchased] = useState("");
   const [totalUsed, setTotalUsed] = useState("");
   const [isButtonEnabled, setButtonEnabled] = useState(false);
   const [totalInvalid, setTotalInvalid] = useState(false);
+
+  console.log("editando registro? " + isEditing);
+  console.log("data do ingrediente editado: " + ingredientData);
 
   const [errorFields, setErrorFields] = useState({
     ingredient: false,
@@ -28,13 +31,7 @@ export default function IngredientAdd({ navigation, route }) {
   });
 
   const checkFields = () => {
-    if (
-      ingredient &&
-      price &&
-      totalPurchased &&
-      totalUsed &&
-      totalInvalid == false
-    ) {
+    if (ingredient && price && totalPurchased && totalUsed) {
       setButtonEnabled(true);
       // console.log("COMPRADO " + typeof parseInt(totalPurchased.trim()))
       // console.log("USADO: " + typeof parseInt(totalUsed.trim()))
@@ -54,11 +51,30 @@ export default function IngredientAdd({ navigation, route }) {
   //   console.log(data);
   // }
 
-  const checkFieldTotal = (totalPurchased, totalUsed) => {
-    if (totalPurchased < totalUsed) {
-      setTotalInvalid(true);
-    } else {
-      setTotalInvalid(false);
+  // const checkFieldTotal = (totalPurchased, totalUsed) => {
+  //   if (totalPurchased < totalUsed) {
+  //     setTotalInvalid(true);
+  //   } else {
+  //     setTotalInvalid(false);
+  //   }
+  // };
+
+  const handleCountPrice = () => {
+    const cleanedPrice = price.trim().replace(/^R\$|\s/g, "");
+
+    totalUsedConverted = totalUsed;
+    totalPurchasedConverted = totalPurchased;
+
+    finalPrice = parseFloat(cleanedPrice);
+
+    if (
+      !isNaN(totalPurchasedConverted) &&
+      !isNaN(finalPrice) &&
+      !isNaN(totalUsedConverted)
+    ) {
+      totalPrice = (finalPrice / totalPurchasedConverted) * totalUsedConverted;
+      console.log("Total Comprado " + totalPurchasedConverted + " Preço do produto " + finalPrice + " dividido por " + totalUsedConverted + " total Usado resultado no preço total " + totalPrice
+      );
     }
   };
 
@@ -82,20 +98,26 @@ export default function IngredientAdd({ navigation, route }) {
 
   function handleAddIngredients() {
     const cleanedPrice = price.trim().replace(/^R\$|\s/g, "");
-
+    handleCountPrice()
     const ingredients = {
       ingredient: ingredient.trim(),
       price: cleanedPrice,
       totalPurchased: parseInt(totalPurchased.trim()),
       totalUsed: parseInt(totalUsed.trim()),
       recipeId: recipeId.trim(),
+      totalPrice: totalPrice
     };
     console.log(ingredients);
     saveItemIngredient(ingredients);
   }
 
   return (
-    <View style={[styles.container, { justifyContent: "flex-start", alignItems: "center" }]}>
+    <View
+      style={[
+        styles.container,
+        { justifyContent: "flex-start", alignItems: "center" },
+      ]}
+    >
       <SafeAreaView>
         <ScrollView horizontal={false}>
           <View>
@@ -134,22 +156,20 @@ export default function IngredientAdd({ navigation, route }) {
               style={styles.input}
               value={price}
               onChangeText={(text) => {
-                if (text.length < 1) {
-                  setErrorFields({
-                    ...errorFields,
-                    price: true,
-                  });
-                } else {
-                  setErrorFields({
-                    ...errorFields,
-                    price: false,
-                  });
-                }
-
+                // if (text.length < 1) {
+                //   setErrorFields({
+                //     ...errorFields,
+                //     price: true,
+                //   });
+                // } else {
+                //   setErrorFields({
+                //     ...errorFields,
+                //     price: false,
+                //   });
+                // }
                 setPrice(text);
                 checkFields();
               }}
-              error={errorFields.price}
             />
 
             <TextInput
@@ -160,21 +180,22 @@ export default function IngredientAdd({ navigation, route }) {
               style={styles.input}
               value={totalPurchased}
               onChangeText={(text) => {
-                if (text.length < 1) {
-                  setErrorFields({
-                    ...errorFields,
-                    totalPurchased: true,
-                  });
-                
-                } else {
-                  setErrorFields({
-                    ...errorFields,
-                    totalPurchased: false,
-                  });
-                }
+                // if (text.length < 1) {
+                //   setErrorFields({
+                //     ...errorFields,
+                //     totalPurchased: true,
+                //   });
+
+                // } else {
+                //   setErrorFields({
+                //     ...errorFields,
+                //     totalPurchased: false,
+                //   });
+                // }
                 setTotalPurchased(text);
+                console.log(totalPurchased);
                 checkFields();
-                checkFieldTotal(text, totalUsed);
+                // checkFieldTotal(text, totalUsed);
               }}
             />
 
@@ -186,21 +207,22 @@ export default function IngredientAdd({ navigation, route }) {
               style={totalInvalid ? styles.inputError : styles.input}
               value={totalUsed}
               onChangeText={(text) => {
-                if (text.length < 1) {
-                  setErrorFields({
-                    ...errorFields,
-                    totalUsed: true,
-                  });
-                } else {
-                  setErrorFields({
-                    ...errorFields,
-                    totalUsed: false,
-                  });
-                  console.log("Estou dentro do programado");
-                }
+                // if (text.length < 1) {
+                //   setErrorFields({
+                //     ...errorFields,
+                //     totalUsed: true,
+                //   });
+                // } else {
+                //   setErrorFields({
+                //     ...errorFields,
+                //     totalUsed: false,
+                //   });
+                //   console.log("Estou dentro do programado");
+                // }
                 setTotalUsed(text);
+                console.log(totalUsed);
                 checkFields();
-                checkFieldTotal(totalPurchased, text);
+                // checkFieldTotal(totalPurchased, text);
               }}
             />
 

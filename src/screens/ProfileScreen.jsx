@@ -25,7 +25,7 @@ export default function ProfileScreen({navigation}) {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {alignItems: 'center'}]}>
       <View style={[styles.centerInfo, {justifyContent: 'flex-start'}]}>
         <Text style={styles.welcomeUser}>Bem-vindo (a), Ana!</Text>
         <Text style={styles.infoUser}>Informações do seu perfil.</Text>
@@ -38,6 +38,8 @@ export default function ProfileScreen({navigation}) {
           // value={password}
           // onChangeText={setPassword}
           style={styles.input}
+          underlineColor="transparent"
+          activeUnderlineColor="transparent"
           editable={false}
         />
         <TextInput
@@ -47,6 +49,8 @@ export default function ProfileScreen({navigation}) {
           // value={password}
           // onChangeText={setPassword}
           style={styles.input}
+          underlineColor="transparent"
+          activeUnderlineColor="transparent"
           editable={false}
         />
       </View>
@@ -67,7 +71,7 @@ export default function ProfileScreen({navigation}) {
         </View>
 
         <TouchableOpacity
-          style={styles.button}
+          style={styles.buttonDeslog}
           onPress={handleSignOut}
         >
           <Text style={styles.buttonText}>Deslogar</Text>

@@ -32,7 +32,7 @@ export const styles = StyleSheet.create({
     paddingVertical: 10,
     flexDirection: "column",
     justifyContent: "center",
-    maxWidth: "100%",
+    alignSelf: "stretch",
   },
   recipeContainer: {
     flex: 1,
@@ -110,7 +110,7 @@ export const styles = StyleSheet.create({
   // Buttons
   buttonProfileDiv: {
     flex: 1,
-    marginHorizontal: 10,
+    marginHorizontal: 3,
     minWidth: "40%",
     backgroundColor: "#6BA0D2",
     borderRadius: 10,
@@ -128,7 +128,7 @@ export const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 15,
     color: "#fff",
-    fontSize: 18,
+    fontSize: 15,
     textAlign: "center",
   },
   button: {
@@ -140,6 +140,27 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     marginTop: 15,
   },
+  buttonLogin:{
+    justifyContent: "center",
+    alignItems: "center",
+    width: widthPercentageToDP("90%"),
+    height: 50,
+    backgroundColor: "#6BA0D2",
+    borderRadius: 10,
+    marginTop: 15,
+    marginLeft: 10,
+  },
+  buttonDeslog: {
+    justifyContent: "center",
+    alignItems: "center",
+    width: widthPercentageToDP("90%"),
+    height: 50,
+    backgroundColor: "#6BA0D2",
+    borderRadius: 10,
+    marginTop: 5,
+    marginBottom: 25
+  },
+
   recipebutton: {
     position: "absolute",
     bottom: 20,
@@ -163,6 +184,7 @@ export const styles = StyleSheet.create({
     backgroundColor: "#6BA0D2",
     borderRadius: 10,
     marginTop: 15,
+    marginLeft:10,
   },
   buttonDisabled: {
     justifyContent: "center",
@@ -172,6 +194,7 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     marginTop: 15,
     backgroundColor: "gray",
+    marginLeft:10,
   },
   btnCenterBottom: {
     marginBottom: 15,
@@ -189,6 +212,10 @@ export const styles = StyleSheet.create({
     borderBottomRightRadius: 10,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
+    alignSelf: "stretch",
+    justifyContent: 'center',
+    marginLeft: 10,
+    marginRight: 10
   },
   inputError: {
     height: 60,
@@ -202,6 +229,10 @@ export const styles = StyleSheet.create({
     borderBottomRightRadius: 10,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
+    alignSelf: "stretch",
+    justifyContent: 'center',
+    marginLeft: 10,
+    marginRight: 10
   },
   textInputContainerIngre: {
     height: 60,
@@ -214,6 +245,10 @@ export const styles = StyleSheet.create({
     borderBottomRightRadius: 10,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
+    alignSelf: "stretch",
+    justifyContent: 'center',
+    marginLeft: 10,
+    marginRight: 10
   },
   textInputContainer: {
     width: widthPercentageToDP("96%"),
@@ -253,7 +288,7 @@ export const styles = StyleSheet.create({
     boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.25)",
     marginTop: 15,
     marginBottom: 15,
-    backgroundColor: "#FEFEFE",
+    backgroundColor: "#E8E8E8",
     flexDirection: "column",
     maxWidth: "100%",
     justifyContent: "center",
@@ -263,16 +298,20 @@ export const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 10,
     minWidth: "100%",
+    minHeight: 60,
+
   },
   cartEnable: {
     width: widthPercentageToDP("95%"),
     height: heightPercentageToDP("6%"),
+    minHeight: 60,
     borderRadius: 10,
-    borderColor: "gray",
+    borderColor: "#BFBFBF",
+    boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.5)",
     marginTop: 15,
     marginBottom: 15,
     justifyContent: "center",
-    backgroundColor: "gray",
+    backgroundColor: "#BFBFBF",
     flexDirection: "column",
     maxWidth: "100%",
     shadowColor: "black",
@@ -346,9 +385,8 @@ export const styles = StyleSheet.create({
   },
   ingredientList: {
     width: widthPercentageToDP("95%"),
-    height: heightPercentageToDP("5%"),
-    marginTop: 10,
-    backgroundColor: "#D9D9D9",
+    // height: heightPercentageToDP("10%"),
+    marginBottom: 15,
   },
   btnModal: {
     justifyContent: "center",
@@ -385,11 +423,11 @@ export const styles = StyleSheet.create({
     borderTopRightRadius: 10,
   },
   modalErrorText: {
-  textAlign: "left",
-  color: "red",
-  alignSelf: "flex-start",
-  paddingLeft: 25,
-  paddingBottom: 20,
+    textAlign: "left",
+    color: "red",
+    alignSelf: "flex-start",
+    paddingLeft: 25,
+    paddingBottom: 20,
   },
   modalBack: {
     flex: 1,
@@ -418,7 +456,8 @@ export const styles = StyleSheet.create({
   },
   listIngredient: {
     width: widthPercentageToDP("90%"),
-    height: heightPercentageToDP("20%"),
+    minHeight: heightPercentageToDP("20%"),
+    maxHeight: heightPercentageToDP("20%"),
     backgroundColor: "white",
     marginTop: 20,
     borderRadius: 10,
@@ -467,6 +506,14 @@ export const styles = StyleSheet.create({
   textLeft: {
     textAlign: "left",
   },
+  ingredientRegisters: {
+    width: widthPercentageToDP("95%"),
+    height: heightPercentageToDP("6%"),
+    marginTop: 5,
+    marginBottom: 5,
+    backgroundColor: "#D9D9D9",
+    flexDirection: "column",
+  },
   // RECIPE
   cardRecipe: {
     maxWidth: widthPercentageToDP("95%"),
@@ -477,7 +524,7 @@ export const styles = StyleSheet.create({
     marginTop: 15,
     marginBottom: 15,
     backgroundColor: "#FEFEFE",
-    justifyContent: "center", 
+    justifyContent: "center",
     shadowColor: "black",
     shadowOffset: { width: 10, height: 10 },
     shadowOpacity: 0.8,
