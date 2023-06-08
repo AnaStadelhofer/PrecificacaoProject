@@ -140,7 +140,7 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     marginTop: 15,
   },
-  buttonLogin:{
+  buttonLogin: {
     justifyContent: "center",
     alignItems: "center",
     width: widthPercentageToDP("90%"),
@@ -158,7 +158,7 @@ export const styles = StyleSheet.create({
     backgroundColor: "#6BA0D2",
     borderRadius: 10,
     marginTop: 5,
-    marginBottom: 25
+    marginBottom: 25,
   },
 
   recipebutton: {
@@ -184,7 +184,7 @@ export const styles = StyleSheet.create({
     backgroundColor: "#6BA0D2",
     borderRadius: 10,
     marginTop: 15,
-    marginLeft:10,
+    marginLeft: 10,
   },
   buttonDisabled: {
     justifyContent: "center",
@@ -194,7 +194,7 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     marginTop: 15,
     backgroundColor: "gray",
-    marginLeft:10,
+    marginLeft: 10,
   },
   btnCenterBottom: {
     marginBottom: 15,
@@ -204,7 +204,7 @@ export const styles = StyleSheet.create({
     height: 50,
     backgroundColor: "#6BA0D2",
     borderRadius: 10,
-    marginLeft:10,
+    marginLeft: 10,
   },
   // Inputs
   input: {
@@ -220,9 +220,9 @@ export const styles = StyleSheet.create({
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
     alignSelf: "stretch",
-    justifyContent: 'center',
+    justifyContent: "center",
     marginLeft: 10,
-    marginRight: 10
+    marginRight: 10,
   },
   inputError: {
     height: 60,
@@ -237,9 +237,9 @@ export const styles = StyleSheet.create({
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
     alignSelf: "stretch",
-    justifyContent: 'center',
+    justifyContent: "center",
     marginLeft: 10,
-    marginRight: 10
+    marginRight: 10,
   },
   textInputContainerIngre: {
     height: 60,
@@ -253,9 +253,9 @@ export const styles = StyleSheet.create({
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
     alignSelf: "stretch",
-    justifyContent: 'center',
+    justifyContent: "center",
     marginLeft: 10,
-    marginRight: 10
+    marginRight: 10,
   },
   textInputContainer: {
     width: widthPercentageToDP("96%"),
@@ -306,7 +306,6 @@ export const styles = StyleSheet.create({
     elevation: 10,
     minWidth: "100%",
     minHeight: 60,
-
   },
   cartEnable: {
     width: widthPercentageToDP("95%"),
@@ -365,7 +364,6 @@ export const styles = StyleSheet.create({
     boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)",
     overflow: "hidden",
   },
-
   icon: {
     marginLeft: 10,
     fontSize: 20,
@@ -377,74 +375,51 @@ export const styles = StyleSheet.create({
     fontSize: 20,
   },
   ///MODAL
-  modalInput: {
-    height: 60,
-    borderColor: "#ccc",
-    borderWidth: 1,
-    paddingLeft: 5,
-    minWidth: elementWidth,
-    backgroundColor: "white",
-    borderColor: "#777777",
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-  },
   ingredientList: {
     width: widthPercentageToDP("95%"),
-    // height: heightPercentageToDP("10%"),
     marginBottom: 15,
   },
   btnModal: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#6BA0D2",
     padding: 15,
-    borderRadius: 10,
     marginLeft: 10,
+  },
+  buttonTextModal: {
+    color: "#10C9F1",
+    fontSize: 20,
+    textTransform: "uppercase",
   },
   inputModal: {
     height: 60,
-    marginBottom: 10,
-    borderColor: "#ccc",
     borderWidth: 1,
-    paddingLeft: 5,
-    minWidth: elementWidth,
+    width: widthPercentageToDP("80%"),
     backgroundColor: "white",
     borderColor: "#777777",
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
+    marginTop: 25,
+    marginBottom: 10,
+    justifyContent: "center",
   },
-  modalError: {
-    minWidth: elementWidth,
+  inputModalError: {
     height: 60,
-    borderColor: "red",
     borderWidth: 1,
-    paddingLeft: 5,
+    width: widthPercentageToDP("80%"),
     backgroundColor: "white",
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
+    borderColor: "red",
+    marginTop: 25,
+    marginBottom: 10,
+    justifyContent: "center",
   },
   modalErrorText: {
     textAlign: "left",
     color: "red",
     alignSelf: "flex-start",
-    paddingLeft: 25,
-    paddingBottom: 20,
+    marginLeft: 5
   },
   modalBack: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
     padding: 20,
     backgroundColor: "white",
     maxHeight: "25%",
     minHeight: 200,
-    borderRadius: 15,
   },
   emptyCart: {
     textAlign: "center",
@@ -452,8 +427,9 @@ export const styles = StyleSheet.create({
     color: "gray",
     padding: 20,
   },
+  // Termos
   modalContent: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
   },
   modalTitle: {
     justifyContent: "center",
@@ -480,7 +456,7 @@ export const styles = StyleSheet.create({
     marginRight: 6,
   },
   modalButtonContainer: {
-    color: '#10C9F1',
+    color: "#10C9F1",
     justifyContent: "center",
     textAlign: "center",
   },
@@ -496,7 +472,7 @@ export const styles = StyleSheet.create({
   listIngredient: {
     width: widthPercentageToDP("90%"),
     alignSelf: "stretch",
-    justifyContent: 'center',
+    justifyContent: "center",
     marginLeft: 10,
     backgroundColor: "white",
     marginTop: 20,

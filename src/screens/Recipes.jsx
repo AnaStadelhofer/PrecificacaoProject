@@ -1,6 +1,6 @@
 import { View, TouchableOpacity } from "react-native";
 import React, { useRef, useState } from "react";
-import { TextInput, Text, Dialog, Button} from "react-native-paper";
+import { TextInput, Text, Dialog, Button } from "react-native-paper";
 import { collection, addDoc } from "firebase/firestore";
 import { styles } from "../utils/styles";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -49,11 +49,10 @@ export default function Recipes({ navigation }) {
   const clearRecipeName = () => {
     setNameRecipe("");
   };
-  
 
   function handleAddRecipe() {
     if (nameRecipe.trim() === "") {
-      setRecipeEmpty("Campo obrigatorío.");
+      setRecipeEmpty("O campo é obrigatório");
       return;
     }
     try {
@@ -72,52 +71,50 @@ export default function Recipes({ navigation }) {
 
   return (
     <View style={styles.recipeContainer}>
- 
       <RecipesList />
 
-      <TouchableOpacity style={styles.recipebutton} onPress={() => {toggleModal(); setNameRecipe('');}}>
-
+      <TouchableOpacity
+        style={styles.recipebutton}
+        onPress={() => {
+          toggleModal();
+          setNameRecipe("");
+        }}
+      >
         <Icon name="plus" size={24} color="black" />
       </TouchableOpacity>
 
       <Modal isVisible={isModalVisible} onBackdropPress={toggleModal}>
-        <View
-          style={styles.modalBack}
-        >
+        <View style={styles.modalBack}>
           <Text style={{ fontSize: 20, textAlign: "left" }}>Criar receita</Text>
-          <TextInput
-            placeholder="Nome da Receita"
-            label="Nome da Receita"
-            style={recipeEmpty ? styles.modalError : styles.inputModal}
-            textContentType="text"
-            value={nameRecipe}
-            onChangeText={setNameRecipe}
-          />
-          {recipeEmpty && <Text style={styles.modalErrorText}>{recipeEmpty}</Text> }
+          <View style={{ justifyContent: "center", alignItems: "center" }}>
+            <TextInput
+              placeholder="Nome da Receita"
+              label="Nome da Receita"
+              style={recipeEmpty ? styles.inputModalError : styles.inputModal}
+              textContentType="text"
+              value={nameRecipe}
+              onChangeText={setNameRecipe}
+            />
+          </View>
+          {recipeEmpty && (
+            <Text style={styles.modalErrorText}>{recipeEmpty}</Text>
+          )}
           <View
             style={{
               flexDirection: "row",
-              justifyContent: "center"
+              justifyContent: "end",
+              alignItems: "flex-end",
             }}
           >
             <TouchableOpacity style={styles.btnModal} onPress={toggleModal}>
-              <Text style={styles.buttonText}>Cancelar</Text>
+              <Text style={styles.buttonTextModal}>Cancelar</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.btnModal} onPress={handleAddRecipe}>
-              <Text style={styles.buttonText}>Salvar</Text>
+              <Text style={styles.buttonTextModal}>Salvar</Text>
             </TouchableOpacity>
           </View>
         </View>
       </Modal>
-      {/* <Dialog visible={dialogVisible} onDismiss={() => setDialogVisible(false)}>
-        <Dialog.Title>Atenção</Dialog.Title>
-        <Dialog.Content>
-          <Text>Por favor, preencha o nome da receita</Text>
-        </Dialog.Content>
-        <Dialog.Actions>
-            <Button onPress={() => setDialogVisible(false)}>Ok</Button>
-        </Dialog.Actions>
-      </Dialog> */}
     </View>
   );
 }

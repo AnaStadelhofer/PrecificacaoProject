@@ -27,13 +27,65 @@ export default function CartList() {
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
   const [cartEmpty, setCartEmpty] = useState(false);
-  const [isSelected, setIsSelected] = useState(false);
   const [isModalVisible, setModalVisible] = useState(false);
   const [nameItem, setNameItem] = useState("");
   const [dialogVisible, setDialogVisible] = useState(false);
+  const [registroSelecionado, setRegistroSelecionado] = useState(null);
+  const [itemEmpty, setItemEmpty] = useState(false);
 
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible);
+  const errorPccurred = () => {
+    Alert.alert(
+      "Aviso",
+      "Ocorreu um erro inesperado, tente novamente mais tarde ou contate o administrador",
+      [
+        {
+          text: "OK",
+          onPress: () => navigation.navigate("CartScreen"),
+        },
+      ]
+    );
+  };
+
+  const toggleModal = (itemId) => {
+    try {
+      if (itemId) {
+        const selectedRecord = cart.find((item) => item.id === itemId);
+        setNameItem(selectedRecord.nameProduct); // Preenche o TextInput com o nome do item selecionado
+        setRegistroSelecionado(selectedRecord); // Atualiza o registro selecionado
+      } else {
+        setNameItem(""); // Limpa o TextInput ao abrir o modal sem um registro selecionado
+        setRegistroSelecionado(null); // Limpa o registro selecionado
+      }
+      setModalVisible(!isModalVisible);
+    } catch (error) {
+      errorPccurred();
+    }
+  };
+
+  const handleSave = () => {
+    if (nameItem.trim() === "") {
+      setItemEmpty(true);
+    } else {
+      setItemEmpty(false);
+
+      try {
+        const { id } = registroSelecionado;
+        const docRef = doc(db, "Cart", id);
+        const updatedName = nameItem;
+
+        updateDoc(docRef, { nameProduct: updatedName })
+          .then(() => {
+            console.log("Registro atualizado com sucesso no Firebase");
+            setModalVisible(!isModalVisible);
+          })
+          .catch((error) => {
+            console.log(error);
+            setModalVisible(!isModalVisible);
+          });
+      } catch (error) {
+        errorPccurred();
+      }
+    }
   };
 
   useEffect(() => {
@@ -59,18 +111,23 @@ export default function CartList() {
   }, []);
 
   const toggleCheckbox = (itemId) => {
-    setCart((prevCart) =>
-      prevCart.map((item) =>
-        item.id === itemId ? { ...item, isSelected: !item.isSelected } : item
-      )
-    );
+    try {
+      setCart((prevCart) =>
+        prevCart.map((item) =>
+          item.id === itemId ? { ...item, isSelected: !item.isSelected } : item
+        )
+      );
 
-    const docRef = doc(db, "Cart", itemId);
-    const checkProduct = !cart.find((item) => item.id === itemId)?.checkProduct;
+      const docRef = doc(db, "Cart", itemId);
+      const checkProduct = !cart.find((item) => item.id === itemId)
+        ?.checkProduct;
 
-    updateDoc(docRef, { checkProduct })
-      .then(() => console.log("Checkbox atualizado no Firebase"))
-      .catch((error) => console.log(error));
+      updateDoc(docRef, { checkProduct })
+        .then(() => console.log("Checkbox atualizado no Firebase"))
+        .catch((error) => console.log(error));
+    } catch (error) {
+      errorPccurred();
+    }
   };
 
   function handleDeleteAlert(id) {
@@ -87,36 +144,13 @@ export default function CartList() {
   }
 
   function handleDelete(id) {
-    const docRef = doc(db, "Cart", id);
-    deleteDoc(docRef)
-      .then(() => console.log("Documento deletado com sucesso"))
-      .catch((error) => console.log(error));
-  }
-
-  function handleEdit(id) {
-    const selectedItem = cart.find((item) => item.id === id);
-    console.log("batata");
-    showModalEdit(true);
-  }
-
-  function hideModalEdit(id) {
-    setDialogVisible(false);
-  }
-
-  const showModalEdit = (id) => {
-    setDialogVisible(true);
-    edit(id);
-  };
-
-  function edit(id) {
-    console.log(showModalEdit);
-    return <View></View>;
-  }
-
-  function handleAddCart() {
-    if (nameRecipe.trim() === "") {
-      setCartEmpty("Campo obrigatorío.");
-      return;
+    try {
+      const docRef = doc(db, "Cart", id);
+      deleteDoc(docRef)
+        .then(() => console.log("Documento deletado com sucesso"))
+        .catch((error) => console.log(error));
+    } catch (error) {
+      errorPccurred();
     }
   }
 
@@ -179,29 +213,39 @@ export default function CartList() {
       </ScrollView>
       <Modal isVisible={isModalVisible} onBackdropPress={toggleModal}>
         <View style={styles.modalBack}>
-          <Text style={{ fontSize: 20, textAlign: "left" }}>Editar item do carrinho</Text>
-          <TextInput
-            placeholder="Nome do Item"
-            label="Nome do Item"
-            style={cartEmpty ? styles.modalError : styles.inputModal}
-            textContentType="text"
-            value={nameItem}
-            onChangeText={setNameItem}
-          />
-          {cartEmpty && (
-            <Text style={styles.modalErrorText}>{cartEmpty}</Text>
-          )}
+          <Text style={{ fontSize: 20, textAlign: "left" }}>Editar item</Text>
+          <View style={{ justifyContent: "center", alignItems: "center" }}>
+            <TextInput
+              placeholder="Nome do Item"
+              label="Nome do Item"
+              style={itemEmpty ? styles.inputModalError : styles.inputModal}
+              textContentType="text"
+              value={nameItem}
+              onChangeText={setNameItem}
+            />
+            {itemEmpty ? (
+              <Text style={styles.modalErrorText}>O campo é obrigatório.</Text>
+            ) : (
+              <Text></Text>
+            )}
+          </View>
           <View
             style={{
               flexDirection: "row",
-              justifyContent: "center",
+              justifyContent: "end",
+              alignItems: "flex-end",
             }}
           >
-            <TouchableOpacity style={styles.btnModal} onPress={toggleModal}>
-              <Text style={styles.buttonText}>Cancelar</Text>
+            <TouchableOpacity
+              style={styles.btnModal}
+              onPress={() => {
+                setModalVisible(!isModalVisible);
+              }}
+            >
+              <Text style={styles.buttonTextModal}>Cancelar</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.btnModal} onPress={null}>
-              <Text style={styles.buttonText}>Salvar</Text>
+            <TouchableOpacity style={styles.btnModal} onPress={handleSave}>
+              <Text style={styles.buttonTextModal}>Salvar</Text>
             </TouchableOpacity>
           </View>
         </View>
