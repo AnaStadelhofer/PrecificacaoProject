@@ -7,12 +7,26 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { getUserData } from "../utils/user";
 
-export default function ProfileScreen() {
-  const [isLoggedOut, setIsLoggedOut] = useState(false);
+export default function ProfileScreen({navigation}) {
+
   const [user, setUser] = useState(null);
+
+const handleSignOut = () => {
+    auth.signOut()
+      .then(() => {
+        console.log('Sign-out successful');
+        navigation.navigate('LoginScreen');
+        console.log(auth.currentUser)
+      })
+      .catch((error) => {
+        console.log('Sign-out error:', error);
+      });
+  };
+
+
   useEffect(() => {
     const currentUser = auth.currentUser;
-    console.log(currentUser.email);
+    console.log(currentUser);
     if (currentUser) {
       getUserData().then((data) => {
         setUser(data);
