@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { View, FlatList, ScrollView } from "react-native";
 import { TouchableOpacity } from "react-native";
+import Modal from "react-native-modal";
 import { List } from "react-native-paper";
-import { Text } from "react-native-paper";
+import { Text, TextInput } from "react-native-paper";
 import { TouchableHighlight } from "react-native";
 import { Alert } from "react-native";
 import {
@@ -16,10 +17,8 @@ import {
 import { db } from "../config/firebase";
 import { styles } from "../utils/styles";
 import { updateDoc } from "firebase/firestore";
-import Dialog from "react-native-paper";
-import Button from "react-native-paper";
-import { auth
- } from "../config/firebase";
+import { Button, Dialog } from "react-native-paper"; // Corrigido aqui
+import { auth } from "../config/firebase";
 import { where } from "firebase/firestore";
 
 const itemRef = collection(db, "Cart");
@@ -29,10 +28,19 @@ export default function CartList() {
   const [loading, setLoading] = useState(true);
   const [cartEmpty, setCartEmpty] = useState(false);
   const [isSelected, setIsSelected] = useState(false);
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [nameItem, setNameItem] = useState("");
   const [dialogVisible, setDialogVisible] = useState(false);
 
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
+
   useEffect(() => {
-    const queryInstance = query(itemRef, where("userID", '==', auth.currentUser.uid));
+    const queryInstance = query(
+      itemRef,
+      where("userID", "==", auth.currentUser.uid)
+    );
     const cartQuery = onSnapshot(queryInstance, (snapshot) => {
       console.log(snapshot);
       const listCart = snapshot.docs.map((doc) => ({
@@ -89,7 +97,6 @@ export default function CartList() {
     const selectedItem = cart.find((item) => item.id === id);
     console.log("batata");
     showModalEdit(true);
-    
   }
 
   function hideModalEdit(id) {
@@ -98,16 +105,19 @@ export default function CartList() {
 
   const showModalEdit = (id) => {
     setDialogVisible(true);
-    edit(id)
-  }
+    edit(id);
+  };
 
   function edit(id) {
-    console.log(showModalEdit)
-    return(
-      <View>
-       
-      </View>
-    )
+    console.log(showModalEdit);
+    return <View></View>;
+  }
+
+  function handleAddCart() {
+    if (nameRecipe.trim() === "") {
+      setCartEmpty("Campo obrigatorío.");
+      return;
+    }
   }
 
   const renderItem = ({ item }) => (
@@ -134,7 +144,7 @@ export default function CartList() {
           <View style={{ flexDirection: "row", ...styles.icons }}>
             <TouchableOpacity
               style={{ paddingLeft: 10 }}
-              onPress={() => showModalEdit(item.id)}
+              onPress={() => toggleModal(item.id)}
             >
               <List.Icon icon="pencil" size={28} />
             </TouchableOpacity>
@@ -153,10 +163,11 @@ export default function CartList() {
 
   return (
     <View style={styles.containerInner}>
-      
       <ScrollView horizontal={false}>
         {loading || cartEmpty ? (
-          <Text style={styles.emptyCart}>Ops! Parece que você não adicionou nenhum item na lista de compras!</Text>
+          <Text style={styles.emptyCart}>
+            Ops! Parece que você não adicionou nenhum item na lista de compras!
+          </Text>
         ) : (
           <FlatList
             data={cart}
@@ -166,6 +177,35 @@ export default function CartList() {
           />
         )}
       </ScrollView>
+      <Modal isVisible={isModalVisible} onBackdropPress={toggleModal}>
+        <View style={styles.modalBack}>
+          <Text style={{ fontSize: 20, textAlign: "left" }}>Editar item do carrinho</Text>
+          <TextInput
+            placeholder="Nome do Item"
+            label="Nome do Item"
+            style={cartEmpty ? styles.modalError : styles.inputModal}
+            textContentType="text"
+            value={nameItem}
+            onChangeText={setNameItem}
+          />
+          {cartEmpty && (
+            <Text style={styles.modalErrorText}>{cartEmpty}</Text>
+          )}
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
+          >
+            <TouchableOpacity style={styles.btnModal} onPress={toggleModal}>
+              <Text style={styles.buttonText}>Cancelar</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.btnModal} onPress={null}>
+              <Text style={styles.buttonText}>Salvar</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
