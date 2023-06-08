@@ -4,35 +4,34 @@ import { styles } from "../utils/styles";
 import { TouchableOpacity } from "react-native";
 import { auth } from "../config/firebase";
 import { useState } from "react";
+import { useEffect } from "react";
+import { getUserData } from "../utils/user";
 
-export default function ProfileScreen({navigation}) {
-  
+export default function ProfileScreen() {
   const [isLoggedOut, setIsLoggedOut] = useState(false);
-  const handleSignOut = () => {
-    auth.signOut()
-      .then(() => {
-        console.log('Sign-out successful');
-        setIsLoggedOut(true);
-        console.log(auth.currentUser)
-      })
-      .catch((error) => {
-        console.log('Sign-out error:', error);
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    const currentUser = auth.currentUser;
+    console.log(currentUser.email);
+    if (currentUser) {
+      getUserData().then((data) => {
+        setUser(data);
+        console.log(data);
       });
-  };
-
-  if (isLoggedOut) {
-    navigation.navigate('LoginScreen');
-  }
-
+      // setUser(currentUser);
+    }
+  }, [auth?.currentUser]);
   return (
-    <View style={[styles.container, {alignItems: 'center'}]}>
-      <View style={[styles.centerInfo, {justifyContent: 'flex-start'}]}>
-        <Text style={styles.welcomeUser}>Bem-vindo (a), Ana!</Text>
+    <View style={styles.container}>
+      <View style={[styles.centerInfo, { justifyContent: "flex-start" }]}>
+        <Text style={styles.welcomeUser}>
+          Bem-vindo (a), {user ? user.name: ""}!
+        </Text>
         <Text style={styles.infoUser}>Informações do seu perfil.</Text>
       </View>
       <View style={styles.container}>
         <TextInput
-          placeholder="Ana Carolina Stadelhofer"
+          placeholder={user ? user.name : ""}
           // secureTextEntry={showPassword}
           textContentType="text"
           // value={password}
@@ -43,7 +42,7 @@ export default function ProfileScreen({navigation}) {
           editable={false}
         />
         <TextInput
-          placeholder="ana.stadelhofer@teste.com.br"
+          placeholder={auth.currentUser?.email}
           // secureTextEntry={showPassword}
           textContentType="text"
           // value={password}
