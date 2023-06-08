@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, TouchableOpacity, SafeAreaView } from "react-native";
 import { TextInput, Text, Dialog, Button } from "react-native-paper";
 import { styles } from "../utils/styles";
-import { auth } from "../config/firebase";
+import { auth, passwordReset } from "../config/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Logo from "../components/Logo";
@@ -14,6 +14,7 @@ export default function RecoveryScreen({ navigation }) {
   const [mailUser, setMailUser] = useState("");
   const [dialogVisible, setDialogVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isEmailValid, setIsEmailValid] = useState("false");
 
   const handleRecovery = async (email) => {
     if (mailUser.trim() === "") {
@@ -21,7 +22,8 @@ export default function RecoveryScreen({ navigation }) {
       return;
     }
     try {
-      await auth.sendPasswordResetEmail(email);
+      // await auth.sendPasswordResetEmail(email);
+      passwordReset(email);
       setDialogVisible(true);
       Alert.alert(
         "Sucesso",
@@ -53,10 +55,13 @@ export default function RecoveryScreen({ navigation }) {
 
     if (mailUser === "") {
       setErrorMessage("");
+      setIsEmailValid(false);
     } else if (!emailRegex.test(mailUser)) {
       setErrorMessage("E-mail informado é inválido.");
+      setIsEmailValid(false);
     } else {
       checkExistingEmail(mailUser);
+      setIsEmailValid(true);
     }
   };
 
@@ -103,7 +108,7 @@ export default function RecoveryScreen({ navigation }) {
             borderRadius={10}
             style={styles.button}
             onPress={() => handleRecovery(mailUser)}
-            disabled={!mailUser}
+            disabled={!isEmailValid || mailUser.trim() === ""}
           >
             <Text style={styles.buttonText}>Recuperar Senha</Text>
           </TouchableOpacity>
