@@ -94,6 +94,7 @@ export default function RecoveryScreen({ navigation }) {
           <TextInput
             borderRadius={10}
             placeholder="Email de recuperação"
+            label="Email de recuperação"
             secureTextEntry={false}
             textContentType="emailAddress"
             value={mailUser}

@@ -31,6 +31,7 @@ export default function FPasswordScreen({ navigation }) {
         <View>
           <TextInput
             placeholder="Senha"
+            label="Senha"
             secureTextEntry={showNewPassword}
             textContentType="password"
             value={newpassword}
@@ -50,6 +51,7 @@ export default function FPasswordScreen({ navigation }) {
 
           <TextInput
             placeholder="Confirmar Senha"
+            label="Confirmar Senha"
             secureTextEntry={showConfirmNewPassword}
             textContentType="password"
             value={newconfirmpassword}

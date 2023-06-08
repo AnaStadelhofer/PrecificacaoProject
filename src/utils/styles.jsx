@@ -198,6 +198,13 @@ export const styles = StyleSheet.create({
   },
   btnCenterBottom: {
     marginBottom: 15,
+    justifyContent: "center",
+    alignItems: "center",
+    width: widthPercentageToDP("90%"),
+    height: 50,
+    backgroundColor: "#6BA0D2",
+    borderRadius: 10,
+    marginLeft:10,
   },
   // Inputs
   input: {
@@ -445,6 +452,38 @@ export const styles = StyleSheet.create({
     color: "gray",
     padding: 20,
   },
+  modalContent: {
+    backgroundColor: 'white',
+  },
+  modalTitle: {
+    justifyContent: "center",
+    textAlign: "center",
+    paddingBottom: 20,
+    fontWeight: "bold",
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    marginLeft: 10,
+    marginRight: 10,
+  },
+  modalSubText: {
+    justifyContent: "center",
+    textAlign: "center",
+    paddingBottom: 20,
+    marginLeft: 6,
+    marginRight: 6,
+  },
+  modalText: {
+    justifyContent: "center",
+    textAlign: "justify",
+    paddingBottom: 20,
+    marginLeft: 6,
+    marginRight: 6,
+  },
+  modalButtonContainer: {
+    color: '#10C9F1',
+    justifyContent: "center",
+    textAlign: "center",
+  },
   // INGREDIENTE E RECEITA
   textInputContainerIngre: {
     width: widthPercentageToDP("90%"),
@@ -456,8 +495,9 @@ export const styles = StyleSheet.create({
   },
   listIngredient: {
     width: widthPercentageToDP("90%"),
-    minHeight: heightPercentageToDP("20%"),
-    maxHeight: heightPercentageToDP("20%"),
+    alignSelf: "stretch",
+    justifyContent: 'center',
+    marginLeft: 10,
     backgroundColor: "white",
     marginTop: 20,
     borderRadius: 10,
