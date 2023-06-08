@@ -198,6 +198,13 @@ export const styles = StyleSheet.create({
   },
   btnCenterBottom: {
     marginBottom: 15,
+    justifyContent: "center",
+    alignItems: "center",
+    width: widthPercentageToDP("90%"),
+    height: 50,
+    backgroundColor: "#6BA0D2",
+    borderRadius: 10,
+    marginLeft:10,
   },
   // Inputs
   input: {
@@ -488,8 +495,9 @@ export const styles = StyleSheet.create({
   },
   listIngredient: {
     width: widthPercentageToDP("90%"),
-    minHeight: heightPercentageToDP("20%"),
-    maxHeight: heightPercentageToDP("20%"),
+    alignSelf: "stretch",
+    justifyContent: 'center',
+    marginLeft: 10,
     backgroundColor: "white",
     marginTop: 20,
     borderRadius: 10,

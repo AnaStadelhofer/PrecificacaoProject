@@ -87,6 +87,7 @@ export default function Recipes({ navigation }) {
           <Text style={{ fontSize: 20, textAlign: "left" }}>Criar receita</Text>
           <TextInput
             placeholder="Nome da Receita"
+            label="Nome da Receita"
             style={recipeEmpty ? styles.modalError : styles.inputModal}
             textContentType="text"
             value={nameRecipe}

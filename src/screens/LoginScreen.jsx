@@ -80,6 +80,7 @@ export default function LoginScreen({ navigation }) {
           )}
           <TextInput
             placeholder="E-mail"
+            label="E-mail"
             secureTextEntry={false}
             textContentType="emailAddress"
             value={mailUser}
@@ -93,6 +94,7 @@ export default function LoginScreen({ navigation }) {
 
           <TextInput
             placeholder="Senha"
+            label="Senha"
             secureTextEntry={showPassword}
             textContentType="password"
             value={password}

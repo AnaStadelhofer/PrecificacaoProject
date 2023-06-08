@@ -70,6 +70,7 @@ export default function CartAdd({ navigation }) {
       <View style={styles.textInputContainer}>
         <TextInput
           placeholder="Adicionar item"
+          label="Adicionar item"
           mode="outline"
           value={nameItem}
           onChangeText={setNameItem}

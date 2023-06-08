@@ -193,6 +193,7 @@ export default function RegisterUserScreen({ navigation }) {
       <SafeAreaView>
         <TextInput
           placeholder="Nome"
+          label="Nome"
           secureTextEntry={false}
           textContentType="text"
           value={nameUser}
@@ -206,6 +207,7 @@ export default function RegisterUserScreen({ navigation }) {
 
         <TextInput
           placeholder="Email"
+          label="Email"
           textContentType="emailAddress"
           value={mailUser}
           onChangeText={validateEmail}
@@ -218,6 +220,7 @@ export default function RegisterUserScreen({ navigation }) {
 
         <TextInput
           placeholder="Senha"
+          label="Senha"
           secureTextEntry={!showPassword}
           textContentType="password"
           value={password}
@@ -239,6 +242,7 @@ export default function RegisterUserScreen({ navigation }) {
 
         <TextInput
           placeholder="Confirmar Senha"
+          label="Confirmar Senha"
           secureTextEntry={!showPasswordConfirm}
           textContentType="password"
           value={confirmPassword}
