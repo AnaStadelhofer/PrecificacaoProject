@@ -454,6 +454,7 @@ export const styles = StyleSheet.create({
   },
   listIngredient: {
     width: widthPercentageToDP("90%"),
+    maxHeight: heightPercentageToDP("25%"),
     alignSelf: "stretch",
     justifyContent: "center",
     marginLeft: 10,

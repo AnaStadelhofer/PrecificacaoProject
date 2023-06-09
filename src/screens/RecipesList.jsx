@@ -133,8 +133,18 @@ export default function RecipesList() {
       </View>
       {item.expanded && (
         <Animated.View style={styles.expandedItem}>
-          <Text style={styles.itemText}>Preço total: R$ {item.totalPrice / item.revenue}</Text>
-          <Text style={styles.itemText}>Preço de venda: R$ {item.unitCost}</Text>
+          <Text style={styles.itemText}>
+            Preço total: R${" "}
+            {isNaN(item.totalPrice / item.revenue) || item.revenue == 0 ? (
+              <Text>0.00</Text>
+            ) : (
+              <Text>{(item.totalPrice / item.revenue).toFixed(2)}</Text>
+            )}
+          </Text>
+          <Text style={styles.itemText}>
+          Preço de venda: R$
+            {isNaN(item.unitCost) ? (<Text> 0.00</Text>) : (parseFloat(item.unitCost).toLocaleString('pt-BR', { minimumFractionDigits: 2 }))}
+          </Text>
         </Animated.View>
       )}
     </View>
@@ -146,7 +156,8 @@ export default function RecipesList() {
         <ScrollView horizontal={false}>
           {loading || recipeEmpty ? (
             <Text style={styles.emptyCart}>
-              Ops! Parece que você não adicionou nenhum item na lista de compras!
+              Ops! Parece que você não adicionou nenhum item na lista de
+              compras!
             </Text>
           ) : (
             <FlatList

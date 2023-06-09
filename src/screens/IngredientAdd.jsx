@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, TouchableOpacity, SafeAreaView, ScrollView } from "react-native";
 import { TextInput, Text } from "react-native-paper";
 import { styles } from "../utils/styles";
@@ -15,66 +15,60 @@ export default function IngredientAdd({ navigation, route }) {
   const { recipeId, isEditing, ingredientData } = route.params;
   const [ingredient, setIngredient] = useState("");
   const [price, setPrice] = useState("");
-  const [totalPurchased, setTotalPurchased] = useState("");
-  const [totalUsed, setTotalUsed] = useState("");
+  const [totalPurchased, setTotalPurchased] = useState(0);
+  const [totalUsed, setTotalUsed] = useState(0);
   const [isButtonEnabled, setButtonEnabled] = useState(false);
   const [totalInvalid, setTotalInvalid] = useState(false);
+  const [totalPrice, setTotalPrice] = useState("");
 
-  console.log("editando registro? " + isEditing);
-  console.log("data do ingrediente editado: " + ingredientData);
-
-  const [errorFields, setErrorFields] = useState({
-    ingredient: false,
-    price: false,
-    totalPurchased: false,
-    totalUsed: false,
-  });
-
-  const checkFields = () => {
-    if (ingredient && price && totalPurchased && totalUsed) {
-      setButtonEnabled(true);
-      // console.log("COMPRADO " + typeof parseInt(totalPurchased.trim()))
-      // console.log("USADO: " + typeof parseInt(totalUsed.trim()))
-      // console.log("PREÇO USADO DO INGREDIENTE: " + (parseFloat(price) / (parseFloat(totalPurchased) - parseFloat(totalUsed))))
-    } else {
-      setButtonEnabled(false);
-      // console.log("COMPRADO " + typeof totalPurchased)
-      // console.log("USADO: " + typeof totalUsed)
-      // console.log("PREÇO USADO DO INGREDIENTE: " + (parseFloat(price) / (parseFloat(totalPurchased) - parseFloat(totalUsed))))
-    }
-  };
-
-  // function checkInput(data) {
-  //   if (data.length < 1) {
-  //     console.log("erro");
-  //   }
-  //   console.log(data);
-  // }
-
-  // const checkFieldTotal = (totalPurchased, totalUsed) => {
-  //   if (totalPurchased < totalUsed) {
-  //     setTotalInvalid(true);
-  //   } else {
-  //     setTotalInvalid(false);
-  //   }
-  // };
-
-  const handleCountPrice = () => {
-    const cleanedPrice = price.trim().replace(/^R\$|\s/g, "");
-
-    totalUsedConverted = totalUsed;
-    totalPurchasedConverted = totalPurchased;
-
-    finalPrice = parseFloat(cleanedPrice);
-
+  useEffect(() => {
     if (
-      !isNaN(totalPurchasedConverted) &&
-      !isNaN(finalPrice) &&
-      !isNaN(totalUsedConverted)
+      ingredient == "" ||
+      price == "" ||
+      price == "R$ 0,00" ||
+      totalPurchased == 0 ||
+      totalUsed == 0 ||
+      totalInvalid == true
     ) {
-      totalPrice = (finalPrice / totalPurchasedConverted) * totalUsedConverted;
-      console.log("Total Comprado " + totalPurchasedConverted + " Preço do produto " + finalPrice + " dividido por " + totalUsedConverted + " total Usado resultado no preço total " + totalPrice
+      setButtonEnabled(false);
+    } else {
+      setButtonEnabled(true);
+    }
+  }, [ingredient, price, totalPurchased, totalUsed]);
+
+  useEffect(() => {
+    const cleanedPrice = price.trim().replace(/^R\$|\s/g, "");
+    const updatedTotalPrice = (parseFloat(cleanedPrice) / Number(totalPurchased)) * Number(totalUsed);
+    setTotalPrice(updatedTotalPrice);
+  
+    if (
+      !isNaN(Number(totalUsed)) &&
+      !isNaN(updatedTotalPrice) &&
+      !isNaN(Number(totalPurchased))
+    ) {
+      const recalculatedPrice = (updatedTotalPrice / Number(totalPurchased)) * Number(totalUsed);
+      setTotalPrice(recalculatedPrice);
+  
+      console.log(
+        "Total Comprado: " +
+        Number(totalPurchased) +
+        " dividido por " +
+        Number(totalUsed) +
+        " total Usado resultado no preço total: " +
+        recalculatedPrice
       );
+    }
+  }, [price, totalPurchased, totalUsed]);
+
+  const checkFieldTotal = (totalPurchased, totalUsed) => {
+    if (Number(totalPurchased) >= Number(totalUsed)) {
+      setTotalInvalid(false);
+      console.log(
+        "Campo está valido pois total usado é menor que total comprado"
+      );
+    } else {
+      setTotalInvalid(true);
+      console.log("Campo está invalido pois total usado foi maior");
     }
   };
 
@@ -98,14 +92,13 @@ export default function IngredientAdd({ navigation, route }) {
 
   function handleAddIngredients() {
     const cleanedPrice = price.trim().replace(/^R\$|\s/g, "");
-    handleCountPrice()
     const ingredients = {
       ingredient: ingredient.trim(),
       price: cleanedPrice,
-      totalPurchased: parseInt(totalPurchased.trim()),
-      totalUsed: parseInt(totalUsed.trim()),
+      totalPurchased: totalPurchased,
+      totalUsed: totalUsed,
       recipeId: recipeId.trim(),
-      totalPrice: totalPrice
+      totalPrice: totalPrice,
     };
     console.log(ingredients);
     saveItemIngredient(ingredients);
@@ -130,9 +123,7 @@ export default function IngredientAdd({ navigation, route }) {
               value={ingredient}
               onChangeText={(text) => {
                 setIngredient(text);
-                checkFields();
               }}
-              error={errorFields.ingredient}
             />
 
             <TextInputMask
@@ -156,73 +147,33 @@ export default function IngredientAdd({ navigation, route }) {
               style={styles.input}
               value={price}
               onChangeText={(text) => {
-                // if (text.length < 1) {
-                //   setErrorFields({
-                //     ...errorFields,
-                //     price: true,
-                //   });
-                // } else {
-                //   setErrorFields({
-                //     ...errorFields,
-                //     price: false,
-                //   });
-                // }
                 setPrice(text);
-                checkFields();
               }}
             />
 
             <TextInput
               placeholder="Total comprado *"
               secureTextEntry={false}
-              textContentType="text"
+              textContentType="number"
               keyboardType="numeric"
               style={styles.input}
               value={totalPurchased}
               onChangeText={(text) => {
-                // if (text.length < 1) {
-                //   setErrorFields({
-                //     ...errorFields,
-                //     totalPurchased: true,
-                //   });
-
-                // } else {
-                //   setErrorFields({
-                //     ...errorFields,
-                //     totalPurchased: false,
-                //   });
-                // }
                 setTotalPurchased(text);
-                console.log(totalPurchased);
-                checkFields();
-                // checkFieldTotal(text, totalUsed);
+                checkFieldTotal(text, totalUsed);
               }}
             />
 
             <TextInput
               placeholder="Total usado *"
               secureTextEntry={false}
-              textContentType="text"
+              textContentType="number"
               keyboardType="numeric"
               style={totalInvalid ? styles.inputError : styles.input}
               value={totalUsed}
               onChangeText={(text) => {
-                // if (text.length < 1) {
-                //   setErrorFields({
-                //     ...errorFields,
-                //     totalUsed: true,
-                //   });
-                // } else {
-                //   setErrorFields({
-                //     ...errorFields,
-                //     totalUsed: false,
-                //   });
-                //   console.log("Estou dentro do programado");
-                // }
                 setTotalUsed(text);
-                console.log(totalUsed);
-                checkFields();
-                // checkFieldTotal(totalPurchased, text);
+                checkFieldTotal(totalPurchased, text);
               }}
             />
 
