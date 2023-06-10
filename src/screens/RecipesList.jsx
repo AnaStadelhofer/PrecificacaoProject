@@ -1,11 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import {
-  View,
-  FlatList,
-  ScrollView,
-  Alert,
-  TouchableOpacity,
-} from "react-native";
+import { View, FlatList, ScrollView, Alert } from "react-native";
 import { List, Text } from "react-native-paper";
 import {
   collection,
@@ -22,10 +16,15 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { FontAwesome } from "@expo/vector-icons";
 import { Animated } from "react-native";
+import { TouchableOpacity } from "react-native";
+import { useNavigation } from '@react-navigation/native';
+
 
 const itemRef = collection(db, "Recipes");
 
 export default function RecipesList() {
+  const navigation = useNavigation();
+
   const [recipes, setRecipe] = useState([]);
   const [loading, setLoading] = useState(true);
   const [recipeEmpty, setRecipeEmpty] = useState(false);
@@ -116,7 +115,13 @@ export default function RecipesList() {
             <View style={{ alignSelf: "stretch", flexDirection: "row" }}>
               <TouchableOpacity
                 style={{ paddingLeft: 10 }}
-                onPress={() => console.log("Apertado")}
+                onPress={() => {
+                  console.log("pressioado");
+                  navigation.navigate("RecipeAdd", {
+                    recipeId: item.id,
+                    recipe: item,
+                  });
+                }}
               >
                 <List.Icon icon="pencil" size={28} />
               </TouchableOpacity>
@@ -142,8 +147,14 @@ export default function RecipesList() {
             )}
           </Text>
           <Text style={styles.itemText}>
-          Preço de venda: R${" "}
-            {isNaN(item.unitCost) ? (<Text>0.00</Text>) : (parseFloat(item.unitCost).toLocaleString('pt-BR', { minimumFractionDigits: 2 }))}
+            Preço de venda: R${" "}
+            {isNaN(item.unitCost) ? (
+              <Text>0.00</Text>
+            ) : (
+              parseFloat(item.unitCost).toLocaleString("pt-BR", {
+                minimumFractionDigits: 2,
+              })
+            )}
           </Text>
         </Animated.View>
       )}
