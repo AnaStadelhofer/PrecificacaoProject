@@ -1,3 +1,5 @@
+import React, { useRef } from "react";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { View } from "react-native-animatable";
 import { ScrollView, FlatList } from "react-native";
 import { useEffect } from "react";
@@ -15,13 +17,14 @@ import { db } from "../config/firebase";
 import { List } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from "../utils/styles";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import { Alert } from "react-native";
 import { Text } from "react-native-paper";
 
 const itemRef = collection(db, "Ingredient");
 
 export default function IngredientList({ navigation, recipeId }) {
+  const touchableRef = useRef(null);
   const [ingredient, setIngredient] = useState([]);
   const [listEmpty, setListEmpty] = useState(false);
   console.log(recipeId);
@@ -63,7 +66,7 @@ export default function IngredientList({ navigation, recipeId }) {
         right={() => (
           <View style={{ flexDirection: "row" }}>
             <TouchableOpacity
-              style={{ paddingLeft: 10 }}
+              style={{ paddingLeft: 10, paddingRight: 10, zIndex: 1 }}
               onPress={() =>
                 navigation.navigate("IngredientAdd", {
                   recipeId,
@@ -138,21 +141,24 @@ export default function IngredientList({ navigation, recipeId }) {
   }, []);
 
   return (
-    <View>
-      <ScrollView horizontal={false}>
-        {listEmpty ? (
-          <Text style={styles.emptyCart}>
-            Ops! Parece que você não adicionou nenhum ingrediente ainda!
-          </Text>
-        ) : (
-          <FlatList
-            data={ingredient}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.id}
-            contentContainerStyle={{ flexGrow: 1 }}
-          />
-        )}
-      </ScrollView>
-    </View>
+    <GestureHandlerRootView>
+      <View>
+        <ScrollView horizontal={false}
+        contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}>
+          {listEmpty ? (
+            <Text style={styles.emptyCart}>
+              Ops! Parece que você não adicionou nenhum ingrediente ainda!
+            </Text>
+          ) : (
+            <FlatList
+              data={ingredient}
+              renderItem={renderItem}
+              keyExtractor={(item) => item.id}
+              contentContainerStyle={{ flexGrow: 1 }}
+            />
+          )}
+        </ScrollView>
+      </View>
+    </GestureHandlerRootView>
   );
 }

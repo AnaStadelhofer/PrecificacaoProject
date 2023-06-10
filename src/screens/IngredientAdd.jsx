@@ -62,10 +62,11 @@ export default function IngredientAdd({ navigation, route }) {
   const handleCountPrice = () => {
     const cleanedPrice = price.trim().replace(/^R\$|\s/g, "");
 
-    totalUsedConverted = totalUsed;
-    totalPurchasedConverted = totalPurchased;
+    const totalUsedConverted = totalUsed;
+    const totalPurchasedConverted = totalPurchased;
 
-    finalPrice = parseFloat(cleanedPrice);
+    const finalPrice = parseFloat(cleanedPrice);
+    let totalPrice = 0;
 
     if (
       !isNaN(totalPurchasedConverted) &&
@@ -76,6 +77,7 @@ export default function IngredientAdd({ navigation, route }) {
       console.log("Total Comprado " + totalPurchasedConverted + " Preço do produto " + finalPrice + " dividido por " + totalUsedConverted + " total Usado resultado no preço total " + totalPrice
       );
     }
+    return totalPrice;
   };
 
   const saveItemIngredient = (ingredients) => {
@@ -98,6 +100,7 @@ export default function IngredientAdd({ navigation, route }) {
 
   function handleAddIngredients() {
     const cleanedPrice = price.trim().replace(/^R\$|\s/g, "");
+    const totalPrice = handleCountPrice()
     handleCountPrice()
     const ingredients = {
       ingredient: ingredient.trim(),
@@ -105,7 +108,7 @@ export default function IngredientAdd({ navigation, route }) {
       totalPurchased: parseInt(totalPurchased.trim()),
       totalUsed: parseInt(totalUsed.trim()),
       recipeId: recipeId.trim(),
-      totalPrice: totalPrice
+      totalPrice: totalPrice || 0
     };
     console.log(ingredients);
     saveItemIngredient(ingredients);
