@@ -58,7 +58,7 @@ export default function IngredientList({ navigation, recipeId }) {
   const renderItem = ({ item }) => (
     <View style={styles.ingredientRegisters}>
       <List.Item
-        title={item.ingredient + " - R$ " + item.totalPrice}
+        title={item.ingredient + " - R$ " + item.totalPrice.toFixed(2)}
         data={ingredient}
         right={() => (
           <View style={{ flexDirection: "row" }}>
@@ -86,33 +86,6 @@ export default function IngredientList({ navigation, recipeId }) {
       />
     </View>
   );
-
-  // const renderItem = ({ item }) => (
-  //   <View style={{marginBottom: 15, backgroundColor: "#D9D9D9",  }}>
-  //     <SafeAreaView>
-  //       <List.Item
-  //         title={item.ingredient}
-  //         data={ingredient}
-  //         right={() => (
-  //           <View style={{ flexDirection: "row", ...styles.icons }}>
-  //             <TouchableOpacity
-  //               style={{ paddingLeft: 10 }}
-  //             >
-  //               <List.Icon icon="pencil" size={28} />
-  //             </TouchableOpacity>
-
-  //             <TouchableOpacity
-  //               style={{ paddingLeft: 10 }}
-  //               onPress={() => handleDeleteAlert(item.id)}
-  //             >
-  //               <List.Icon icon="delete" size={28} />
-  //             </TouchableOpacity>
-  //           </View>
-  //         )}
-  //       />
-  //     </SafeAreaView>
-  //   </View>
-  // );
 
   useEffect(() => {
     try {
