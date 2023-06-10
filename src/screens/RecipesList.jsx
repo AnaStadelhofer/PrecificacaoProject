@@ -142,8 +142,8 @@ export default function RecipesList() {
             )}
           </Text>
           <Text style={styles.itemText}>
-          Preço de venda: R$
-            {isNaN(item.unitCost) ? (<Text> 0.00</Text>) : (parseFloat(item.unitCost).toLocaleString('pt-BR', { minimumFractionDigits: 2 }))}
+          Preço de venda: R${" "}
+            {isNaN(item.unitCost) ? (<Text>0.00</Text>) : (parseFloat(item.unitCost).toLocaleString('pt-BR', { minimumFractionDigits: 2 }))}
           </Text>
         </Animated.View>
       )}

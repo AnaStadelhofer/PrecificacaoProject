@@ -58,7 +58,7 @@ export default function IngredientList({ navigation, recipeId }) {
   const renderItem = ({ item }) => (
     <View style={styles.ingredientRegisters}>
       <List.Item
-        title={item.ingredient + " - R$ " + item.totalPrice}
+        title={item.ingredient + " - R$ " + item.totalPrice.toFixed(2)}
         data={ingredient}
         right={() => (
           <View style={{ flexDirection: "row" }}>
