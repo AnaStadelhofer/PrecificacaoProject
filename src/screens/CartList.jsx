@@ -219,24 +219,26 @@ export default function CartList() {
               placeholder="Nome do Item"
               label="Nome do Item"
               style={itemEmpty ? styles.inputModalError : styles.inputModal}
-              textContentType="text"
+              // textContentType="text"
               value={nameItem}
               onChangeText={setNameItem}
             />
+
             {itemEmpty ? (
               <Text style={styles.modalErrorText}>O campo é obrigatório.</Text>
             ) : (
               <Text></Text>
             )}
           </View>
+          
           <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "end",
-              alignItems: "flex-end",
+             style={{
+               flexDirection: "row",
+               justifyContent: "flex-end",
+               alignItems: "flex-end",
             }}
-          >
-            <TouchableOpacity
+          > 
+          <TouchableOpacity
               style={styles.btnModal}
               onPress={() => {
                 setModalVisible(!isModalVisible);
@@ -247,7 +249,7 @@ export default function CartList() {
             <TouchableOpacity style={styles.btnModal} onPress={handleSave}>
               <Text style={styles.buttonTextModal}>Salvar</Text>
             </TouchableOpacity>
-          </View>
+          </View> 
         </View>
       </Modal>
     </View>
