@@ -135,8 +135,7 @@ export default function MenuScreen() {
         <Stack.Screen
           name="IngredientList"
           component={IngredientList}
-          options={{ title: "IngredientList" }}
-        />
+          options={({ navigation }) => ({ navigation })}        />
         <Stack.Screen
           name="RecipesList"
           component={RecipesList}

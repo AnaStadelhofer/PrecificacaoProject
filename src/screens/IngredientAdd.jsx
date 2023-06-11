@@ -8,6 +8,7 @@ import { db } from "../config/firebase";
 import { addDoc } from "firebase/firestore";
 import ButtonCentralized from "../components/ButtonCentralized";
 import { TextInputMask } from "react-native-masked-text";
+import { updateDoc, doc } from "firebase/firestore";
 
 const itemRef = collection(db, "Ingredient");
 
@@ -20,6 +21,17 @@ export default function IngredientAdd({ navigation, route }) {
   const [isButtonEnabled, setButtonEnabled] = useState(false);
   const [totalInvalid, setTotalInvalid] = useState(false);
   const [totalPrice, setTotalPrice] = useState("");
+
+console.log(isEditing)
+
+  useEffect(() => {
+    if (isEditing) {
+      setIngredient(ingredientData.ingredient);
+      setPrice(ingredientData.price);
+      setTotalPurchased(ingredientData.totalPurchased);
+      setTotalUsed(ingredientData.totalUsed);
+    }
+  }, [isEditing, ingredientData]);
 
   useEffect(() => {
     if (
@@ -74,6 +86,7 @@ export default function IngredientAdd({ navigation, route }) {
 
   const saveItemIngredient = (ingredients) => {
     try {
+
       addDoc(itemRef, ingredients)
         .then((docRef) => {
           console.log("Item criado: ", docRef.id);
@@ -101,7 +114,33 @@ export default function IngredientAdd({ navigation, route }) {
       totalPrice: totalPrice,
     };
     console.log(ingredients);
-    saveItemIngredient(ingredients);
+    handleSaveIngredients(ingredients);
+  }
+
+  function saveEditIngredients (ingredients) {
+    console.log("Botão de editar")
+    const ingredientRef = doc(db, "Ingredient", );
+
+    try {
+      updateDoc(ingredientRef, ingredients, ingredientData.id)
+      .then(() => {
+        console.log("Ingrediente atualizada com sucesso!");
+        navigation.goBack(); // Volta para a tela anterior após a edição
+      })
+      .catch((error) => {
+        console.error("Erro ao atualizar a receita: ", error);
+      });
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  function handleSaveIngredients(ingredients) {
+    if (isEditing) {
+      saveEditIngredients(ingredients);
+    } else {
+      saveItemIngredient(ingredients);
+    }
   }
 
   return (

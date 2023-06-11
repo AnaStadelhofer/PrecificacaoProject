@@ -556,4 +556,13 @@ export const styles = StyleSheet.create({
     marginTop: 18,
     marginLeft: 5
   },
+  radioBtn: {
+    marginTop: 20
+  },
+  radioText: {
+    fontSize: 20,
+  },
+  radioView: {
+    flexDirection: "row", alignItems: "center"
+  }
 });
