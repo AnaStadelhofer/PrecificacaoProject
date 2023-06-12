@@ -1,40 +1,38 @@
-import { Text, TextInput } from "react-native-paper";
-import { View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Text, TextInput, View, TouchableOpacity } from "react-native";
 import { styles } from "../utils/styles";
-import { TouchableOpacity } from "react-native";
 import { auth } from "../config/firebase";
-import { useState } from "react";
-import { useEffect } from "react";
 import { getUserData } from "../utils/user";
 
-export default function ProfileScreen({navigation}) {
-
+export default function ProfileScreen({ navigation }) {
   const [user, setUser] = useState(null);
 
-const handleSignOut = () => {
-    auth.signOut()
+  useEffect(() => {
+    const checkAuthentication = async () => {
+      const currentUser = auth.currentUser;
+      if (!currentUser) {
+        navigation.navigate("LoginScreen");
+      } else {
+        const userData = await getUserData();
+        setUser(userData);
+      }
+    };
+
+    checkAuthentication();
+  }, []);
+
+  const handleSignOut = () => {
+    auth
+      .signOut()
       .then(() => {
-        console.log('Sign-out successful');
-        navigation.navigate('LoginScreen');
-        console.log(auth.currentUser)
+        console.log("Sign-out successful");
+        navigation.navigate("LoginScreen");
       })
       .catch((error) => {
-        console.log('Sign-out error:', error);
+        console.log("Sign-out error:", error);
       });
   };
 
-
-  useEffect(() => {
-    const currentUser = auth.currentUser;
-    console.log(currentUser);
-    if (currentUser) {
-      getUserData().then((data) => {
-        setUser(data);
-        console.log(data);
-      });
-      // setUser(currentUser);
-    }
-  }, [auth?.currentUser]);
   return (
     <View style={styles.container}>
       <View style={[styles.centerInfo, { justifyContent: "flex-start" }]}>

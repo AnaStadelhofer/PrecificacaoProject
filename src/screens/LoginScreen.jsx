@@ -6,9 +6,9 @@ import { auth } from "../config/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import Logo from "../components/Logo";
 import CartScreen from "./CartScreen";
-
 import { Alert } from "react-native";
 import Divider from "../components/Divider";
+import { useEffect } from "react";
 
 export default function LoginScreen({ navigation }) {
   const [mailUser, setMailUser] = useState("");
@@ -16,6 +16,16 @@ export default function LoginScreen({ navigation }) {
   const [showPassword, setShowPassword] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
   const [emailError, setEmailError] = useState("");
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        navigation.navigate("MenuScreen");
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const login = async (email, password) => {
     try {
