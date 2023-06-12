@@ -196,7 +196,7 @@ export default function CartList() {
   );
 
   return (
-    <View style={styles.containerInner}>
+    <View style={[styles.containerInner, {marginTop: '10%'}]}>
       <ScrollView horizontal={false}>
         {loading || cartEmpty ? (
           <Text style={styles.emptyCart}>

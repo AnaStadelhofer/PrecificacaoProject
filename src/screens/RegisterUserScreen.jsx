@@ -273,7 +273,7 @@ export default function RegisterUserScreen({ navigation }) {
           </TouchableOpacity>
           <TouchableOpacity onPress={openTermsModal}>
             <Text style={styles.termsText}>
-              Concordo com os Termos de Serviço
+              Concordo com os <Text style={{textDecorationLine: 'underline'}}>Termos de Serviço</Text>
             </Text>
           </TouchableOpacity>
         </View>

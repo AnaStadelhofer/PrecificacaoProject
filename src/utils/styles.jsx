@@ -102,32 +102,39 @@ export const styles = StyleSheet.create({
   },
   infoUser: {
     fontSize: 40,
+    marginBottom: '10%'
   },
   welcomeUser: {
-    fontSize: 20,
+    fontSize: 25,
+  },
+  inputProfile: {
+    justifyContent: "center",
+    alignItems: 'center',
+    marginLeft: 10
   },
   // Buttons
   buttonProfileDiv: {
     flex: 1,
     marginHorizontal: 3,
-    minWidth: "40%",
     backgroundColor: "#6BA0D2",
     borderRadius: 10,
     paddingVertical: 10,
     paddingHorizontal: 15,
+    maxWidth: '45%',
   },
   buttonContainer: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
+    marginTop: '40%'
   },
   buttonProfile: {
-    minWidth: "40%",
+    maxWidth: '100%',
     backgroundColor: "#6BA0D2",
     borderRadius: 10,
     paddingVertical: 10,
     paddingHorizontal: 15,
     color: "#fff",
-    fontSize: 15,
+    fontSize: 18,
     textAlign: "center",
   },
   button: {
@@ -156,10 +163,13 @@ export const styles = StyleSheet.create({
     height: 50,
     backgroundColor: "#6BA0D2",
     borderRadius: 10,
-    marginTop: 5,
+    marginTop: 10,
     marginBottom: 25,
   },
-
+  containerButtonTotal: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
   recipebutton: {
     position: "absolute",
     bottom: 20,
@@ -408,6 +418,18 @@ export const styles = StyleSheet.create({
     fontSize: 25,
     color: "gray",
     padding: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: '60%'
+  },
+  emptyIngredient: {
+    textAlign: "center",
+    fontSize: 25,
+    color: "gray",
+    padding: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 5
   },
   // Termos
   modalContent: {
@@ -455,6 +477,7 @@ export const styles = StyleSheet.create({
   listIngredient: {
     width: widthPercentageToDP("90%"),
     maxHeight: heightPercentageToDP("25%"),
+    minHeight: heightPercentageToDP("25%"),
     alignSelf: "stretch",
     justifyContent: "center",
     marginLeft: 10,
