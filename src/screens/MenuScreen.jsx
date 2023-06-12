@@ -29,8 +29,7 @@ function OptionsMenu({ navigation }) {
       <Logo />
       <SafeAreaView>
         <Text style={styles.textInittial}>
-          {" "}
-          Seja bem-vindo ao nosso aplicativo!{" "}
+          Seja bem-vindo ao Priset!
         </Text>
         <TouchableOpacity
           style={styles.button}
@@ -135,8 +134,7 @@ export default function MenuScreen() {
         <Stack.Screen
           name="IngredientList"
           component={IngredientList}
-          options={{ title: "IngredientList" }}
-        />
+          options={({ navigation }) => ({ navigation })}        />
         <Stack.Screen
           name="RecipesList"
           component={RecipesList}

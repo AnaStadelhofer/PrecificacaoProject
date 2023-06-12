@@ -15,23 +15,41 @@ import { updateDoc, doc } from "firebase/firestore";
 import IngredientList from "./IngredientList";
 import { Alert } from "react-native";
 import { query, where, onSnapshot } from "firebase/firestore";
-import { TextInputMask } from "react-native-masked-text";
-
-// import Picker from "@ouroboros/react-native-picker";
+import Modal from "react-native-modal";
+import { RadioButton } from "react-native-paper";
 
 const itemRef = collection(db, "Ingredient");
 
 export default function RecipeAdd({ navigation, route }) {
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [typeEmpty, setTypeEmpty] = useState(" ");
+  const [selectedOption, setSelectedOption] = useState(null);
+
   const { recipeId, recipe } = route.params;
   const [nameRecipe, setNameRecipe] = useState(recipe.nameRecipe);
-  const [revenue, setRevenue] = useState(1); // rendimento
-  const [typeProfit, setTypeProfit] = useState(""); //tipo de lucro
+  const [revenue, setRevenue] = useState(recipe.revenue || 1); // rendimento
+  const [typeProfit, setTypeProfit] = useState(recipe.typeProfit || ""); //tipo de lucro
   const [message, setMessage] = useState("");
-  const [profitValue, setProfitValue] = useState(0); //valor de lucro
+  const [profitValue, setProfitValue] = useState(recipe.profitValue || 0); //valor de lucro
   const [totalPrice, setTotalPrice] = useState(0); //total da receita mais adicional
   const [additional, setAdditional] = useState(10); //adiciona de 10%
   const [unitCost, setUnitCost] = useState(0); //custo por unidade com lucro
   const [salePrice, setSalePrice] = useState(0); //valor do total de venda sem unidade
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
+
+  function handleEditType() {
+    if (selectedOption === null) {
+      setTypeEmpty("O campo é obrigatório");
+      return;
+    } else {
+      setTypeEmpty(" ");
+      setTypeProfit(selectedOption);
+      toggleModal();
+    }
+  }
 
   useEffect(() => {
     try {
@@ -58,22 +76,21 @@ export default function RecipeAdd({ navigation, route }) {
     }
   }, []);
 
-useEffect(() => {
-  if (typeProfit == "%") {
-    setSalePrice(totalPrice + totalPrice * (profitValue / 100));
-  } else {
-    setSalePrice(Number(profitValue) + Number(totalPrice));
-  }
+  useEffect(() => {
+    if (typeProfit == "Porcentagem") {
+      setSalePrice(totalPrice + totalPrice * (profitValue / 100));
+    } else {
+      setSalePrice(Number(profitValue) + Number(totalPrice));
+    }
+  }, [totalPrice, profitValue, typeProfit]);
 
-}, [totalPrice, profitValue, typeProfit])
-
-useEffect(() => {
-  if (revenue == 0) {
-    setUnitCost(salePrice);
-  } else {
-    setUnitCost(salePrice / revenue);
-  }
-}, [revenue, salePrice]);
+  useEffect(() => {
+    if (revenue == 0) {
+      setUnitCost(salePrice);
+    } else {
+      setUnitCost(salePrice / revenue);
+    }
+  }, [revenue, salePrice]);
 
   const calculatingCosts = (totalPriceQuery) => {
     console.log("total do custo: " + totalPriceQuery * (additional / 100));
@@ -238,7 +255,7 @@ useEffect(() => {
                 textContentType="text"
                 keyboardType="numeric"
                 editable={false}
-                value={"R$ " + (totalPrice).toFixed(2)}
+                value={"R$ " + totalPrice.toFixed(2)}
                 right={
                   <TextInput.Icon
                     onPress={() =>
@@ -255,29 +272,31 @@ useEffect(() => {
 
           <View style={styles.divInput}>
             <View style={styles.column}>
-              <TextInput
-                label="Tipo do lucro"
-                style={styles.inputDiv}
-                placeholder="Tipo de lucro"
-                textContentType="text"
-                editable={true}
-                value={typeProfit}
-                onChangeText={(value) => {
-                  setTypeProfit(value);
-                  // // console.log("Tipo de lucro: " + value)
-                  // calculationCost(revenue, value, profitValue);
-                }}
-                right={
-                  <TextInput.Icon
-                    onPress={() =>
-                      openAlertInfo(
-                        "Neste campo deverá ser informado o nome da receita que deseja cadastrar."
-                      )
-                    }
-                    icon="information"
-                  />
-                }
-              />
+              <TouchableOpacity onPress={toggleModal}>
+                <TextInput
+                  label="Tipo do lucro"
+                  style={styles.inputDiv}
+                  placeholder="Tipo de lucro"
+                  textContentType="text"
+                  editable={false}
+                  value={typeProfit}
+                  onChangeText={(value) => {
+                    setTypeProfit(value);
+                    // // console.log("Tipo de lucro: " + value)
+                    // calculationCost(revenue, value, profitValue);
+                  }}
+                  right={
+                    <TextInput.Icon
+                      onPress={() =>
+                        openAlertInfo(
+                          "Neste campo deverá ser informado o nome da receita que deseja cadastrar."
+                        )
+                      }
+                      icon="information"
+                    />
+                  }
+                />
+              </TouchableOpacity>
             </View>
             <View style={styles.column}>
               <TextInput
@@ -339,6 +358,56 @@ useEffect(() => {
             <Text style={styles.buttonText}>Salvar</Text>
           </TouchableOpacity>
         </View>
+
+        <Modal isVisible={isModalVisible} onBackdropPress={toggleModal}>
+          <View style={styles.modalBack}>
+            <Text style={{ fontSize: 20, textAlign: "left" }}>
+              Selecionar tipo de lucro
+            </Text>
+            <View style={styles.radioBtn}>
+              <View style={styles.radioView}>
+                <RadioButton
+                  value="valorFixo"
+                  status={
+                    selectedOption === "Valor fixo" ? "checked" : "unchecked"
+                  }
+                  onPress={() => setSelectedOption("Valor fixo")}
+                />
+                <Text styles={styles.radioText}>Valor fixo</Text>
+              </View>
+              <View style={styles.radioView}>
+                <RadioButton
+                  value="porcentagem"
+                  status={
+                    selectedOption === "Porcentagem" ? "checked" : "unchecked"
+                  }
+                  onPress={() => setSelectedOption("Porcentagem")}
+                />
+                <Text styles={styles.radioText}>Porcentagem</Text>
+              </View>
+            </View>
+            {typeEmpty && (
+              <Text style={styles.modalErrorText}>{typeEmpty}</Text>
+            )}
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "flex-end",
+                alignItems: "flex-end",
+              }}
+            >
+              <TouchableOpacity style={styles.btnModal} onPress={toggleModal}>
+                <Text style={styles.buttonTextModal}>Cancelar</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.btnModal}
+                onPress={handleEditType}
+              >
+                <Text style={styles.buttonTextModal}>Salvar</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
       </SafeAreaView>
     </View>
   );

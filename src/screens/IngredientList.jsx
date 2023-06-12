@@ -18,10 +18,15 @@ import { styles } from "../utils/styles";
 import { TouchableOpacity } from "react-native";
 import { Alert } from "react-native";
 import { Text } from "react-native-paper";
+import { useNavigation } from '@react-navigation/native';
 
 const itemRef = collection(db, "Ingredient");
 
-export default function IngredientList({ navigation, recipeId }) {
+export default function IngredientList({ recipeId }) {
+  
+  const navigation = useNavigation();
+
+  
   const [ingredient, setIngredient] = useState([]);
   const [listEmpty, setListEmpty] = useState(false);
   console.log(recipeId);

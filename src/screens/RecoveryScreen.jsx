@@ -84,7 +84,12 @@ export default function RecoveryScreen({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        { justifyContent: "center", alignItems: "center" },
+      ]}
+    >
       <Logo />
       <SafeAreaView style={styles.RegisterCamps}>
         <View>
@@ -104,10 +109,7 @@ export default function RecoveryScreen({ navigation }) {
             activeUnderlineColor="transparent"
           />
           <TouchableOpacity
-            width="296px"
-            height="39px"
-            borderRadius={10}
-            style={styles.button}
+            style={styles.buttonLogin}
             onPress={() => handleRecovery(mailUser)}
             disabled={!isEmailValid || mailUser.trim() === ""}
           >
@@ -116,7 +118,7 @@ export default function RecoveryScreen({ navigation }) {
           <Divider />
           <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}>
             <Text style={[styles.link, { color: "#CDCDCD" }]} color="#CDCDCD">
-              Voltar para Login
+              Voltar para login
             </Text>
           </TouchableOpacity>
         </View>
