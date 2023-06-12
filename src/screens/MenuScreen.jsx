@@ -29,8 +29,7 @@ function OptionsMenu({ navigation }) {
       <Logo />
       <SafeAreaView>
         <Text style={styles.textInittial}>
-          {" "}
-          Seja bem-vindo ao nosso aplicativo!{" "}
+          Seja bem-vindo ao Priset!
         </Text>
         <TouchableOpacity
           style={styles.button}
