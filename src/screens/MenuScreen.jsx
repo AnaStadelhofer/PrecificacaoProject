@@ -75,7 +75,7 @@ function OptionsMenu({ navigation }) {
 export default function MenuScreen() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="MenuScreen">
+      <Stack.Navigator initialRouteName="LoginScreen">
         <Stack.Screen
           name="MenuScreen"
           component={OptionsMenu}

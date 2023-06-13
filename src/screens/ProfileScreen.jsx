@@ -1,15 +1,26 @@
-import { Text, TextInput } from "react-native-paper";
-import { View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Text, TextInput, View, TouchableOpacity } from "react-native";
 import { styles } from "../utils/styles";
-import { TouchableOpacity } from "react-native";
 import { auth } from "../config/firebase";
-import { useState } from "react";
-import { useEffect } from "react";
 import { getUserData } from "../utils/user";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function ProfileScreen({ navigation }) {
   const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const checkAuthentication = async () => {
+      const currentUser = auth.currentUser;
+      if (!currentUser) {
+        navigation.navigate("LoginScreen");
+      } else {
+        const userData = await getUserData();
+        setUser(userData);
+      }
+    };
+
+    checkAuthentication();
+  }, []);
 
   const handleSignOut = () => {
     auth
@@ -18,6 +29,7 @@ export default function ProfileScreen({ navigation }) {
         console.log("Sign-out successful");
         navigation.navigate("LoginScreen");
         console.log(auth.currentUser);
+
       })
       .catch((error) => {
         console.log("Sign-out error:", error);
@@ -35,6 +47,7 @@ export default function ProfileScreen({ navigation }) {
       // setUser(currentUser);
     }
   }, [auth?.currentUser]);
+
   return (
     <View style={styles.container}>
       <SafeAreaView>
