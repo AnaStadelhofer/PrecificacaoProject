@@ -4,10 +4,7 @@ import { Image, StyleSheet } from "react-native";
 export default function Logo() {
   return (
     <Image
-      source={{
-        uri: "https://cdn-icons-png.flaticon.com/512/138/138239.png",
-      }}
-      // source={require("../../assets/favicon.png")}
+      source={require('../utils/imgs/logo2.jpg')}
       style={styles.image}
     />
   );
@@ -15,8 +12,10 @@ export default function Logo() {
 
 const styles = StyleSheet.create({
   image: {
-    width: 150,
-    height: 150,
-    marginBottom: 40,
+    minWidth: 250,
+    minHeight: 250,
+    marginBottom: 10,
+    maxWidth: '60%',
+    maxHeight: '20%',
   },
 });
