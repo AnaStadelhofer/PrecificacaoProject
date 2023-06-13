@@ -119,7 +119,7 @@ export default function IngredientList({ recipeId }) {
     <View>
       <ScrollView horizontal={false}>
         {listEmpty ? (
-          <Text style={styles.emptyCart}>
+          <Text style={styles.emptyIngredient}>
             Ops! Parece que você não adicionou nenhum ingrediente ainda!
           </Text>
         ) : (

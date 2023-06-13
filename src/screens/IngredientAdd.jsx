@@ -22,7 +22,7 @@ export default function IngredientAdd({ navigation, route }) {
   const [totalInvalid, setTotalInvalid] = useState(false);
   const [totalPrice, setTotalPrice] = useState("");
 
-console.log(isEditing)
+  console.log(isEditing);
 
   useEffect(() => {
     if (isEditing) {
@@ -50,24 +50,26 @@ console.log(isEditing)
 
   useEffect(() => {
     const cleanedPrice = price.trim().replace(/^R\$|\s/g, "");
-    const updatedTotalPrice = (parseFloat(cleanedPrice) / Number(totalPurchased)) * Number(totalUsed);
+    const updatedTotalPrice =
+      (parseFloat(cleanedPrice) / Number(totalPurchased)) * Number(totalUsed);
     setTotalPrice(updatedTotalPrice);
-  
+
     if (
       !isNaN(Number(totalUsed)) &&
       !isNaN(updatedTotalPrice) &&
       !isNaN(Number(totalPurchased))
     ) {
-      const recalculatedPrice = (updatedTotalPrice / Number(totalPurchased)) * Number(totalUsed);
+      const recalculatedPrice =
+        (updatedTotalPrice / Number(totalPurchased)) * Number(totalUsed);
       setTotalPrice(recalculatedPrice);
-  
+
       console.log(
         "Total Comprado: " +
-        Number(totalPurchased) +
-        " dividido por " +
-        Number(totalUsed) +
-        " total Usado resultado no preço total: " +
-        recalculatedPrice
+          Number(totalPurchased) +
+          " dividido por " +
+          Number(totalUsed) +
+          " total Usado resultado no preço total: " +
+          recalculatedPrice
       );
     }
   }, [price, totalPurchased, totalUsed]);
@@ -86,7 +88,6 @@ console.log(isEditing)
 
   const saveItemIngredient = (ingredients) => {
     try {
-
       addDoc(itemRef, ingredients)
         .then((docRef) => {
           console.log("Item criado: ", docRef.id);
@@ -117,21 +118,21 @@ console.log(isEditing)
     handleSaveIngredients(ingredients);
   }
 
-  function saveEditIngredients (ingredients) {
-    console.log("Botão de editar")
-    const ingredientRef = doc(db, "Ingredient", );
+  function saveEditIngredients(ingredients) {
+    console.log("Botão de editar");
+    const ingredientRef = doc(db, "Ingredient");
 
     try {
       updateDoc(ingredientRef, ingredients, ingredientData.id)
-      .then(() => {
-        console.log("Ingrediente atualizada com sucesso!");
-        navigation.goBack(); // Volta para a tela anterior após a edição
-      })
-      .catch((error) => {
-        console.error("Erro ao atualizar a receita: ", error);
-      });
+        .then(() => {
+          console.log("Ingrediente atualizada com sucesso!");
+          navigation.goBack(); // Volta para a tela anterior após a edição
+        })
+        .catch((error) => {
+          console.error("Erro ao atualizar a receita: ", error);
+        });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
@@ -152,7 +153,7 @@ console.log(isEditing)
     >
       <SafeAreaView>
         <ScrollView horizontal={false}>
-          <View>
+          <View style={{ marginTop: "20%" }}>
             <TextInput
               placeholder="Ingrediente *"
               secureTextEntry={false}
@@ -223,19 +224,17 @@ console.log(isEditing)
             )}
           </View>
         </ScrollView>
-
+        {/* <View style={[styles.textLinks, { marginBottom: "5%" }]}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Text style={styles.link}>Voltar</Text>
+          </TouchableOpacity>
+        </View> */}
         <View style={[styles.textInputContainerIngre]}>
           <ButtonCentralized
             text="Confirmar"
             handle={handleAddIngredients}
             disable={isButtonEnabled}
           />
-        </View>
-
-        <View style={[styles.textLinks, { marginBottom: "5%" }]}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Text style={styles.link}>Voltar</Text>
-          </TouchableOpacity>
         </View>
       </SafeAreaView>
     </View>

@@ -14,3 +14,4 @@ Rodar os seguintes comandos no terminal:
 1. npm install -g eas-cli
 2. eas build -p android
 3. Login e Password do Expo
+4. Outro comando para gerar o apk 'eas build -p android --profile preview'

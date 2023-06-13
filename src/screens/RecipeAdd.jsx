@@ -143,7 +143,7 @@ export default function RecipeAdd({ navigation, route }) {
           <TextInput
             label="Nome da Receita"
             placeholder="Nome da receita"
-            style={styles.input}
+            style={[styles.input, {marginTop: 15}]}
             textContentType="text"
             editable={true}
             value={nameRecipe}

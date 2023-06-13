@@ -84,52 +84,52 @@ export default function MenuScreen() {
         <Stack.Screen
           name="LoginScreen"
           component={LoginScreen}
-          options={{ title: "Login" }}
+          options={{ title: "Login", headerShown: false  }}
         />
         <Stack.Screen
           name="CartScreen"
           component={CartScreen}
-          options={{ title: "Carrinho" }}
+          options={{ title: "Lista de Compras", headerShown: false  }}
         />
         <Stack.Screen
           name="RegisterUserScreen"
           component={RegisterUserScreen}
-          options={{ title: "Cadastrar" }}
+          options={{ title: "Cadastrar", headerShown: false  }}
         />
         <Stack.Screen
           name="ProfileScreen"
           component={ProfileScreen}
-          options={{ title: "Perfil" }}
+          options={{ title: "Perfil", headerShown: false  }}
         />
         <Stack.Screen
           name="RecipeAdd"
           component={RecipeAdd}
-          options={{ title: "Criar receita" }}
+          options={{ title: "Criar receita", headerShown: false  }}
         />
         <Stack.Screen
           name="FPasswordScreen"
           component={FPasswordScreen}
-          options={{ title: "FSenha" }}
+          options={{ title: "FSenha", headerShown: false  }}
         />
         <Stack.Screen
           name="Recipes"
           component={Recipes}
-          options={{ title: "Receitas" }}
+          options={{ title: "Receitas", headerShown: false  }}
         />
         <Stack.Screen
           name="RecoveryScreen"
           component={RecoveryScreen}
-          options={{ title: "RecoveryScreen" }}
+          options={{ title: "RecoveryScreen", headerShown: false  }}
         />
         <Stack.Screen
           name="IngredientAdd"
           component={IngredientAdd}
-          options={{ title: "IngredientAdd" }}
+          options={{ title: "IngredientAdd", headerShown: false  }}
         />
         <Stack.Screen
           name="CartAdd"
           component={CartAdd}
-          options={{ title: "CartAdd" }}
+          options={{ title: "CartAdd", headerShown: false  }}
         />
         <Stack.Screen
           name="IngredientList"

@@ -109,7 +109,7 @@ export default function RecoveryScreen({ navigation }) {
             activeUnderlineColor="transparent"
           />
           <TouchableOpacity
-            style={styles.buttonLogin}
+            style={[styles.buttonLogin, {marginTop: '5%'}]}
             onPress={() => handleRecovery(mailUser)}
             disabled={!isEmailValid || mailUser.trim() === ""}
           >
