@@ -70,13 +70,13 @@ export default function CartAdd({ navigation }) {
       <View style={styles.textInputContainer}>
         <TextInput
           placeholder="Adicionar item"
-          label="Adicionar item"
+          // label="Adicionar item"
           mode="outline"
           value={nameItem}
           onChangeText={setNameItem}
           style={styles.inputAddItem}
-          underlineColor="transparent"
-          activeUnderlineColor="transparent"
+          // underlineColor="transparent"
+          // activeUnderlineColor="transparent"
           right={
             <TextInput.Icon
               icon="plus"

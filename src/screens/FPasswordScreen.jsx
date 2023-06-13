@@ -37,8 +37,8 @@ export default function FPasswordScreen({ navigation }) {
             value={newpassword}
             onChangeText={setNewPassword}
             style={styles.input}
-            underlineColor="transparent"
-            activeUnderlineColor="transparent"
+            // underlineColor="transparent"
+            // activeUnderlineColor="transparent"
             right={
               <TextInput.Icon
                 icon={showNewPassword ? "eye" : "eye-off"}

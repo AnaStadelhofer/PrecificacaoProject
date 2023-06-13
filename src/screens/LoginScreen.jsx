@@ -97,8 +97,8 @@ export default function LoginScreen({ navigation }) {
             onChangeText={validateEmail}
             keyboardType="email-address"
             style={emailError ? styles.inputError : styles.input}
-            underlineColor="transparent"
-            activeUnderlineColor="transparent"
+            // underlineColor="transparent"
+            // activeUnderlineColor="transparent"
           />
           {emailError && <Text style={styles.error}>{emailError}</Text>}
 
@@ -110,8 +110,8 @@ export default function LoginScreen({ navigation }) {
             value={password}
             onChangeText={setPassword}
             style={styles.input}
-            underlineColor="transparent"
-            activeUnderlineColor="transparent"
+            // underlineColor="transparent"
+            // activeUnderlineColor="transparent"
             keyboardType="default"
             right={
               <TextInput.Icon

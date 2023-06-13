@@ -105,8 +105,8 @@ export default function RecoveryScreen({ navigation }) {
             value={mailUser}
             onChangeText={validateEmail}
             style={styles.input}
-            underlineColor="transparent"
-            activeUnderlineColor="transparent"
+            // underlineColor="transparent"
+            // activeUnderlineColor="transparent"
           />
           <TouchableOpacity
             style={[styles.buttonLogin, {marginTop: '5%'}]}

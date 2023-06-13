@@ -31,23 +31,23 @@ function OptionsMenu({ navigation }) {
         <Text style={styles.textInittial}>
           Seja bem-vindo ao Priset!
         </Text>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate("LoginScreen")}
         >
           <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
+        </TouchableOpacity> */}
+        {/* <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate("RegisterUserScreen")}
         >
           <Text style={styles.buttonText}>Registrar</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate("CartScreen")}
         >
-          <Text style={styles.buttonText}>Carrinho</Text>
+          <Text style={styles.buttonText}>Lista de Compra</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
@@ -61,12 +61,12 @@ function OptionsMenu({ navigation }) {
         >
           <Text style={styles.buttonText}>Perfil</Text>
         </TouchableOpacity>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate("RecoveryScreen")}
         >
           <Text style={styles.buttonText}>RecoveryScreen</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </SafeAreaView>
     </View>
   );

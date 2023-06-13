@@ -41,6 +41,7 @@ export const styles = StyleSheet.create({
   error: {
     textAlign: "left",
     color: "red",
+    marginLeft: 10
   },
   // Texts
   checkboxContainer: {
