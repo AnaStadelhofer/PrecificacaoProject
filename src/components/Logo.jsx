@@ -12,10 +12,10 @@ export default function Logo() {
 
 const styles = StyleSheet.create({
   image: {
-    minWidth: 250,
-    minHeight: 250,
+    minWidth: 200,
+    minHeight: 200,
     marginBottom: 10,
-    maxWidth: '60%',
+    maxWidth: '40%',
     maxHeight: '20%',
   },
 });

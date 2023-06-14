@@ -218,7 +218,7 @@ export const styles = StyleSheet.create({
   },
   // Inputs
   input: {
-    height: 60,
+    height: 55,
     borderWidth: 1,
     paddingLeft: 5,
     marginTop: 22,
@@ -235,7 +235,7 @@ export const styles = StyleSheet.create({
     marginRight: 10,
   },
   inputError: {
-    height: 60,
+    height: 55,
     borderColor: "red",
     borderWidth: 1,
     paddingLeft: 5,
