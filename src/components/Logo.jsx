@@ -15,5 +15,7 @@ const styles = StyleSheet.create({
     minWidth: 200,
     minHeight: 200,
     marginBottom: 10,
+    maxWidth: '60%',
+    maxHeight: '20%',
   },
 });
