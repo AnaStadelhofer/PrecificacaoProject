@@ -120,10 +120,10 @@ export default function IngredientAdd({ navigation, route }) {
 
   function saveEditIngredients(ingredients) {
     console.log("Botão de editar");
-    const ingredientRef = doc(db, "Ingredient");
-
+    const ingredientRef = doc(db, "Ingredient", ingredientData.id); // Adicione o ID do ingrediente como terceiro argumento
+  
     try {
-      updateDoc(ingredientRef, ingredients, ingredientData.id)
+      updateDoc(ingredientRef, ingredients)
         .then(() => {
           console.log("Ingrediente atualizada com sucesso!");
           navigation.goBack(); // Volta para a tela anterior após a edição

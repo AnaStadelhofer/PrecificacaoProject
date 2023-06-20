@@ -289,7 +289,7 @@ export default function RecipeAdd({ navigation, route }) {
                     <TextInput.Icon
                       onPress={() =>
                         openAlertInfo(
-                          "Neste campo deverá ser informado o nome da receita que deseja cadastrar."
+                          "Neste campo deverá ser informado o tipo de lucro que deseja aplicar na receita, seja porcentagem ou um valor fixo."
                         )
                       }
                       icon="information"
@@ -312,7 +312,16 @@ export default function RecipeAdd({ navigation, route }) {
                   // console.log("Valor do Lucro: " + value)
                   // calculationCost(revenue, typeProfit, value);
                 }}
-                right={<TextInput.Icon icon="information" />}
+                right={
+                  <TextInput.Icon
+                    onPress={() =>
+                      openAlertInfo(
+                        "Neste campo deve ser informado a quantidade ou porcentagem de lucro que deseja obter."
+                      )
+                    }
+                    icon="information"
+                  />
+                }
               />
             </View>
           </View>
@@ -325,8 +334,16 @@ export default function RecipeAdd({ navigation, route }) {
             keyboardType="numeric"
             value={"R$ " + salePrice.toFixed(2)}
             editable={false}
-            right={<TextInput.Icon icon="information" />}
-          />
+            right={
+              <TextInput.Icon
+                onPress={() =>
+                  openAlertInfo(
+                    "Neste campo vai ser informado valor final da receita total, sem a divisão de rendimentos com o lucro em cima."
+                  )
+                }
+                icon="information"
+              />
+            }          />
 
           <TextInput
             style={styles.input}

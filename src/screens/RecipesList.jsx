@@ -167,8 +167,7 @@ export default function RecipesList() {
         <ScrollView horizontal={false}>
           {loading || recipeEmpty ? (
             <Text style={styles.emptyCart}>
-              Ops! Parece que você não adicionou nenhum item na lista de
-              compras!
+              Ops! Parece que você não criou nenhuma receita ainda!
             </Text>
           ) : (
             <FlatList
